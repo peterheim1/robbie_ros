@@ -1,0 +1,32 @@
+<package>
+  <name>robbie_ros</name>
+  <version>0.1.0</version>
+
+  <description>the robbie project</description>
+
+  <maintainer email="peter.heim1066@gmail.com">Peter Heim</maintainer>
+  <license>BSD</license>
+  <url type="website">http://escaliente-robotics.blogspot.com.au/</url>
+  <url type="bugtracker">https://github.com/peterheim1/robbie_ros/issues</url>
+  <author email="peter.heim1066@gmail.com">Peter Heim</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>robbie_description</run_depend>
+  
+  <run_depend>robbie_bringup</run_depend>
+  <run_depend>robbie_msgs</run_depend>
+  <run_depend>robbie_utils</run_depend>
+  <run_depend>robbie_moveit</run_depend>
+  <run_depend>robbie_nav</run_depend>
+  <run_depend>robbie_sandbox</run_depend>
+  <run_depend>robbie_diagnostics</run_depend>
+  <run_depend>robbie_speech</run_depend>
+  
+  <export>
+    <metapackage/>
+  </export>
+
+</package>

@@ -127,7 +127,7 @@ class R_shoulder(object):
                 if (partsCount  < 7):
                         pass
                 try:
-                        P1 = (radians((float(lineParts[1])))/10)-0.2
+                        P1 = (radians((float(lineParts[1])))/10)-2.08
                         P2 = self.left_rotate #0-((float(lineParts[2])* 0.00174532925)-1.57)
                         P3 = float(lineParts[3])
                         P4 = 0

@@ -385,7 +385,7 @@
     	<child link="right_shoulder_tilt" />
     	<origin xyz="-0.045 -0.145 0.105" rpy="0 0 0" />
         <axis xyz="1 0 0" />
-        <limit lower="-1.34" upper="0" effort="10" velocity="0" />
+        <limit lower="-1.34" upper="0.1" effort="10" velocity="0" />
 	</joint> 
 
 <joint name="right_arm_lift_joint" type="revolute">
@@ -401,7 +401,7 @@
     	<child link="right_shoulder_rotate" />
     	<origin xyz="0 0 -0.065" rpy="0 0 0" />
         <axis xyz="0 0 -1" />
-        <limit lower="-2.61" upper="0" effort="10" velocity="0" />
+        <limit lower="-3.14" upper="0.2" effort="10" velocity="0" />
 	</joint> 
 
 <joint name="right_elbow_link" type="fixed">
@@ -507,7 +507,7 @@
     	<child link="left_shoulder_tilt" />
     	<origin xyz="-0.045 0.145 0.105" rpy="0 0 0" />
         <axis xyz="-1 0 0" />
-        <limit lower="-1.34" upper="0" effort="10" velocity="0" />
+        <limit lower="-1.34" upper="0.1" effort="10" velocity="0" />
 	</joint> 
 
 <joint name="left_arm_lift_joint" type="revolute">
@@ -523,7 +523,7 @@
     	<child link="left_shoulder_rotate" />
     	<origin xyz="0 0.06 -0.055" rpy="0 0 0" />
         <axis xyz="0 0 -1" />
-        <limit lower="0" upper="2.61" effort="10" velocity="0" />
+        <limit lower="0.2" upper="3.14" effort="10" velocity="0" />
 	</joint> 
 
 <joint name="left_elbow_link" type="fixed">

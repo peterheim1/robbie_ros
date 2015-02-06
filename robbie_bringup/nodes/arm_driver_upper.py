@@ -83,7 +83,7 @@ class R_shoulder(object):
                 if (partsCount  < 7):
                         pass
                 try:
-                        P1 = ((321-float(lineParts[1]))*0.008)-0.07
+                        P1 = ((321-float(lineParts[1]))*0.008)-0.15
                         P2 = self.left_tilt
                         P3 = float(lineParts[3])# current
                         P4 = 0#float(lineParts[4])# speed
@@ -120,7 +120,7 @@ class R_shoulder(object):
                         pass
                 try:
                         
-                        P1 = 0-(((321-float(lineParts[1]))*0.008)-0.07)
+                        P1 = ((321-float(lineParts[1]))*0.008)-0.07
                         P2 = self.right_tilt
                         P3 = 0#float(lineParts[3])# current
                         P4 = 0#float(lineParts[4])# speed
@@ -157,8 +157,8 @@ class R_shoulder(object):
                         pass
                 try:
                         #offset = Float(-1.57)
-                        P1 = float(lineParts[1])/1000
-                        P2 = 0-((float(lineParts[2])* 0.00174532925)-1.57)
+                        P1 = (float(lineParts[1])/1000)-0.6
+                        P2 = self.right_lift #0-((float(lineParts[2])* 0.00174532925)-1.57)
                         P3 = 0#float(lineParts[3])
                         P4 = 0
                         val = [P1, P2, P3, P4]
@@ -197,7 +197,7 @@ class R_shoulder(object):
                 try: 
                         #off = 1570
                         P1 = float(lineParts[1])/1000
-                        P2 = 0-((float(lineParts[2])* 0.00174532925)-1.57)
+                        P2 = self.right_lift #0-((float(lineParts[2])* 0.00174532925)-1.57)
                         P3 = 0 #float(lineParts[3])
                         P4 = 0
                         val = [P1, P2, P3, P4]
@@ -296,6 +296,8 @@ class R_shoulder(object):
                 self.cal_elbow = rospy.get_param("~cal_elbow", 0)
                 self.right_tilt = 0
                 self.left_tilt = 0
+                self.right_lift = 1.57
+                self.left_lift = 1.57
                 self.left_elbow = 0
                
                 #name = rospy.get_param("~name")
@@ -398,6 +400,7 @@ class R_shoulder(object):
 
                 """
                 v = Command.data      # angel request in radians
+                self.left_lift = v
                 v1 =int(1023 -((v + 1.82) * 195.3786081396))#convert encoder value
                 if v1 < 100: v1 = 100 #degrees * 10
                 if v1 > 1000: v1 = 1000 #degrees * 10
@@ -413,6 +416,7 @@ class R_shoulder(object):
 
                 """
                 v = Command.data      # angel request in radians
+                self.right_lift = v
                 v1 =int(1023 -((v + 1.05) * 195.3786081396))#convert encoder value
                 if v1 < 100: v1 = 100 #degrees * 10
                 if v1 > 1000: v1 = 1000 #degrees * 10

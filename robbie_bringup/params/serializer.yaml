@@ -1,0 +1,25 @@
+port: /dev/sensors/ftdi_A700eZdy
+baud: 19200
+timeout: 1
+sensor_rate: 20
+use_base_controller: True
+base_controller_rate: 10
+wheel_diameter: 0.15
+wheel_track: 0.43
+encoder_type: 1
+encoder_resolution: 2500
+gear_reduction: 1
+units: 0
+motors_reversed: False
+init_pid: True
+VPID_P: 1
+VPID_I: 0
+VPID_D: 1
+VPID_L: 24
+DPID_P: 1
+DPID_I: 0
+DPID_D: 0
+DPID_A: 1
+DPID_B: 25
+
+

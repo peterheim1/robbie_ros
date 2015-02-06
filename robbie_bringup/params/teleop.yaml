@@ -1,0 +1,29 @@
+# Axes
+axis_vx: 1
+axis_vy: 2
+axis_vw: 0
+axis_pan: 3
+axis_tilt: 4
+
+# base velocities
+max_vw: 0.5
+max_vx: 0.25
+max_vy: 0.25
+max_vw_run: 0.8
+max_vx_run: 0.5
+max_vy_run: 0.5
+
+# Head 
+max_pan: 2.7
+max_tilt: 1.4
+min_tilt: -0.4
+tilt_step: 0.3
+pan_step: 0.3
+
+# Buttons have changed for PS3 controller mapping 
+# With joystick remapper, this works with all joysticks on "/joy" 
+run_button: 0
+torso_dn_button: 2
+torso_up_button: 1
+head_button: 4 
+deadman_button: 5

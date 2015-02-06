@@ -1,0 +1,29 @@
+<launch>
+
+  <!-- By default, we do not start a database (it can be large) -->
+  <arg name="db" default="false" />
+
+  <!-- By default, we are not in debug mode -->
+  <arg name="debug" default="false" />
+
+  <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+  <include file="$(find robbie_moveit)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="true"/>
+  </include>
+
+  
+  
+
+  <!-- Run the main MoveIt executable with trajectory execution -->
+  <include file="$(find robbie_moveit)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>  
+    <arg name="fake_execution" value="false"/>
+    <arg name="info" value="true"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  
+  <!-- If database loading was enabled, start mongodb as well -->
+  <include file="$(find robbie_moveit)/launch/default_warehouse_db.launch" if="$(arg db)"/>
+
+</launch>

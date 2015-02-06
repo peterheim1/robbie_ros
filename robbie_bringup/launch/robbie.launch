@@ -1,0 +1,105 @@
+<launch>
+        
+      
+
+    <!-- start the kinect and laser -->
+     <include file="$(find robbie_bringup)/launch/openni.launch"/>
+
+    <!-- launch head cam camers-->
+     <include file="$(find robbie_bringup)/launch/uvc_cam.launch"/>
+
+    <!-- start the kinect and laser  
+     <include file="$(find robbie_bringup)/launch/openni2.launch"/>
+-->
+
+
+    <!-- start the arduino base controller and urdf-->
+     <include file="$(find robbie_bringup)/launch/robbie_base.launch"/>
+    <!--<include file="$(find ros_arduino_python)/launch/arduino.launch"/>-->
+
+
+    <!-- start the dynamixel servos --> 
+     <include file="$(find robbie_bringup)/launch/dynamixels.launch"/>
+
+    
+    <!-- start action servers   -->
+     <include file="$(find robbie_bringup)/launch/action.launch"/>
+
+    <!-- start imu
+     <include file="$(find omni_bot)/launch/imu.launch" />
+-->
+
+   <!-- Start rosbridge and voice
+
+     <include file="$(find robbie_bringup)/launch/1_stage.launch"/>
+-->
+  <!-- Start arm control-->
+
+     <include file="$(find robbie_bringup)/launch/arm.launch"/>
+ 
+ <!-- Start move base-->
+     <include file="$(find robbie_bringup)/launch/move_base.launch"/>
+
+
+<!-- start robbie's voice --> 
+  <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py" output="screen"/>
+
+
+<!-- Launch a node that republishes the output of NLTK as a string (representation of a parse tree) -->
+  <!--<node pkg="nltk_parser" type="nltk_parser.py" name="nltk_parser_service" output="screen" >-->
+   <node pkg="nltk_parser" type="language.py" name="simple_chart_parser" output="screen" >
+        <param name="grammar_path" value="$(find phoenix_robot)" />
+        <param name="grammar_name" value="language.cfg" />
+    </node>
+
+
+<!-- Node that republishes the output of language.py to be useful for meet_greet_demo -->
+    <node pkg="nltk_parser" type="nltk_interpret.py" name="nltk_interpret" output="screen" />
+
+<!-- Node that republishes the output to nltk or chat node -->
+    <node pkg="phoenix_robot" type="talk_w.py" name="speach_director" output="screen" />
+
+<!-- Node that monitors robbies battery and auto recharge 
+    <node pkg="robbie" type="health_monitor.py" name="health_monitor" output="screen" />
+-->
+<!-- robot task coordinator -->
+    <node pkg="phoenix_robot" type="task_cord.py" name="task_coordinator" output="screen" />
+
+
+<!-- launch Face recognition server-->
+  <include file="$(find robbie_bringup)/launch/face_server.launch"/>
+
+
+
+  <!-- Start moveit
+     <include file="$(find robbie_bringup)/launch/robbie_moveit.launch"/>
+-->
+  <!-- start the AI system   
+  <include file="$(find robbie_bringup)/launch/a_test.launch"/>
+-->
+<!-- launch Face tracker
+  <include file="$(find robbie_bringup)/launch/face_tracker2.launch"/>
+-->
+   <!-- launch head tracking
+   <include file="$(find robbie_bringup)/launch/tf_head_tracker.launch"/>
+-->
+<!--robbie chat
+  <node name="robbie_chat" pkg="robbie" type="./robbie_chat" />
+
+-->
+
+
+    
+   <!-- Monitoring and Diagnostics 
+ 
+   <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
+   <rosparam command="load" file="$(find robbie_bringup)/params/diagnostics.yaml" />
+   </node>
+
+  -->
+
+
+     
+       
+   
+</launch>

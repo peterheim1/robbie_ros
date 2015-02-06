@@ -1,0 +1,42 @@
+controller_list:
+  - name: "right_arm_controller"
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    joints:
+      - pan_joint
+      - right_arm_tilt_joint
+      - right_arm_lift_joint
+      - right_arm_rotate_joint
+      - right_arm_elbow_joint
+      - right_arm_wrist_pan_joint
+      - right_arm_wrist_yaw_joint   
+  - name: "left_arm_controller"
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    joints: 
+      - left_arm_tilt_joint
+      - left_arm_lift_joint
+      - left_arm_rotate_joint
+      - left_arm_elbow_joint
+      - left_arm_wrist_pan_joint
+      - left_arm_wrist_yaw_joint
+      - left_arm_wrist_tilt_joint
+      - pan_joint
+  - name: left_gripper
+    type: GripperCommand
+    action_ns: gripper_action
+    default: true
+    joints:
+      - left_arm_gripper_joint
+  - name: right_gripper
+    type: GripperCommand
+    action_ns: gripper_action
+    default: true
+    joints:
+      - right_arm_gripper_joint
+  - name: head_controller
+    type: FollowJointTrajectory
+    action_ns: head_trajectory
+    joints:
+      - head_tilt_mod_joint
+      - head_pan_joint

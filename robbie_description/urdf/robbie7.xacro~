@@ -1,0 +1,1059 @@
+<?xml version="1.0"?>
+
+<!-- XML namespaces -->
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro" 
+       
+	   name="robbie">
+
+    <property name="M_PI" value="3.14159"/>
+    <property name="M_SCALE" value="0.001"/>
+    <property name="MESH_EXT" value="stl"/>
+    <xacro:include filename="$(find robbie)/urdf/robbie_hardware.xacro" />
+
+
+  <xacro:my_box name="base_footprint" lwh="0.41 0.35 0.06" xyz="0 0 .135" rpy="0 0 0" mass="0.1" material="Gazebo/FlatBlack">
+	        <xacro:green1 />
+        </xacro:my_box>
+
+  <xacro:my_cylinder name="left_wheel" l="0.035" r="0.1025" xyz="0 0 0" rpy="1.57 0 0" mass="0.1" material="Gazebo/Grey">
+		<xacro:grey1 />
+	</xacro:my_cylinder>
+
+  <xacro:my_cylinder name="right_wheel" l="0.035" r="0.1025" xyz="0 0 0" rpy="1.57 0 0" mass="0.1" material="Gazebo/Grey">
+		<xacro:grey1 />
+	</xacro:my_cylinder>
+
+  <xacro:my_cylinder name="castor_wheel_l" l="0.035" r="0.04" xyz="0 0 0" rpy="1.57 0 0" mass="0.1" material="Gazebo/Grey">
+		<xacro:grey1 />
+	</xacro:my_cylinder>
+
+  <xacro:my_cylinder name="castor_wheel_r" l="0.035" r="0.04" xyz="0 0 0" rpy="1.57 0 0" mass="0.1" material="Gazebo/Grey">
+		<xacro:grey1 />
+	</xacro:my_cylinder>
+
+  <xacro:my_cylinder name="deck_link" l="0.520" r="0.175" xyz="0.1 0 0" rpy="0 0 0" mass="0.2" material="Gazebo/grey">
+			<xacro:black />
+		</xacro:my_cylinder>
+<!-- ##############################   upper torso   ##################333333-->
+
+<link name="upper_torso" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/upper_torso2.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+         <material name="green">
+        <color rgba="0.1 0.8 0 0.8"/>
+      </material>
+      <origin rpy="0 0 1.57" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+
+  <link name="waist_bottom" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/bottom torso.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+          <xacro:cyan3 />
+      <origin rpy="1.57 0 1.57" xyz="-0.12 -0.29 -0.5"/>
+    </visual>
+  </link>
+
+
+  <link name="waist_left" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/waist top lower left.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+          <xacro:cyan3 />
+      <origin rpy="0 3.14 3.14" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="waist_right" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/waist top lower right.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+          <xacro:cyan3 />
+      <origin rpy="0 3.14 3.14" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="waist_left_mid" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/waist top upper left.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+          <xacro:cyan3 />
+      <origin rpy="0 3.14 3.14" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="waist_right_mid" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/waist top upper right.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+          <xacro:cyan3 />
+      <origin rpy="0 3.14 3.14" xyz="0 0 0"/>
+    </visual>
+  </link>
+<!-- ##############################   right arm ##################333333--> 
+
+<link name="right_shoulder_gear" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/gear_box.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <material name="OffWhite">
+       <color rgba="0.8 0.8 0.8 0.9"/>
+       </material>
+      <origin rpy="${-M_PI/2} 0 1.57" xyz="0 0 0"/>
+    </visual>
+  </link>
+  <link name="right_shoulder_pan" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/shoulder_pan_gear.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="0 0 ${-M_PI/2}" xyz="-0.05 0.05 0.0"/>
+    </visual>
+  </link>
+
+  <link name="right_shoulder_tilt" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/elbow_pivot.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="0 0 ${M_PI/2}" xyz="-0.045 0.02 -0.03"/>
+    </visual>
+  </link>
+
+  <link name="right_shoulder_bracket" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/shoulder_lift_bracket.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="0 ${M_PI/2} ${M_PI/2}" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="right_shoulder_lift" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/gear_box.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <material name="OffWhite">
+       <color rgba="0.8 0.8 0.8 0.9"/>
+       </material>
+      <origin rpy="1.57 -1.57 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="right_shoulder_lift2" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/arm_top_left.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="0 0 0" xyz="-0.105 0 -0.09"/>
+    </visual>
+  </link>
+
+  <link name="right_shoulder_mid" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/right_arm _middle front.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:blue1 />
+      <origin rpy="0 3.14 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="right_shoulder_lower" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/elbow_plug.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="0 0 0" xyz="-0.05 -0.05 0"/>
+    </visual>
+  </link>
+
+  <link name="right_shoulder_elbow" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/right_arm lower top.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:blue1 />
+      <origin rpy="0 3.14 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="right_elbow_gearbox" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/gear_box.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="1.57 0 3.14" xyz="0.06 -0.04 0"/>
+    </visual>
+  </link>
+
+  <link name="right_elbow" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/elbow_pivot.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="3.14 0 0" xyz="0.025 -0.05 0.02"/>
+    </visual>
+  </link>
+
+  <link name="right_forearm_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/fore_arm.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+        <xacro:yellow2 />
+      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
+    </visual></link>
+
+  <!-- wrist_pan_ joint--> 
+  <xacro:ax12 name="wrist_pan_servo" xyz="0 0 0" rpy="0 0 0" />
+  <xacro:F3_bracket name="wrist_pan_servo_bracket_f3" xyz="0 0.005 0" rpy="1.57 0 0" />
+ <!-- <xacro:F3_bracket name="wrist_pan_servo_bracket2_f3" xyz="0 0 0" rpy="0 -1.57 0" />-->
+    
+  <!-- wrist_tilt joint-->
+  <xacro:ax12 name="wrist_tilt_servo" xyz="-0.04 0.05 0" rpy="-1.57 0 0" />
+  <xacro:F2_bracket name="wrist_tilt_bracket_f2" xyz="0 0 0" rpy="0 1.57 0" /><!--here-->
+ 
+ <xacro:F3_bracket name="gripper_bracket_f3" xyz="0 0 0" rpy="1.57 1.57 0" />
+  
+<!-- Gripper_joint-->
+  <xacro:ax12 name="gripper_servo" xyz="0 0 0" rpy="1.57 0 0" />
+  <xacro:F2_bracket name="gripper_bracket_f2" xyz="0 0 0" rpy="0 0 1.57" />
+
+  <xacro:my_box name="right_finger_link" lwh="-0.08 0.005 0.035" xyz="0 0 0" rpy="1.57 0 1.57" mass="0.1" material="Gazebo/FlatBlack">
+	        <xacro:grey3 />
+        </xacro:my_box>
+
+
+  <xacro:my_box name="left_finger_link" lwh="0.08 0.005 0.035" xyz="0 0 0" rpy="1.57 0 1.57" mass="0.1" material="Gazebo/FlatBlack">
+	        <xacro:blue1/>
+        </xacro:my_box>
+
+ 
+
+
+<!--##########################left arm#############################-->
+  <link name="left_shoulder_gear" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/gear_box.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <material name="green">
+        <color rgba="0.1 0.8 0 0.8"/>
+      </material>
+      <origin rpy="-1.57 0 -1.57" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+ <link name="left_shoulder_pan" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/shoulder_pan_gear.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="0 0 -1.57" xyz="-0.05 0.05 0.0"/>
+    </visual>
+  </link>
+
+  <link name="left_shoulder_tilt" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/elbow_pivot.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="0 0 -1.57" xyz="0.045 -0.02 -0.03"/>
+    </visual>
+  </link>
+
+  <link name="left_shoulder_bracket" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/shoulder_lift_bracket_left.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="0 0 1.57" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="left_shoulder_lift" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/gear_box.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <material name="OffWhite">
+       <color rgba="0.8 0.8 0.8 0.9"/>
+       </material>
+      <origin rpy="1.57 -1.57 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="left_shoulder_lift2" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/left_top_shoulder.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="0 0 3.14" xyz="0.08 0.07 -0.095"/>
+    </visual>
+  </link>
+
+  <link name="left_shoulder_mid" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/left_mid_front.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:blue1 />
+      <origin rpy="0 3.14 3.14" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+
+  <link name="left_shoulder_lower" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/elbow_plug.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="0 0 0" xyz="-0.05 -0.05 0"/>
+    </visual>
+  </link>
+
+  <link name="left_shoulder_elbow" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/right_arm lower top.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:blue1 />
+      <origin rpy="0 3.14 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="left_elbow_gearbox" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/gear_box.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="1.57 0 3.14" xyz="0.06 -0.04 0"/>
+    </visual>
+  </link>
+
+  <link name="left_elbow" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/elbow_pivot.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+       <xacro:yellow2 />
+      <origin rpy="3.14 0 0" xyz="0.025 -0.05 0.02"/>
+    </visual>
+  </link>
+
+  <link name="left_forearm_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/fore_arm.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+        <xacro:yellow2 />
+      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <!-- left_wrist_pan_ joint--> 
+  <xacro:ax12 name="left_wrist_pan_servo" xyz="0 0 0" rpy="0 0 0" />
+  <xacro:F3_bracket name="left_wrist_pan_servo_bracket_f3" xyz="0 0.005 0" rpy="1.57 0 0" />
+ <!-- <xacro:F3_bracket name="left_wrist_pan_servo_bracket2_f3" xyz="0 0 0" rpy="0 -1.57 0" />-->
+    
+  <!-- left_wrist_tilt joint-->
+  <xacro:ax12 name="left_wrist_tilt_servo" xyz="-0.04 0.05 0" rpy="-1.57 0 0" />
+  <xacro:F2_bracket name="left_wrist_tilt_bracket_f2" xyz="0 0 0" rpy="-1.57 0 0" />
+ 
+ <xacro:F3_bracket name="left_gripper_bracket_f3" xyz="0 0 0" rpy="1.57 1.57 0" />
+  
+<!-- left_Gripper_joint-->
+  <xacro:ax12 name="left_gripper_servo" xyz="0 0 0" rpy="0 0 -1.57" />
+  <xacro:F2_bracket name="left_gripper_bracket_f2" xyz="0 0 0" rpy="0 0 1.57" />
+
+  <xacro:my_box name="left_right_finger_link" lwh="-0.08 0.005 0.035" xyz="0 0 0" rpy="1.57 0 1.57" mass="0.1" material="Gazebo/FlatBlack">
+	        <xacro:grey3 />
+        </xacro:my_box>
+
+
+  <xacro:my_box name="left_left_finger_link" lwh="0.08 0.005 0.035" xyz="0 0 0" rpy="1.57 0 1.57" mass="0.1" material="Gazebo/FlatBlack">
+	        <xacro:blue1/>
+        </xacro:my_box>
+
+
+  <!-- head details-->
+  <xacro:F2_bracket name="head_tilt_bracket" xyz="0 0 0" rpy="0 3.1415 0"/>
+
+  <xacro:ax12 name="head_tilt_link" xyz="0 0 0" rpy="3.1415 0 0">
+	</xacro:ax12>
+
+  <xacro:F3_bracket name="head_pan_bracket" xyz="0 0 0" rpy="0 0 0"/>
+	
+	
+  <xacro:ax12 name="head_pan_link" xyz="0 0 0" rpy=" 1.57 0 1.57">
+	</xacro:ax12>
+
+  <xacro:F3_bracket name="neck_link" xyz="0 0 0" rpy="1.57 0 -1.570" />
+
+  <xacro:my_box name="head_base_link" lwh="0.06 0.08 0.005" xyz="0 0 0" rpy="0 0 0" mass="0.1" material="Gazebo/FlatBlack">
+		<xacro:black />
+	</xacro:my_box>
+
+  <link name="head_link" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie/meshes/head.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+         <material name="grey1">
+	  <color rgba="0.75 0.75 0.75 1.0"/>
+	</material>
+      <origin rpy="1.57 0 1.57" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="head_link_fake">
+      <inertial>
+        <mass value="0.0001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                 iyy="0.0001" iyz="0.0"
+                 izz="0.0001" />
+      </inertial>
+    </link>
+
+    <link name="kinect_link">
+      <inertial>
+        <mass value="1.0" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                 iyy="1.0" iyz="0.0"
+                 izz="1.0" />
+      </inertial>
+
+      <visual>
+        <origin xyz=" 0 0 0 " rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robbie/meshes/kinect.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+        </geometry>
+        <xacro:ax12_color />
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robbie/meshes/kinect.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+          </geometry>
+      </collision>
+
+    </link>
+
+  <link name="head_cam_link">
+      <inertial>
+        <mass value="1.0" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                 iyy="1.0" iyz="0.0"
+                 izz="1.0" />
+      </inertial>
+
+      <visual>
+        <origin xyz=" 0 0 0 " rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robbie/meshes/kinect.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+          
+        </geometry>
+          <xacro:grey3 />
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://robbie/meshes/kinect.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+          </geometry>
+      </collision>
+
+    </link>
+<!-- =================== Joint Definitions ==================== -->
+  <joint name="base_footprint_joint" type="fixed">
+    	<parent link="base_footprint" />
+    	<child link="deck_link" />
+    	<origin xyz="-0.10 0 .36" rpy="0 0 0" />
+	</joint> 
+
+  <joint name="'base_l_wheel_joint" type="fixed">
+    	<parent link="base_footprint" />
+    	<child link="left_wheel" />
+    	<origin xyz="0.1 -0.2 0.1" rpy="0 0 0" />
+	</joint>
+
+  <joint name="'base_r_wheel_joint" type="fixed">
+    	<parent link="base_footprint" />
+    	<child link="right_wheel" />
+    	<origin xyz="0.1 0.2 0.1" rpy="0 0 0" />
+	</joint>
+
+  <joint name="castor_wheel_joint_l" type="fixed">
+    	<parent link="base_footprint" />
+    	<child link="castor_wheel_l" />
+    	<origin xyz="-0.20 -0.13 0.05" rpy="0 0 0" />
+	</joint>
+
+  <joint name="castor_wheel_joint_r" type="fixed">
+    	<parent link="base_footprint" />
+    	<child link="castor_wheel_r" />
+    	<origin xyz="-0.20 0.13 0.05" rpy="0 0 0" />
+	</joint>
+<!--#################  Upper torso#############################-->
+ 
+  <joint name="waist_link" type="fixed">
+    	<parent link="deck_link" />
+    	<child link="waist_bottom" />
+    	<origin xyz="-0 0 0" rpy="0 0 0" />
+	</joint> 
+
+ <joint name="waist_upper_link" type="fixed">
+    	<parent link="deck_link" />
+    	<child link="upper_torso" />
+    	<origin xyz="0.19 -0.14 0.59" rpy="0 0 0" />
+	</joint> 
+  <joint name="waist_left_link" type="fixed">
+    	<parent link="waist_bottom" />
+    	<child link="waist_left" />
+    	<origin xyz="0.051 0 0.58" rpy="0 0 0" />
+	</joint>
+
+  <joint name="waist_right_link" type="fixed">
+    	<parent link="waist_bottom" />
+    	<child link="waist_right" />
+    	<origin xyz="0.05 0.109 0.58" rpy="0 0 0" />
+	</joint>
+
+  <joint name="waist_left_upper_link" type="fixed">
+    	<parent link="waist_left" />
+    	<child link="waist_left_mid" />
+    	<origin xyz="0.0 0.02 0.005" rpy="0 0 0" />
+	</joint>
+
+  <joint name="waist_right_upper_link" type="fixed">
+    	<parent link="waist_right" />
+    	<child link="waist_right_mid" />
+    	<origin xyz="0.0 0.03 0.01" rpy="0 0 0" />
+	</joint>
+
+<!--###########################right arm############################################3-->
+  <joint name="right_arm_pan_joint" type="fixed">
+    <parent link="upper_torso"/>
+    <child link="right_shoulder_pan"/>
+    <origin xyz="-0.05 0.05 0.0" rpy="0  0 0" />
+    <axis xyz="0 0 1" />
+   <limit lower="-0.80" upper="0.80" effort="10" velocity="0" />
+  </joint>
+ 
+
+  <joint name="right_shoulder_link" type="fixed">
+    	<parent link="right_shoulder_pan" />
+    	<child link="right_shoulder_gear" />
+    	<origin xyz="0.025 -0.05 0.105" rpy="0 0 0" />
+	</joint> 
+
+  <joint name="right_arm_tilt_joint" type="revolute">
+    <parent link="right_shoulder_gear"/>
+    <child link="right_shoulder_tilt"/>
+    <origin xyz="-0.02 0.03 -0.03" rpy="0 0 0" />
+    <axis xyz="1 0 0" />
+   <limit lower="-0.82" upper="0" effort="10" velocity="0" />
+  </joint>
+
+  <joint name="right_shoulder_lift_bracket_link" type="fixed">
+    	<parent link="right_shoulder_tilt" />
+    	<child link="right_shoulder_bracket" />
+    	<origin xyz="0.01 -0.145 0.02" rpy="0 0 0" />
+	</joint> 
+
+  <joint name="right_shoulder_lift_gearbox_link" type="fixed">
+    	<parent link="right_shoulder_bracket" />
+    	<child link="right_shoulder_lift" />
+    	<origin xyz="0.03 0.03 -0.055" rpy="0 0 0" />
+	</joint>
+
+  <joint name="right_arm_lift_joint" type="revolute">
+    <parent link="right_shoulder_lift"/>
+    <child link="right_shoulder_lift2"/>
+    <origin xyz="-0.025 -0.075 0.035" rpy="0 -1.57 0" />
+    <axis xyz="0 1 0" />
+   <limit lower="-1.1" upper="1.9" effort="10" velocity="0" />
+  </joint>
+
+  <joint name="right_shoulder_mid_link" type="fixed">
+    	<parent link="right_shoulder_lift2" />
+    	<child link="right_shoulder_mid" />
+    	<origin xyz="0.07 0.001 -0.088" rpy="0 0 0" />
+	</joint>
+
+  <joint name="right_arm_rotate_joint" type="revolute">
+    	<parent link="right_shoulder_mid" />
+    	<child link="right_shoulder_lower" />
+    	<origin xyz="-0.07 0.052 -0.131" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+        <limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
+	</joint>
+
+  <joint name="right_shoulder_elbow_link" type="fixed">
+    	<parent link="right_shoulder_lower" />
+    	<child link="right_shoulder_elbow" />
+    	<origin xyz="0.05 -0.05 0" rpy="0 0 0" />
+	</joint>
+
+  <joint name="right_elbow_gearbox_link" type="fixed">
+    	<parent link="right_shoulder_elbow" />
+    	<child link="right_elbow_gearbox" />
+    	<origin xyz="-0.09 0.08 -0.13" rpy="0 0 0" />
+	</joint>
+
+   <joint name="right_arm_elbow_joint" type="revolute">
+    <parent link="right_elbow_gearbox"/>
+    <child link="right_elbow"/>
+    <origin xyz="0.03 -0.02 0.025" rpy="0 -1.57 0" />
+    <axis xyz="0 1 0" />
+   <limit lower="-2.00" upper="0.57" effort="10" velocity="0" />
+  </joint>
+
+  <joint name="right_arm_forearm_link" type="fixed">
+    <parent link="right_elbow"/>
+    <child link="right_forearm_link"/>
+    <origin xyz="-0.08 -0.0 -0.0" rpy="1.57 0 0" />
+  </joint>
+
+  <!--right_arm_wrist_pan_joint-->
+  <joint name="right_arm_wrist_pan_bracket" type="fixed">
+    	<parent link="right_forearm_link" />
+    	<child link="wrist_pan_servo" />
+    	<origin xyz="-0.21 0.0 0.0" rpy="0 0 1.57" />
+    	
+	</joint>
+  <joint name="right_arm_wrist_pan_joint" type="revolute">
+    	<parent link="wrist_pan_servo" />
+    	<child link="wrist_pan_servo_bracket_f3" />
+    	<origin xyz="0. 0.015 0.0" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    	<limit lower="-2.61" upper="2.61" effort="10" velocity="0" />
+      	<dynamics damping="0.0"/>
+	</joint>   
+
+
+   <joint name="right_arm_wrist_tilt_bracket" type="fixed">
+    	<parent link="wrist_pan_servo_bracket_f3" />
+    	<child link="wrist_tilt_servo" />
+    	<origin xyz="0.04 0 0.0" rpy="0 0 0" />
+        <axis xyz="1 0 0" />
+    	
+	</joint> 
+
+
+<!--wrist_tilt_joint-->
+  <joint name="right_arm_wrist_tilt_joint" type="revolute">
+    	<parent link="wrist_tilt_servo" />
+    	<child link="wrist_tilt_bracket_f2" />
+    	<origin xyz="-0.04 0.05 0" rpy="-1.57 0 1.57" />
+        <axis xyz="0 1 0" />
+    	<limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
+      	<dynamics damping="0.0"/>
+	</joint>
+
+ 
+  <joint name="right_arm_gripper_bracket" type="fixed">
+    	<parent link="wrist_tilt_bracket_f2" />
+    	<child link="gripper_bracket_f3" />
+    	<origin xyz="0.025 0.025 0.0" rpy="1.57 1.57 0" /><!--now-->
+	</joint> 
+
+   <joint name="right_arm_gripper_servo" type="fixed">
+    	<parent link="gripper_bracket_f3" />
+    	<child link="gripper_servo" />
+    	<origin xyz="0.0 0.02 0.02" rpy="-1.57 0 1.57" />
+	</joint>
+
+
+<!-- gripper_joint-->
+   <joint name="right_arm_gripper_joint" type="revolute">
+    	<parent link="gripper_servo" />
+    	<child link="gripper_bracket_f2" />
+    	<origin xyz="0 0.0 0.0" rpy="0 1.57 -1.57" />
+        <axis xyz="1 0 0" />
+    	<limit lower="-0.36" upper="0.28" effort="10" velocity="0" />
+      	<dynamics damping="0.0"/>
+	</joint> 
+
+
+
+  <joint name="right_arm_finger_link_l" type="fixed">
+    	<parent link="gripper_servo" />
+    	<child link="left_finger_link" />
+    	<origin xyz="0.03 0.04 0.0" rpy="0 1.57 -1.57" />
+        
+	</joint> 
+<!-- moving finger   ############-->
+  <joint name="right_arm_finger_link_r" type="fixed">
+    	<parent link="gripper_bracket_f2" />
+    	<child link="right_finger_link" />
+    	<origin xyz="0 0.03 0.03" rpy="0 0 0" />
+	</joint>
+
+  
+
+<!--##########################left arm#############################-->
+  <joint name="left_shoulder_link" type="fixed"> 
+    	<parent link="left_shoulder_pan" />
+    	<child link="left_shoulder_gear" />
+    	<origin xyz="-0.025 0.05 0.105" rpy="0 0 0" />
+	</joint>
+
+  <joint name="left_arm_pan_joint" type="fixed"> <!--revolute-->
+    <parent link="upper_torso"/>
+    <child link="left_shoulder_pan"/>
+    <origin xyz="-0.04 0.22 0.0" rpy="0  0 0" />
+    <axis xyz="0 0 1" />
+   <limit lower="-0.80" upper="0.80" effort="10" velocity="0" />
+  </joint>
+
+  <joint name="left_arm_tilt_joint" type="fixed"> <!--revolute-->
+    <parent link="left_shoulder_gear"/>
+    <child link="left_shoulder_tilt"/>
+    <origin xyz="0.02 -0.03 -0.03" rpy="0 0 0" />
+    <axis xyz="1 0 0" />
+   <limit lower="-0.82" upper="0.0" effort="10" velocity="0" />
+  </joint>
+
+  <joint name="left_shoulder_lift_bracket_link" type="fixed">
+    	<parent link="left_shoulder_tilt" />
+    	<child link="left_shoulder_bracket" />
+    	<origin xyz="0.0 0.145 0.02" rpy="0 0 0" />
+	</joint>
+
+  <joint name="left_shoulder_lift_gearbox_link" type="fixed">
+    	<parent link="left_shoulder_bracket" />
+    	<child link="left_shoulder_lift" />
+    	<origin xyz="0.03 0.005 -0.055" rpy="0 0 0" />
+	</joint>
+
+  <joint name="left_arm_lift_joint" type="fixed"> <!--revolute-->
+    <parent link="left_shoulder_lift"/>
+    <child link="left_shoulder_lift2"/>
+    <origin xyz="-0.025 -0.03 0.035" rpy="0 0 0" /><!--rpy="0 -1.57 0"-->
+    <axis xyz="0 1 0" />
+   <limit lower="-1.1" upper="1.9" effort="10" velocity="0" />
+  </joint>
+
+  <joint name="left_shoulder_mid_link" type="fixed">
+    	<parent link="left_shoulder_lift2" />
+    	<child link="left_shoulder_mid" />
+    	<origin xyz="-0.067 0.07 -0.093" rpy="0 0 0" />
+	</joint>
+
+  <joint name="left_arm_rotate_joint" type="fixed"> <!--revolute-->
+    	<parent link="left_shoulder_mid" />
+    	<child link="left_shoulder_lower" />
+    	<origin xyz="0.07 -0.06 -0.131" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+        <limit lower="-2.00" upper="1.57" effort="10" velocity="0" />
+	</joint>
+
+  <joint name="left_shoulder_elbow_link" type="fixed">
+    	<parent link="left_shoulder_lower" />
+    	<child link="left_shoulder_elbow" />
+    	<origin xyz="0.05 -0.05 0" rpy="0 0 0" />
+	</joint>
+
+  <joint name="left_elbow_gearbox_link" type="fixed">
+    	<parent link="left_shoulder_elbow" />
+    	<child link="left_elbow_gearbox" />
+    	<origin xyz="-0.09 0.08 -0.13" rpy="0 0 0" />
+	</joint>
+
+  <joint name="left_arm_elbow_joint" type="fixed"> <!--revolute-->
+    <parent link="left_elbow_gearbox"/>
+    <child link="left_elbow"/>
+    <origin xyz="0.03 -0.02 0.025" rpy="0 -1.57 0" />
+    <axis xyz="0 1 0" />
+   <limit lower="-2.0" upper="0.57" effort="10" velocity="0" />
+  </joint>
+
+  <joint name="left_arm_forearm_link" type="fixed">
+    <parent link="left_elbow"/>
+    <child link="left_forearm_link"/>
+    <origin xyz="-0.08 -0.0 -0.0" rpy="1.57 0 0" />
+  </joint>
+
+   <!--left_arm_wrist_pan_joint-->
+  <joint name="left_arm_wrist_pan_bracket" type="fixed">
+    	<parent link="left_forearm_link" />
+    	<child link="left_wrist_pan_servo" />
+    	<origin xyz="-0.21 0.0 0.0" rpy="0 0 1.57" />
+    	
+	</joint>
+  <joint name="left_arm_wrist_pan_joint" type="fixed"> <!--revolute-->
+    	<parent link="left_wrist_pan_servo" />
+    	<child link="left_wrist_pan_servo_bracket_f3" />
+    	<origin xyz="0. 0.015 0.0" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    	<limit lower="-2.61" upper="2.61" effort="10" velocity="0" />
+      	<dynamics damping="0.0"/>
+	</joint>   
+
+
+   <joint name="left_arm_wrist_tilt_bracket" type="fixed">
+    	<parent link="left_wrist_pan_servo_bracket_f3" />
+    	<child link="left_wrist_tilt_servo" />
+    	<origin xyz="0.04 0 0.0" rpy="0 0 0" />
+        <axis xyz="1 0 0" />
+    	
+	</joint> 
+
+
+<!--wrist_tilt_joint-->
+  <joint name="left_arm_wrist_tilt_joint" type="fixed"> <!--revolute-->
+    	<parent link="left_wrist_tilt_servo" />
+    	<child link="left_wrist_tilt_bracket_f2" />
+    	<origin xyz="-0.04 0.05 0" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+    	<limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
+      	<dynamics damping="0.0"/>
+	</joint>
+
+ 
+  <joint name="left_arm_gripper_bracket" type="fixed">
+    	<parent link="left_wrist_tilt_bracket_f2" />
+    	<child link="left_gripper_bracket_f3" />
+    	<origin xyz="0.0 0.025 0.015" rpy="0 0 0" />
+	</joint> 
+
+   <joint name="left_arm_gripper_servo" type="fixed">
+    	<parent link="left_gripper_bracket_f3" />
+    	<child link="left_gripper_servo" />
+    	<origin xyz="0.0 0.02 -0.02" rpy="0 3.14 0" />
+	</joint>
+
+  <!-- left gripper_joint-->
+   <joint name="left_arm_gripper_joint" type="fixed"> <!--revolute-->
+    	<parent link="left_gripper_servo" />
+    	<child link="left_gripper_bracket_f2" />
+    	<origin xyz="0 0.0 0.0" rpy="0 0 0" />
+        <axis xyz="1 0 0" />
+    	<limit lower="-0.36" upper="0.28" effort="10" velocity="0" />
+      	<dynamics damping="0.0"/>
+	</joint> 
+
+  <joint name="left_arm_finger_link_l" type="fixed">
+    	<parent link="left_gripper_servo" />
+    	<child link="left_left_finger_link" />
+    	<origin xyz="0. 0.03 -0.04" rpy="0 0 0" />
+        
+	</joint> 
+
+  <joint name="left_arm_finger_link_r" type="fixed">
+    	<parent link="left_gripper_bracket_f2" />
+    	<child link="left_right_finger_link" />
+    	<origin xyz="0 0.03 0.03" rpy="0 0 0" />
+	</joint>
+
+<!-- #####################################Head joints#########################################-->
+  <joint name="head_tilt_servo" type="fixed">
+    	<parent link="upper_torso" />
+    	<child link="head_tilt_bracket" />
+    	<origin xyz="-0.05 0.135 0.15" rpy="0 0 0" />
+	</joint>
+<!-- Head tilt joint-->
+  <joint name="head_tilt_mod_joint" type="revolute">
+    	<parent link="head_tilt_bracket" />
+    	<child link="head_tilt_link" />
+    	<origin xyz="0 0 0.0" rpy="0 0 0" />
+    	<axis xyz="0 1 0" />
+    	<limit lower="-2.6" upper="2.6" effort="10" velocity="0" />
+      	<dynamics damping="0.0"/>
+	</joint>
+
+<!-- Head tilt joint fake-->
+  <joint name="head_tilt_joint" type="revolute">
+    	<parent link="head_tilt_bracket" />
+    	<child link="head_link_fake" />
+    	<origin xyz="0 0 0.0" rpy="0 0 0" />
+    	<axis xyz="0 1 0" />
+    	<limit lower="-2.6" upper="2.6" effort="10" velocity="0" />
+      	<dynamics damping="0.0"/>
+	</joint>
+
+  <joint name="head_pan_servo" type="fixed">
+    	<parent link="head_tilt_link" />
+    	<child link="head_pan_bracket" />
+    	<origin xyz="-0.0 0 0.04" rpy="0 0 0" />
+	</joint>
+
+  <!-- head_pan_joint-->	
+	<joint name="head_pan_joint" type="revolute">
+    	<parent link="head_pan_bracket" />
+    	<child link="head_pan_link" />
+    	<origin xyz="0.0 0 0.02" rpy="0 0 0" />
+        <origin xyz="0 0 0.0" rpy="0 0 0" />
+    	<axis xyz="0 0 1" />
+    	<limit lower="-2" upper="2" effort="10" velocity="0" />
+      	<dynamics damping="0.0"/>
+	</joint>
+
+  <joint name="head_neck_link" type="fixed">
+    	<parent link="head_pan_link" />
+    	<child link="neck_link" />
+    	<origin xyz="-0.04 0 0.0" rpy="0 0 0" />
+	</joint>
+
+  <joint name="neck_joint" type="fixed">
+    	<parent link="neck_link" />
+    	<child link="head_base_link" />
+    	<origin xyz="0.02 0 0.0" rpy="0 0 0" />
+	</joint>
+	
+  <joint name="head_joint" type="fixed">
+    	<parent link="head_base_link" />
+    	<child link="head_link" />
+    	<origin xyz="-0.02 -0.097 -0.45" rpy="0 0 0" />
+	</joint>
+
+   <joint name="kinect_joint" type="fixed">
+    	<parent link="base_footprint" />
+    	<child link="kinect_link" />
+    	<origin xyz="0.2 0 0.47" rpy="0 0 0" />
+	</joint>
+
+
+  <joint name="kinect_depth_joint" type="fixed">
+      <origin xyz="0 0.018 0" rpy="0 0 0" />
+      <parent link="kinect_link" />
+      <child link="kinect_depth_frame" />
+    </joint>
+    
+    <link name="kinect_depth_frame">
+      <inertial>
+        <mass value="0.0001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                 iyy="0.0001" iyz="0.0"
+                 izz="0.0001" />
+      </inertial>
+    </link>
+    
+    <joint name="kinect_depth_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+      <parent link="kinect_link" />
+      <child link="kinect_depth_optical_frame" />
+    </joint>
+    
+    <link name="kinect_depth_optical_frame">
+      <inertial>
+        <mass value="0.0001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                 iyy="0.0001" iyz="0.0"
+                 izz="0.0001" />
+      </inertial>
+    </link>
+
+
+    <joint name="kinect_rgb_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+      <parent link="kinect_depth_optical_frame" />
+      <child link="kinect_rgb_optical_frame" />
+    </joint>
+    <link name="kinect_rgb_optical_frame">
+      <inertial>
+        <mass value="0.001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                 iyy="0.0001" iyz="0.0"
+                 izz="0.0001" />
+      </inertial>
+    </link>
+
+  <joint name="head_cam_joint" type="fixed">
+    	<parent link="head_link" />
+    	<child link="head_cam_link" />
+    	<origin xyz="0.15 0.1 0.58" rpy="0 0 0" /><!-- 0 -1.57 1.57-->	
+  </joint>
+
+
+  <joint name="head_cam_depth_joint" type="fixed">
+      <origin xyz="0 0.018 0" rpy="0 0 0" />
+      <parent link="head_cam_link" />
+      <child link="head_cam_depth_frame" />
+    </joint>
+    
+    <link name="head_cam_depth_frame">
+      <inertial>
+        <mass value="0.0001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                 iyy="0.0001" iyz="0.0"
+                 izz="0.0001" />
+      </inertial>
+    </link>
+    
+    <joint name="head_cam_depth_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="${-M_PI/2} 0 0" />
+      <parent link="head_cam_link" />
+      <child link="head_cam_depth_optical_frame" />
+    </joint>
+    
+    <link name="head_cam_depth_optical_frame">
+      <inertial>
+        <mass value="0.0001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                 iyy="0.0001" iyz="0.0"
+                 izz="0.0001" />
+      </inertial>
+    </link>
+
+
+    <joint name="head_cam_rgb_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 ${M_PI/2} 0 " />
+      <parent link="head_cam_depth_optical_frame" />
+      <child link="head_cam_rgb_optical_frame" />
+    </joint>
+    <link name="head_cam_rgb_optical_frame">
+      <inertial>
+        <mass value="0.001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                 iyy="0.0001" iyz="0.0"
+                 izz="0.0001" />
+      </inertial>
+    </link>
+  
+
+
+
+
+<gazebo reference="robbie">
+  	</gazebo>
+</robot>

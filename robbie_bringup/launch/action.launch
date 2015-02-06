@@ -1,0 +1,21 @@
+<launch>
+<!-- used to launch all working action servers-->
+
+
+
+     <!-- Move_base action server 
+    <node name="robbie_move_base_action" pkg="robbie" type="robbie_base_action.py" output="screen"/>
+-->
+     <!-- Head action server  -->
+    <node name="robbie_head_action" pkg="robbie_bringup" type="follow_head.py" output="screen"/>
+
+  <!-- Arm action server  -->
+    
+    <node name="right_robbie_arm_action" pkg="robbie_bringup" type="right_follow_joint.py" output="screen"/>
+    <node name="left_robbie_arm_action" pkg="robbie_bringup" type="left_follow_joint.py" output="screen"/>
+
+  <node name="right_gripper" pkg="robbie_bringup" type="gripper_controller.py"/>
+    	<param name="model" value="singlesided"/>
+
+
+</launch>

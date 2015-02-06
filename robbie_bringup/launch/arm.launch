@@ -1,0 +1,23 @@
+<launch>
+<!--
+This is the launch file robbies arms
+
+-->
+  
+
+     <!-- start the upper arms controller -->
+   <node name="upper_arms" pkg="robbie_bringup" type="arm_driver_upper.py">
+   <rosparam file="$(find robbie)/params/upper_arms.yaml" command="load" />
+   </node>
+
+    <!-- start the lower arms controller -->
+   <node name="lower_arms" pkg="robbie_bringup" type="arm_driver_lower.py">
+   <rosparam file="$(find robbie_bringup)/params/lower_arms.yaml" command="load" />
+   </node>
+  <!-- Start the Dynamixel Joint States Publisher -->
+   <node name="robbie_joint_states_publisher" pkg="robbie_bringup" type="robbie_joint_state_publisher.py" output="screen" />
+   
+
+    
+
+</launch>

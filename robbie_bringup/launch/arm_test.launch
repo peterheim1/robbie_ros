@@ -1,0 +1,42 @@
+<launch>
+<!--
+This is the launch file for robbies arm for testing 
+
+-->
+
+ <!-- Load the URDF/Xacro model of our robot -->
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find robbie_description)/urdf/rob_inmoov.xacro'" />
+
+
+<!-- Start the Dynamixel Joint States Publisher -->
+     <node name="robbie_joint_states_publisher" pkg="robbie_bringup" type="robbie_joint_state_publisher.py" output="screen" />
+
+   <!-- Given the published joint states, publish tf for the robot links -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+
+ 
+       
+   <!-- start the dynamixel servos -->
+     <include file="$(find robbie_bringup)/launch/dynamixels.launch"/>
+
+
+  <!-- start the upper arms controller --> 
+   <node name="upper_arms" pkg="robbie_bringup" type="arm_driver_upper.py">
+    <rosparam file="$(find robbie_bring_up)/params/upper_arms.yaml" command="load" />
+   </node>
+
+<!-- start the lower arms controller -->
+   <node name="lower_arms" pkg="robbie_bringup" type="arm_driver_lower.py">
+    <rosparam file="$(find robbie_bringup)/params/lower_arms.yaml" command="load" />
+   </node>
+
+  
+ <!-- start action servers  
+     <include file="$(find robbie)/launch/action.launch"/>
+-->
+   
+ 
+
+    
+
+</launch>

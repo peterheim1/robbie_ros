@@ -1,0 +1,54 @@
+port: /dev/ttyACM0
+baudRate: 115200
+
+
+
+joints: [left_arm_pan_joint, left_arm_tilt_joint, left_arm_lift_joint, left_arm_rotate_joint, left_arm_elbow_joint, left_arm_wrist_tilt_joint, left_arm_wrist_pan_joint, left_arm_gripper_joint]
+
+
+
+servos: [left_arm_tilt_joint, left_arm_lift_joint, left_arm_rotate_joint, left_arm_elbow_joint, left_arm_wrist_tilt_joint, left_arm_wrist_pan_joint, left_arm_gripper_joint, head_pan_joint, head_tilt_joint]
+
+
+    
+
+
+
+
+arm_tilt_controller:
+    joint_name: left_arm_tilt_joint
+    joint_speed: 1.17
+    motor:
+        id: 9
+        init: 512
+        min: 300
+        max: 800
+
+arm_lift_controller:
+    joint_name: left_arm_lift_joint
+    joint_speed: 1.17
+    motor:
+        id: 9
+        init: 512
+        min: 300
+        max: 800
+
+arm_rotate_controller:
+    joint_name: left_arm_rotate_joint
+    joint_speed: 1.17
+    motor:
+        id: 9
+        init: 512
+        min: 300
+        max: 800
+
+arm_elbow_controller:
+    joint_name: left_arm_elbow_joint
+    joint_speed: 1.17
+    motor:
+        id: 9
+        init: 512
+        min: 300
+        max: 800
+
+

@@ -1,0 +1,15 @@
+<launch>
+
+   <!-- Load the URDF/Xacro model of our robot -->
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find robbie_description)/urdf/rob_inmoov.xacro'" />
+
+    <!-- Publish the robot state -->
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
+    	<param name="publish_frequency" value="20.0"/>
+
+        </node>
+
+  <node name="arduino" pkg="robbie_bringup" type="arduino.py">
+    <rosparam file="$(find robbie_bringup)/params/robbie_base.yaml" command="load" />
+  </node>
+</launch>

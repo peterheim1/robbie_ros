@@ -1,0 +1,26 @@
+#port: /dev/sensors/ftdi_A700eDQw #arbotix
+port: /dev/sensors/ftdi_A400gac2 #usbDynamixel
+baud: 1000000
+rate: 100
+read_rate: 50
+write_rate: 50
+sync_read: False
+sync_write: True
+
+
+dynamixels: {  
+    head_pan_joint:{id: 4, max_speed: 360, min_angle: -145, max_angle: 145, invert: True},
+    head_tilt_joint:{id: 9, max_speed: 360,min_angle: -90, max_angle: 90, invert: True},
+    arm_pan_joint: {id: 3, max_speed: 360, invert: false},
+    arm_tilt_joint: {id: 10, max_speed: 180, invert: True},
+    elbow_roll_joint: {id: 7, max_speed: 360},
+    elbow_tilt_joint: {id: 8, max_speed: 180, invert: True},
+    wrist_pan_joint: {id: 6, max_speed: 360},
+    wrist_tilt_joint: {id: 5, max_speed: 360, invert: True},
+    gripper_joint: {id: 2, max_speed: 360, invert: True},
+}
+
+controllers: {
+  head_controller: {type: follow_controller, joints: [head_pan_joint, head_tilt_joint], action_name: head_controller/follow_joint_trajectory },
+  arm_controller: {type: follow_controller, joints: [arm_pan_joint, arm_tilt_joint, elbow_tilt_joint, elbow_roll_joint, wrist_pan_joint, wrist_tilt_joint] }
+}

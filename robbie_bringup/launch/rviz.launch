@@ -1,0 +1,18 @@
+<launch>
+ 
+    <!-- Make sure simulated time is off -->
+    <param name="/use_sim_time" value="False" />
+    
+    <!-- Read in the URDF model of our robot. -->
+   <!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(find pr2_description)/robots/pr2.urdf.xacro'" />-->
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find robbie_description)/urdf/rob_inmoov.xacro'" />
+    
+    <param name="/use_gui" value="True" />
+ 
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />   
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+    <node pkg="tf" type="static_transform_publisher" name="odom_map_broadcaster" args="0 0 0 0 0 0 /odom /map 100" />
+    <node pkg="tf" type="static_transform_publisher" name="odom_base_broadcaster" args="0 0 0 0 0 0 /base_footprint /odom 100" />
+     
+</launch>

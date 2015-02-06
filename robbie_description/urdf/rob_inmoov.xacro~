@@ -318,9 +318,39 @@
 
     </link>
 
-    <xacro:my_cylinder name="camera_link" l="0.035" r="0.008" xyz="0 0 0" rpy="0 1.57 0" mass="0.1" material="Gazebo/Grey">		<xacro:grey1 />
+    <xacro:my_cylinder name="camera_link" l="0.035" r="0.01" xyz="0 0 0" rpy="0 1.57 0" mass="0.1" material="Gazebo/Grey">		
+      <xacro:grey1 />
 	</xacro:my_cylinder>
 
+<!-- virtal joints-->
+<link name="right_gripper_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0.05 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.05 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+<link name="left_gripper_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="-0.05 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.05 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
 
 
 <!-- ##############################   joints ##################333333--> 
@@ -365,7 +395,7 @@
     	<child link="pan_link" />
     	<origin xyz="0.1 0 0.275" rpy="0 0 0" />
         <axis xyz="0 0 1" />
-        <limit lower="-0.26" upper="0.26" effort="10" velocity="0" />
+        <limit lower="-0.8" upper="0.8" effort="10" velocity="0" />
 	</joint> 
 
   <joint name="torso_link" type="fixed">
@@ -450,6 +480,7 @@
 	</joint> 
 
 
+
 <!--wrist_tilt_joint-->
   <joint name="right_arm_wrist_yaw_joint" type="revolute">
     	<parent link="wrist_tilt_servo" />
@@ -472,6 +503,12 @@
     	<child link="gripper_servo" />
     	<origin xyz="0.0 0.02 0.02" rpy="-1.57 0 1.57" />
 	</joint>
+
+  <joint name="right_gripper_joint" type="fixed">
+    <origin rpy="-1.570795 0 1.570795" xyz="0 0.06 0.01"/>
+    <parent link="gripper_bracket_f3"/>
+    <child link="right_gripper_link"/>
+  </joint>
 
 
 <!-- gripper_joint-->
@@ -507,7 +544,7 @@
     	<child link="left_shoulder_tilt" />
     	<origin xyz="-0.045 0.145 0.105" rpy="0 0 0" />
         <axis xyz="-1 0 0" />
-        <limit lower="-1.34" upper="0" effort="10" velocity="0" />
+        <limit lower="-1.34" upper="0.1" effort="10" velocity="0" />
 	</joint> 
 
 <joint name="left_arm_lift_joint" type="revolute">
@@ -523,7 +560,7 @@
     	<child link="left_shoulder_rotate" />
     	<origin xyz="0 0.06 -0.055" rpy="0 0 0" />
         <axis xyz="0 0 -1" />
-        <limit lower="0" upper="2.61" effort="10" velocity="0" />
+        <limit lower="0.2" upper="3.14" effort="10" velocity="0" />
 	</joint> 
 
 <joint name="left_elbow_link" type="fixed">
@@ -603,7 +640,7 @@
   <joint name="left_arm_gripper_bracket" type="fixed">
     	<parent link="left_wrist_tilt_bracket_f2" />
     	<child link="left_gripper_bracket_f3" />
-    	<origin xyz="0.0 0.035 0.0" rpy="0 1.57 0" />
+    	<origin xyz="0.0 0.035 0.0" rpy="0 0 0" />
 	</joint> 
 
    <joint name="left_arm_gripper_servo" type="fixed">
@@ -611,6 +648,12 @@
     	<child link="left_gripper_servo" />
     	<origin xyz="0.0 0.02 -0.02" rpy="0 3.14 0" />
 	</joint>
+
+  <joint name="left_gripper_joint" type="fixed">
+    <origin rpy="-1.570795 0 -1.570795" xyz="0 0.06 -0.01"/>
+    <parent link="left_gripper_bracket_f3"/>
+    <child link="left_gripper_link"/>
+  </joint>
 
   <!-- left gripper_joint-->
    <joint name="left_arm_gripper_joint" type="revolute"> <!--revolute-->

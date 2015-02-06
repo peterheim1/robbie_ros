@@ -34,8 +34,6 @@ right_arm:
     - TRRTkConfigDefault
     - PRMkConfigDefault
     - PRMstarkConfigDefault
-  projection_evaluator: joints(pan_joint,right_arm_wrist_tilt_joint)
-  longest_valid_segment_fraction: 0.05
 left_arm:
   planner_configs:
     - SBLkConfigDefault
@@ -49,8 +47,6 @@ left_arm:
     - TRRTkConfigDefault
     - PRMkConfigDefault
     - PRMstarkConfigDefault
-  projection_evaluator: joints(pan_joint,left_arm_wrist_tilt_joint)
-  longest_valid_segment_fraction: 0.05
 right_gripper:
   planner_configs:
     - SBLkConfigDefault

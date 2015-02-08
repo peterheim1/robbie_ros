@@ -75,7 +75,7 @@ class R_shoulder(object):
                                 self._BroadcastJointStateinfo_P8(lineParts)
                                 return
                         if (lineParts[0] == 'p9'):
-                                self._BroadcastJointStateinfo_P8(lineParts)
+                                self._BroadcastJointStateinfo_P9(lineParts)
                                 return
 
         
@@ -220,7 +220,7 @@ class R_shoulder(object):
                         self._left_elbow_Publisher.publish(P1)
 
                         Joint_State = JointState()
-                        Joint_State.name = "left_arm_elbow_joint"
+                        Joint_State.name = "right_arm_elbow_joint"
                         Joint_State.goal_pos = P2
                         Joint_State.current_pos = P1
                         Joint_State.velocity = P4
@@ -232,7 +232,7 @@ class R_shoulder(object):
                         #rospy.logwarn(val)
 
                 except:
-                        rospy.logwarn("Unexpected error:left_arm_elbow_joint" + str(sys.exc_info()[0]))
+                        rospy.logwarn("Unexpected error:right_arm_elbow_joint" + str(sys.exc_info()[0]))
 
 
         def _BroadcastJointStateinfo_P9(self, lineParts):
@@ -254,8 +254,8 @@ class R_shoulder(object):
                         Motor_State.load = P3
                         Motor_State.moving = 0
                         Motor_State.timestamp = time.time()
-                        self.P8_MotorPublisher.publish(Motor_State)
-                        self._left_elbow_Publisher.publish(P1)
+                        self.P9_MotorPublisher.publish(Motor_State)
+                        self._pan_jount_Publisher.publish(P1)
 
                         Joint_State = JointState()
                         Joint_State.name = "pan_joint"
@@ -266,7 +266,7 @@ class R_shoulder(object):
                         Joint_State.error = P1 - P2
                         Joint_State.is_moving = 0
                         Joint_State.header.stamp = rospy.Time.now()
-                        self._P8_JointPublisher.publish(Joint_State)
+                        self._P9_JointPublisher.publish(Joint_State)
                         #rospy.logwarn(val)
 
                 except:
@@ -423,7 +423,7 @@ class R_shoulder(object):
 
         def _HandleJoint_8_Command(self, Command):
                 """ Handle movement requests. 
-                             left_arm_elbow_joint
+                             pan_joint
                 send message in degrees * 10
 
                 """
@@ -432,7 +432,7 @@ class R_shoulder(object):
                 if v1 < 100: v1 = 100 #degrees * 10
                 if v1 > 1000: v1 = 1000 #degrees * 10
                 message = 'j8 %d \r' % (v1)#% self._GetBaseAndExponents((v1)
-                rospy.logwarn("Sending left_arm_elbow_joint command: " + (message))
+                rospy.logwarn("Sending pan_joint command: " + (message))
                 self._WriteSerial(message) 
                 
                                             

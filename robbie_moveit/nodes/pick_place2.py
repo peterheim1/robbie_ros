@@ -18,9 +18,9 @@ if ROBOT_NAME == "robbie":
     GROUP_NAME_ARM = 'right_arm'
     GROUP_NAME_GRIPPER = 'right_gripper'
 
-    GRIPPER_FRAME = 'gripper_bracket_f2'
+    GRIPPER_FRAME = 'right_gripper_link'
 
-    FIXED_FRAME = 'base_link'
+    FIXED_FRAME = 'base_footprint'
 
     GRIPPER_CLOSED = 0.3
     GRIPPER_OPEN = 0.0
@@ -39,7 +39,7 @@ class TestPick():
         robot = RobotCommander()
        
         right_arm = MoveGroupCommander(GROUP_NAME_ARM)
-        #right_arm.set_planner_id("KPIECEkConfigDefault");
+        right_arm.set_planner_id("KPIECEkConfigDefault");
         right_gripper = MoveGroupCommander(GROUP_NAME_GRIPPER)
        
         eef = right_arm.get_end_effector_link()
@@ -73,8 +73,8 @@ class TestPick():
 
    
         # add an object to be grasped
-        p.pose.position.x = 0.7
-        p.pose.position.y = -0.2
+        p.pose.position.x = 0.40
+        p.pose.position.y = -0.0
         p.pose.position.z = 0.85
         scene.add_box("part", p, (0.07, 0.01, 0.2))
       
@@ -86,8 +86,8 @@ class TestPick():
         start_pose.header.frame_id = FIXED_FRAME
    
         # start the gripper in a neutral pose part way to the target
-        start_pose.pose.position.x = 0.47636
-        start_pose.pose.position.y = -0.21886
+        start_pose.pose.position.x = 0.37636
+        start_pose.pose.position.y = 0.21886
         start_pose.pose.position.z = 0.9
         start_pose.pose.orientation.x = 0.00080331
         start_pose.pose.orientation.y = 0.001589

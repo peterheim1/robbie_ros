@@ -17,5 +17,7 @@
   <node name="right_gripper" pkg="robbie_bringup" type="gripper_controller.py"/>
     	<param name="model" value="singlesided"/>
 
+  <node name="left_gripper" pkg="robbie_bringup" type="left_gripper_controller.py"/>
+    	<param name="model" value="singlesided"/>
 
 </launch>

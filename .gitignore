@@ -4,7 +4,7 @@
 *.txt~
 *.xml~
 *.pyc
-*.*~
+*.xacro~
 *.py[cod]
 
 # C extensions

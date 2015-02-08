@@ -52,7 +52,7 @@ class MoveItDemo:
         left_arm = MoveGroupCommander('left_arm')
 
         right_arm.set_planner_id("KPIECEkConfigDefault");
-        left_arm.set_planner_id("KPIECEkConfigDefault");
+        #left_arm.set_planner_id("KPIECEkConfigDefault");
         rospy.sleep(1)
         
         # Get the name of the end-effector link
@@ -73,6 +73,10 @@ class MoveItDemo:
         
         # Allow 5 seconds per planning attempt
         right_arm.set_planning_time(5)
+
+        # publish a demo scene
+        p = PoseStamped()
+        p.header.frame_id = reference_frame
         
         # Give each of the scene objects a unique name
         table_id = 'table'
@@ -83,6 +87,7 @@ class MoveItDemo:
         scene.remove_world_object(table_id)
         scene.remove_world_object(box1_id)
         scene.remove_world_object(box2_id)
+        scene.remove_world_object("part")
         
         # Give the scene a chance to catch up
         rospy.sleep(1)
@@ -101,34 +106,40 @@ class MoveItDemo:
         table_ground = 0.75
         
         # Set the length, width and height of the table and boxes
-        table_size = [0.2, 0.7, 0.01]
+        table_size = [0.2, 0.6, 0.01]
         box1_size = [0.1, 0.05, 0.05]
         box2_size = [0.05, 0.05, 0.15]
         
         # Add a table top and two boxes to the scene
         table_pose = PoseStamped()
         table_pose.header.frame_id = reference_frame
-        table_pose.pose.position.x = 0.56
+        table_pose.pose.position.x = 0.68
         table_pose.pose.position.y = 0.0
         table_pose.pose.position.z = table_ground + table_size[2] / 2.0
         table_pose.pose.orientation.w = 1.0
         scene.add_box(table_id, table_pose, table_size)
+
+        # add an object to be grasped
+        p.pose.position.x = 0.65
+        p.pose.position.y = -0.0
+        p.pose.position.z = 0.85
+        scene.add_box("part", p, (0.07, 0.01, 0.2))
         
         box1_pose = PoseStamped()
         box1_pose.header.frame_id = reference_frame
-        box1_pose.pose.position.x = 0.51
+        box1_pose.pose.position.x = 0.61
         box1_pose.pose.position.y = -0.1
         box1_pose.pose.position.z = table_ground + table_size[2] + box1_size[2] / 2.0
         box1_pose.pose.orientation.w = 1.0   
-        scene.add_box(box1_id, box1_pose, box1_size)
+        #scene.add_box(box1_id, box1_pose, box1_size)
         
         box2_pose = PoseStamped()
         box2_pose.header.frame_id = reference_frame
-        box2_pose.pose.position.x = 0.49
+        box2_pose.pose.position.x = 0.59
         box2_pose.pose.position.y = 0.15
         box2_pose.pose.position.z = table_ground + table_size[2] + box2_size[2] / 2.0
         box2_pose.pose.orientation.w = 1.0   
-        scene.add_box(box2_id, box2_pose, box2_size)
+        #scene.add_box(box2_id, box2_pose, box2_size)
         
         # Make the table red and the boxes orange
         self.setColor(table_id, 0.8, 0, 0, 1.0)
@@ -141,10 +152,13 @@ class MoveItDemo:
         # Set the target pose in between the boxes and above the table
         target_pose = PoseStamped()
         target_pose.header.frame_id = reference_frame
-        target_pose.pose.position.x = 0.4
+        target_pose.pose.position.x = 0.6
         target_pose.pose.position.y = 0.0
-        target_pose.pose.position.z = table_pose.pose.position.z + table_size[2] + 0.05
+        target_pose.pose.position.z = table_pose.pose.position.z + table_size[2] + 0.1
         target_pose.pose.orientation.w = 1.0
+
+
+
         
         # Set the target pose for the arm
         right_arm.set_pose_target(target_pose, end_effector_link)

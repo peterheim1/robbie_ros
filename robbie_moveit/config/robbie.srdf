@@ -21,7 +21,7 @@
         <joint name="right_arm_wrist_pan_bracket" />
         <joint name="right_arm_wrist_pan_joint" />
         <joint name="right_arm_wrist_yaw_joint" />
-        <chain base_link="pan_link" tip_link="gripper_bracket_f3" />
+        <chain base_link="pan_link" tip_link="right_gripper_link" />
     </group>
     <group name="left_arm">
         <joint name="pan_joint" />
@@ -108,7 +108,7 @@
         <joint name="pan_joint" value="0" />
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="right_eef" parent_link="gripper_bracket_f3" group="right_gripper" />
+    <end_effector name="right_eef" parent_link="right_gripper_link" group="right_gripper" />
     <end_effector name="left_eef" parent_link="left_gripper_bracket_f3" group="left_gripper" />
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="virtual_joint" type="planar" parent_frame="odom" child_link="base_footprint" />
@@ -219,6 +219,7 @@
     <disable_collisions link1="camera_link" link2="castor_wheel_l" reason="Never" />
     <disable_collisions link1="camera_link" link2="castor_wheel_r" reason="Never" />
     <disable_collisions link1="camera_link" link2="deck_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="gripper_bracket_f3" reason="Never" />
     <disable_collisions link1="camera_link" link2="head_base_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="head_link" reason="Adjacent" />
     <disable_collisions link1="camera_link" link2="head_pan_bracket" reason="Never" />
@@ -226,10 +227,8 @@
     <disable_collisions link1="camera_link" link2="head_tilt_bracket" reason="Never" />
     <disable_collisions link1="camera_link" link2="head_tilt_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="kinect_link" reason="Never" />
-    <disable_collisions link1="camera_link" link2="left_gripper_bracket_f3" reason="Never" />
+    <disable_collisions link1="camera_link" link2="left_finger_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="left_gripper_link" reason="Never" />
-    <disable_collisions link1="camera_link" link2="left_gripper_servo" reason="Never" />
-    <disable_collisions link1="camera_link" link2="left_left_finger_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="left_right_finger_link" reason="Never" />
     <disable_collisions link1="camera_link" link2="left_shoulder_lift" reason="Never" />
     <disable_collisions link1="camera_link" link2="left_shoulder_tilt" reason="Never" />
@@ -241,6 +240,7 @@
     <disable_collisions link1="camera_link" link2="right_shoulder_lift" reason="Never" />
     <disable_collisions link1="camera_link" link2="right_shoulder_tilt" reason="Never" />
     <disable_collisions link1="camera_link" link2="right_wheel" reason="Never" />
+    <disable_collisions link1="camera_link" link2="wrist_pan_servo_bracket_f3" reason="Never" />
     <disable_collisions link1="castor_wheel_l" link2="castor_wheel_r" reason="Never" />
     <disable_collisions link1="castor_wheel_l" link2="deck_link" reason="Never" />
     <disable_collisions link1="castor_wheel_l" link2="gripper_bracket_f2" reason="Never" />
@@ -370,8 +370,8 @@
     <disable_collisions link1="gripper_bracket_f2" link2="head_tilt_link" reason="Never" />
     <disable_collisions link1="gripper_bracket_f2" link2="kinect_link" reason="Never" />
     <disable_collisions link1="gripper_bracket_f2" link2="left_finger_link" reason="Never" />
+    <disable_collisions link1="gripper_bracket_f2" link2="left_gripper_bracket_f3" reason="Never" />
     <disable_collisions link1="gripper_bracket_f2" link2="left_gripper_link" reason="Never" />
-    <disable_collisions link1="gripper_bracket_f2" link2="left_right_finger_link" reason="Never" />
     <disable_collisions link1="gripper_bracket_f2" link2="left_wheel" reason="Never" />
     <disable_collisions link1="gripper_bracket_f2" link2="neck_link" reason="Never" />
     <disable_collisions link1="gripper_bracket_f2" link2="right_elbow" reason="Never" />
@@ -394,10 +394,10 @@
     <disable_collisions link1="gripper_bracket_f3" link2="head_tilt_link" reason="Never" />
     <disable_collisions link1="gripper_bracket_f3" link2="kinect_link" reason="Never" />
     <disable_collisions link1="gripper_bracket_f3" link2="left_finger_link" reason="Never" />
-    <disable_collisions link1="gripper_bracket_f3" link2="left_gripper_bracket_f3" reason="Never" />
     <disable_collisions link1="gripper_bracket_f3" link2="left_gripper_link" reason="Never" />
     <disable_collisions link1="gripper_bracket_f3" link2="left_right_finger_link" reason="Never" />
     <disable_collisions link1="gripper_bracket_f3" link2="left_wheel" reason="Never" />
+    <disable_collisions link1="gripper_bracket_f3" link2="left_wrist_tilt_servo" reason="Never" />
     <disable_collisions link1="gripper_bracket_f3" link2="neck_link" reason="Never" />
     <disable_collisions link1="gripper_bracket_f3" link2="right_elbow" reason="Never" />
     <disable_collisions link1="gripper_bracket_f3" link2="right_elbow_link" reason="Never" />
@@ -419,6 +419,7 @@
     <disable_collisions link1="gripper_servo" link2="head_tilt_link" reason="Never" />
     <disable_collisions link1="gripper_servo" link2="kinect_link" reason="Never" />
     <disable_collisions link1="gripper_servo" link2="left_finger_link" reason="Adjacent" />
+    <disable_collisions link1="gripper_servo" link2="left_gripper_link" reason="Never" />
     <disable_collisions link1="gripper_servo" link2="left_wheel" reason="Never" />
     <disable_collisions link1="gripper_servo" link2="neck_link" reason="Never" />
     <disable_collisions link1="gripper_servo" link2="right_elbow" reason="Never" />
@@ -440,16 +441,14 @@
     <disable_collisions link1="head_base_link" link2="head_tilt_bracket" reason="Never" />
     <disable_collisions link1="head_base_link" link2="head_tilt_link" reason="Never" />
     <disable_collisions link1="head_base_link" link2="kinect_link" reason="Never" />
-    <disable_collisions link1="head_base_link" link2="left_gripper_bracket_f2" reason="Never" />
+    <disable_collisions link1="head_base_link" link2="left_finger_link" reason="Never" />
     <disable_collisions link1="head_base_link" link2="left_gripper_bracket_f3" reason="Never" />
     <disable_collisions link1="head_base_link" link2="left_gripper_link" reason="Never" />
-    <disable_collisions link1="head_base_link" link2="left_gripper_servo" reason="Never" />
     <disable_collisions link1="head_base_link" link2="left_left_finger_link" reason="Never" />
     <disable_collisions link1="head_base_link" link2="left_right_finger_link" reason="Never" />
     <disable_collisions link1="head_base_link" link2="left_shoulder_lift" reason="Never" />
     <disable_collisions link1="head_base_link" link2="left_shoulder_tilt" reason="Never" />
     <disable_collisions link1="head_base_link" link2="left_wheel" reason="Never" />
-    <disable_collisions link1="head_base_link" link2="left_wrist_pan_servo_bracket_f3" reason="Never" />
     <disable_collisions link1="head_base_link" link2="left_wrist_tilt_bracket_f2" reason="Never" />
     <disable_collisions link1="head_base_link" link2="left_wrist_tilt_servo" reason="Never" />
     <disable_collisions link1="head_base_link" link2="left_wrist_yaw_bracket_f2" reason="Never" />
@@ -469,12 +468,12 @@
     <disable_collisions link1="head_link" link2="head_tilt_bracket" reason="Never" />
     <disable_collisions link1="head_link" link2="head_tilt_link" reason="Never" />
     <disable_collisions link1="head_link" link2="kinect_link" reason="Never" />
-    <disable_collisions link1="head_link" link2="left_gripper_link" reason="Never" />
     <disable_collisions link1="head_link" link2="left_right_finger_link" reason="Never" />
     <disable_collisions link1="head_link" link2="left_shoulder_lift" reason="Never" />
     <disable_collisions link1="head_link" link2="left_wheel" reason="Never" />
     <disable_collisions link1="head_link" link2="neck_link" reason="Never" />
     <disable_collisions link1="head_link" link2="pan_link" reason="Never" />
+    <disable_collisions link1="head_link" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="head_link" link2="right_shoulder_lift" reason="Never" />
     <disable_collisions link1="head_link" link2="right_wheel" reason="Never" />
     <disable_collisions link1="head_pan_bracket" link2="head_pan_link" reason="Adjacent" />
@@ -513,7 +512,6 @@
     <disable_collisions link1="head_pan_link" link2="head_tilt_link" reason="Never" />
     <disable_collisions link1="head_pan_link" link2="kinect_link" reason="Never" />
     <disable_collisions link1="head_pan_link" link2="left_finger_link" reason="Never" />
-    <disable_collisions link1="head_pan_link" link2="left_gripper_bracket_f2" reason="Never" />
     <disable_collisions link1="head_pan_link" link2="left_gripper_bracket_f3" reason="Never" />
     <disable_collisions link1="head_pan_link" link2="left_gripper_link" reason="Never" />
     <disable_collisions link1="head_pan_link" link2="left_gripper_servo" reason="Never" />
@@ -605,9 +603,12 @@
     <disable_collisions link1="head_tilt_link" link2="wrist_tilt_servo" reason="Never" />
     <disable_collisions link1="kinect_link" link2="left_elbow" reason="Never" />
     <disable_collisions link1="kinect_link" link2="left_elbow_link" reason="Never" />
+    <disable_collisions link1="kinect_link" link2="left_finger_link" reason="Never" />
     <disable_collisions link1="kinect_link" link2="left_forearm_link" reason="Never" />
+    <disable_collisions link1="kinect_link" link2="left_gripper_bracket_f2" reason="Never" />
     <disable_collisions link1="kinect_link" link2="left_gripper_bracket_f3" reason="Never" />
     <disable_collisions link1="kinect_link" link2="left_gripper_link" reason="Never" />
+    <disable_collisions link1="kinect_link" link2="left_gripper_servo" reason="Never" />
     <disable_collisions link1="kinect_link" link2="left_shoulder_lift" reason="Never" />
     <disable_collisions link1="kinect_link" link2="left_shoulder_rotate" reason="Never" />
     <disable_collisions link1="kinect_link" link2="left_shoulder_tilt" reason="Never" />
@@ -624,6 +625,7 @@
     <disable_collisions link1="kinect_link" link2="right_elbow_link" reason="Never" />
     <disable_collisions link1="kinect_link" link2="right_finger_link" reason="Never" />
     <disable_collisions link1="kinect_link" link2="right_forearm_link" reason="Never" />
+    <disable_collisions link1="kinect_link" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="kinect_link" link2="right_shoulder_lift" reason="Never" />
     <disable_collisions link1="kinect_link" link2="right_shoulder_rotate" reason="Never" />
     <disable_collisions link1="kinect_link" link2="right_shoulder_tilt" reason="Never" />
@@ -653,6 +655,7 @@
     <disable_collisions link1="left_elbow" link2="left_wrist_yaw_bracket_f2" reason="Never" />
     <disable_collisions link1="left_elbow" link2="left_wrist_yaw_servo" reason="Never" />
     <disable_collisions link1="left_elbow" link2="pan_link" reason="Never" />
+    <disable_collisions link1="left_elbow" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_elbow" link2="right_shoulder_lift" reason="Never" />
     <disable_collisions link1="left_elbow" link2="right_shoulder_tilt" reason="Never" />
     <disable_collisions link1="left_elbow" link2="right_wheel" reason="Never" />
@@ -713,7 +716,6 @@
     <disable_collisions link1="left_forearm_link" link2="left_wrist_tilt_servo" reason="Never" />
     <disable_collisions link1="left_forearm_link" link2="left_wrist_yaw_bracket_f2" reason="Never" />
     <disable_collisions link1="left_forearm_link" link2="left_wrist_yaw_servo" reason="Never" />
-    <disable_collisions link1="left_forearm_link" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_forearm_link" link2="right_wheel" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f2" link2="left_gripper_bracket_f3" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f2" link2="left_gripper_link" reason="Never" />
@@ -730,8 +732,6 @@
     <disable_collisions link1="left_gripper_bracket_f2" link2="left_wrist_tilt_servo" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f2" link2="left_wrist_yaw_bracket_f2" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f2" link2="left_wrist_yaw_servo" reason="Never" />
-    <disable_collisions link1="left_gripper_bracket_f2" link2="neck_link" reason="Never" />
-    <disable_collisions link1="left_gripper_bracket_f2" link2="right_finger_link" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f2" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f2" link2="right_wheel" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f3" link2="left_gripper_link" reason="Adjacent" />
@@ -744,16 +744,14 @@
     <disable_collisions link1="left_gripper_bracket_f3" link2="left_wheel" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f3" link2="left_wrist_pan_servo" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f3" link2="left_wrist_pan_servo_bracket_f3" reason="Never" />
-    <disable_collisions link1="left_gripper_bracket_f3" link2="left_wrist_tilt_bracket_f2" reason="Adjacent" />
-    <disable_collisions link1="left_gripper_bracket_f3" link2="left_wrist_tilt_servo" reason="Default" />
+    <disable_collisions link1="left_gripper_bracket_f3" link2="left_wrist_tilt_bracket_f2" reason="Never" />
+    <disable_collisions link1="left_gripper_bracket_f3" link2="left_wrist_tilt_servo" reason="Adjacent" />
     <disable_collisions link1="left_gripper_bracket_f3" link2="left_wrist_yaw_bracket_f2" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f3" link2="left_wrist_yaw_servo" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f3" link2="neck_link" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f3" link2="right_finger_link" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f3" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_gripper_bracket_f3" link2="right_wheel" reason="Never" />
-    <disable_collisions link1="left_gripper_bracket_f3" link2="wrist_pan_servo" reason="Never" />
-    <disable_collisions link1="left_gripper_bracket_f3" link2="wrist_pan_servo_bracket_f3" reason="Never" />
     <disable_collisions link1="left_gripper_link" link2="left_gripper_servo" reason="Never" />
     <disable_collisions link1="left_gripper_link" link2="left_left_finger_link" reason="Never" />
     <disable_collisions link1="left_gripper_link" link2="left_right_finger_link" reason="Never" />
@@ -768,11 +766,9 @@
     <disable_collisions link1="left_gripper_link" link2="left_wrist_yaw_bracket_f2" reason="Never" />
     <disable_collisions link1="left_gripper_link" link2="left_wrist_yaw_servo" reason="Never" />
     <disable_collisions link1="left_gripper_link" link2="neck_link" reason="Never" />
-    <disable_collisions link1="left_gripper_link" link2="right_elbow" reason="Never" />
     <disable_collisions link1="left_gripper_link" link2="right_finger_link" reason="Never" />
     <disable_collisions link1="left_gripper_link" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_gripper_link" link2="right_wheel" reason="Never" />
-    <disable_collisions link1="left_gripper_link" link2="upper_chest" reason="Never" />
     <disable_collisions link1="left_gripper_link" link2="wrist_pan_servo" reason="Never" />
     <disable_collisions link1="left_gripper_link" link2="wrist_pan_servo_bracket_f3" reason="Never" />
     <disable_collisions link1="left_gripper_link" link2="wrist_tilt_bracket_f2" reason="Never" />
@@ -786,9 +782,10 @@
     <disable_collisions link1="left_gripper_servo" link2="left_wrist_pan_servo" reason="Never" />
     <disable_collisions link1="left_gripper_servo" link2="left_wrist_pan_servo_bracket_f3" reason="Never" />
     <disable_collisions link1="left_gripper_servo" link2="left_wrist_tilt_bracket_f2" reason="Never" />
+    <disable_collisions link1="left_gripper_servo" link2="left_wrist_tilt_servo" reason="Never" />
     <disable_collisions link1="left_gripper_servo" link2="left_wrist_yaw_bracket_f2" reason="Never" />
     <disable_collisions link1="left_gripper_servo" link2="left_wrist_yaw_servo" reason="Never" />
-    <disable_collisions link1="left_gripper_servo" link2="neck_link" reason="Never" />
+    <disable_collisions link1="left_gripper_servo" link2="right_finger_link" reason="Never" />
     <disable_collisions link1="left_gripper_servo" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_gripper_servo" link2="right_wheel" reason="Never" />
     <disable_collisions link1="left_left_finger_link" link2="left_right_finger_link" reason="Never" />
@@ -806,7 +803,7 @@
     <disable_collisions link1="left_left_finger_link" link2="right_finger_link" reason="Never" />
     <disable_collisions link1="left_left_finger_link" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_left_finger_link" link2="right_wheel" reason="Never" />
-    <disable_collisions link1="left_left_finger_link" link2="wrist_tilt_servo" reason="Never" />
+    <disable_collisions link1="left_left_finger_link" link2="wrist_pan_servo_bracket_f3" reason="Never" />
     <disable_collisions link1="left_right_finger_link" link2="left_shoulder_lift" reason="Never" />
     <disable_collisions link1="left_right_finger_link" link2="left_shoulder_rotate" reason="Never" />
     <disable_collisions link1="left_right_finger_link" link2="left_shoulder_tilt" reason="Never" />
@@ -822,6 +819,7 @@
     <disable_collisions link1="left_right_finger_link" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_right_finger_link" link2="right_wheel" reason="Never" />
     <disable_collisions link1="left_right_finger_link" link2="wrist_pan_servo_bracket_f3" reason="Never" />
+    <disable_collisions link1="left_right_finger_link" link2="wrist_tilt_bracket_f2" reason="Never" />
     <disable_collisions link1="left_shoulder_lift" link2="left_shoulder_rotate" reason="Adjacent" />
     <disable_collisions link1="left_shoulder_lift" link2="left_shoulder_tilt" reason="Adjacent" />
     <disable_collisions link1="left_shoulder_lift" link2="left_wheel" reason="Never" />
@@ -899,7 +897,6 @@
     <disable_collisions link1="left_wrist_pan_servo" link2="left_wrist_yaw_bracket_f2" reason="Never" />
     <disable_collisions link1="left_wrist_pan_servo" link2="left_wrist_yaw_servo" reason="Never" />
     <disable_collisions link1="left_wrist_pan_servo" link2="neck_link" reason="Never" />
-    <disable_collisions link1="left_wrist_pan_servo" link2="right_finger_link" reason="Never" />
     <disable_collisions link1="left_wrist_pan_servo" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_wrist_pan_servo" link2="right_wheel" reason="Never" />
     <disable_collisions link1="left_wrist_pan_servo_bracket_f3" link2="left_wrist_tilt_bracket_f2" reason="Never" />
@@ -911,13 +908,12 @@
     <disable_collisions link1="left_wrist_pan_servo_bracket_f3" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_wrist_pan_servo_bracket_f3" link2="right_wheel" reason="Never" />
     <disable_collisions link1="left_wrist_tilt_bracket_f2" link2="left_wrist_tilt_servo" reason="Adjacent" />
-    <disable_collisions link1="left_wrist_tilt_bracket_f2" link2="left_wrist_yaw_bracket_f2" reason="Default" />
+    <disable_collisions link1="left_wrist_tilt_bracket_f2" link2="left_wrist_yaw_bracket_f2" reason="Adjacent" />
     <disable_collisions link1="left_wrist_tilt_bracket_f2" link2="left_wrist_yaw_servo" reason="Never" />
     <disable_collisions link1="left_wrist_tilt_bracket_f2" link2="neck_link" reason="Never" />
-    <disable_collisions link1="left_wrist_tilt_bracket_f2" link2="right_finger_link" reason="Never" />
     <disable_collisions link1="left_wrist_tilt_bracket_f2" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_wrist_tilt_bracket_f2" link2="right_wheel" reason="Never" />
-    <disable_collisions link1="left_wrist_tilt_servo" link2="left_wrist_yaw_bracket_f2" reason="Adjacent" />
+    <disable_collisions link1="left_wrist_tilt_servo" link2="left_wrist_yaw_bracket_f2" reason="Never" />
     <disable_collisions link1="left_wrist_tilt_servo" link2="left_wrist_yaw_servo" reason="Never" />
     <disable_collisions link1="left_wrist_tilt_servo" link2="neck_link" reason="Never" />
     <disable_collisions link1="left_wrist_tilt_servo" link2="right_gripper_link" reason="Never" />
@@ -928,7 +924,6 @@
     <disable_collisions link1="left_wrist_yaw_bracket_f2" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_wrist_yaw_bracket_f2" link2="right_wheel" reason="Never" />
     <disable_collisions link1="left_wrist_yaw_servo" link2="neck_link" reason="Never" />
-    <disable_collisions link1="left_wrist_yaw_servo" link2="right_finger_link" reason="Never" />
     <disable_collisions link1="left_wrist_yaw_servo" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="left_wrist_yaw_servo" link2="right_wheel" reason="Never" />
     <disable_collisions link1="neck_link" link2="pan_link" reason="Never" />
@@ -996,7 +991,7 @@
     <disable_collisions link1="right_gripper_link" link2="right_shoulder_rotate" reason="Never" />
     <disable_collisions link1="right_gripper_link" link2="right_shoulder_tilt" reason="Never" />
     <disable_collisions link1="right_gripper_link" link2="right_wheel" reason="Never" />
-    <disable_collisions link1="right_gripper_link" link2="upper_chest" reason="Never" />
+    <disable_collisions link1="right_gripper_link" link2="upper_torso" reason="Never" />
     <disable_collisions link1="right_gripper_link" link2="wrist_pan_servo" reason="Never" />
     <disable_collisions link1="right_gripper_link" link2="wrist_pan_servo_bracket_f3" reason="Never" />
     <disable_collisions link1="right_gripper_link" link2="wrist_tilt_bracket_f2" reason="Never" />

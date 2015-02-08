@@ -704,7 +704,7 @@
   <!-- left_wrist_tilt joint-->
   <link name="left_wrist_tilt_servo">
     <visual>
-      <origin rpy="1.57 1.57 0" xyz="-0.04 0.05 0"/>
+      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
@@ -713,7 +713,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="1.57 1.57 0" xyz="-0.04 0.05 0"/>
+      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
       <geometry>
         <!--<box size="0.032 0.038 0.05" />-->
         <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
@@ -1109,6 +1109,35 @@
     <selfCollide>false</selfCollide>
     <turnGravityOff>true</turnGravityOff>
   </gazebo>
+  <!-- virtal joints-->
+  <link name="right_gripper_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0.05 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.05 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_gripper_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="-0.05 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.05 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
   <!-- ##############################   joints ##################333333-->
   <joint name="base_footprint_joint" type="fixed">
     <parent link="base_footprint"/>
@@ -1146,7 +1175,7 @@
     <child link="pan_link"/>
     <origin rpy="0 0 0" xyz="0.1 0 0.275"/>
     <axis xyz="0 0 1"/>
-    <limit effort="10" lower="-0.8" upper="0.8" velocity="0"/>
+    <limit effort="10" lower="-1" upper="1" velocity="0"/>
   </joint>
   <joint name="torso_link" type="fixed">
     <parent link="pan_link"/>
@@ -1189,7 +1218,7 @@
     <child link="right_elbow"/>
     <origin rpy="0 -1.57 0" xyz="0.01 0.01 0.0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="10" lower="-2.00" upper="0.57" velocity="0"/>
+    <limit effort="10" lower="-2.20" upper="0.1" velocity="0"/>
   </joint>
   <joint name="right_arm_forearm_link" type="fixed">
     <parent link="right_elbow"/>
@@ -1205,7 +1234,7 @@
   <joint name="right_arm_wrist_pan_joint" type="revolute">
     <parent link="wrist_pan_servo"/>
     <child link="wrist_pan_servo_bracket_f3"/>
-    <origin rpy="0 0 0" xyz="0. 0.015 0.0"/>
+    <origin rpy="0 1.57 0" xyz="0. 0.015 0.0"/>
     <axis xyz="0 1 0"/>
     <limit effort="10" lower="-2.61" upper="2.61" velocity="0"/>
     <dynamics damping="0.0"/>
@@ -1221,7 +1250,7 @@
     <parent link="wrist_tilt_servo"/>
     <child link="wrist_tilt_bracket_f2"/>
     <origin rpy="-1.57 0 1.57" xyz="-0.04 0.05 0"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 1 0"/>
     <limit effort="10" lower="-1.57" upper="1.57" velocity="0"/>
     <dynamics damping="0.0"/>
   </joint>
@@ -1235,6 +1264,11 @@
     <parent link="gripper_bracket_f3"/>
     <child link="gripper_servo"/>
     <origin rpy="-1.57 0 1.57" xyz="0.0 0.02 0.02"/>
+  </joint>
+  <joint name="right_gripper_joint" type="fixed">
+    <origin rpy="-1.570795 0 1.570795" xyz="0 0.06 0.01"/>
+    <parent link="gripper_bracket_f3"/>
+    <child link="right_gripper_link"/>
   </joint>
   <!-- gripper_joint-->
   <joint name="right_arm_gripper_joint" type="revolute">
@@ -1288,7 +1322,7 @@
     <child link="left_elbow"/>
     <origin rpy="0 -1.57 0" xyz="0.01 0.01 0.0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="10" lower="-2.00" upper="0.57" velocity="0"/>
+    <limit effort="10" lower="-2.20" upper="0.17" velocity="0"/>
   </joint>
   <joint name="left_arm_forearm_link" type="fixed">
     <parent link="left_elbow"/>
@@ -1306,7 +1340,7 @@
     <!--revolute-->
     <parent link="left_wrist_pan_servo"/>
     <child link="left_wrist_pan_servo_bracket_f3"/>
-    <origin rpy="0 1.57 0" xyz="0. 0.015 0.0"/>
+    <origin rpy="0 0 0" xyz="0. 0.015 0.0"/>
     <axis xyz="0 1 0"/>
     <limit effort="10" lower="-2.61" upper="2.61" velocity="0"/>
     <dynamics damping="0.0"/>
@@ -1329,21 +1363,24 @@
   </joint>
   <joint name="left_arm_wrist_yaw_bracket" type="fixed">
     <parent link="left_wrist_yaw_bracket_f2"/>
-    <child link="left_wrist_tilt_servo"/>
-    <origin rpy="0 0 0" xyz="0.04 0 0.0"/>
+    <child link="left_wrist_tilt_bracket_f2"/>
+    <origin rpy="0 0 0" xyz="-0.0 0.052 0.0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="10" lower="-1.57" upper="1.57" velocity="0"/>
+    <dynamics damping="0.0"/>
   </joint>
   <!--wrist_tilt_joint-->
   <joint name="left_arm_wrist_tilt_joint" type="revolute">
     <!--revolute-->
-    <parent link="left_wrist_tilt_servo"/>
-    <child link="left_wrist_tilt_bracket_f2"/>
-    <origin rpy="0 0 0" xyz="-0.04 0.05 0"/>
+    <parent link="left_wrist_tilt_bracket_f2"/>
+    <child link="left_wrist_tilt_servo"/>
+    <origin rpy="0 0 0" xyz="-0 -0.0 0"/>
     <axis xyz="1 0 0"/>
     <limit effort="10" lower="-1.57" upper="1.57" velocity="0"/>
     <dynamics damping="0.0"/>
   </joint>
   <joint name="left_arm_gripper_bracket" type="fixed">
-    <parent link="left_wrist_tilt_bracket_f2"/>
+    <parent link="left_wrist_tilt_servo"/>
     <child link="left_gripper_bracket_f3"/>
     <origin rpy="0 1.57 0" xyz="0.0 0.035 0.0"/>
   </joint>
@@ -1351,6 +1388,11 @@
     <parent link="left_gripper_bracket_f3"/>
     <child link="left_gripper_servo"/>
     <origin rpy="0 3.14 0" xyz="0.0 0.02 -0.02"/>
+  </joint>
+  <joint name="left_gripper_joint" type="fixed">
+    <origin rpy="1.570795 0 1.570795" xyz="0 0.06 -0.01"/>
+    <parent link="left_gripper_bracket_f3"/>
+    <child link="left_gripper_link"/>
   </joint>
   <!-- left gripper_joint-->
   <joint name="left_arm_gripper_joint" type="revolute">

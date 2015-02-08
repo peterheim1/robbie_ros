@@ -6,7 +6,9 @@
 *.pyc
 *.xacro~
 *.py[cod]
-
+*.gitnore~
+*~
+*.ymal~
 # C extensions
 *.so
 *.py~

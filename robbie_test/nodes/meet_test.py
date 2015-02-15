@@ -64,42 +64,45 @@ class Meet_N_Greet:
         self.soundhandle.stopAll()
         
         # Announce that we are ready for input
-        self.soundhandle.playWave(self.wavepath + "/R2D2a.wav")
         rospy.sleep(1)
-        self.soundhandle.say(self.noon1 + self.robot +"   is on line" + " the time is   " + self.local, self.voice)
+        self.soundhandle.say(self.noon1 + "meet and greet   is on line" + " the time is   " + self.local, self.voice)
 
         #start looking for a face with face recognition action server
 
         #wait for result 
-        rospy.Subscriber("/face_recognition/feedback", FaceRecognitionActionFeedback, self.face_found)
-        self.look_for_face#put this in a while loop
+        rospy.Subscriber("/face_recognition/result", FaceRecognitionActionFeedback, self.face_found)
+
+        self.look_for_face()#put this in a while loop 
 
     def look_for_face(self):
         '''
         send command look for face once
         '''
-        goal = face_recognition.msg.FaceRecognitionGoal(order_id=1, order_argument="none")
+        goal = face_recognition.msg.FaceRecognitionGoal(order_id=0, order_argument="none")
         self.client.send_goal(goal)
-        rospy.logdebug("message sent")
+        #rospy.logwarn("message sent")
 
-    def face_found(self,msg)
+    def face_found(self,msg):
         '''
         clean up feedback to extract the name
         check if greeted before answer accordingly
         '''
-        person = msg.feedback.names
-        rospy.logdebug(msg)
+
+        person = str(msg.result.names[0])
+        rospy.logwarn(person)
         
         greet = person in self.greeted
-        if self.greet == 0:#or !== "true"(not true)
-            self.soundhandle.say(self.noon1 + "hello   "+ person,self.voice)
-        
+        if greet == 0:#or !== "true"(not true)
+            self.soundhandle.say("hello   "+ person +"    "+ self.noon1 +"          ",self.voice)
+            rospy.sleep(1)
         else:
             self.soundhandle.say("hi     ",self.voice)
         #add name to greeted list
         self.greeted.append(person)
+        print self.greeted
         #start looking again
-        self.look_for_face
+        rospy.sleep(30)
+        self.look_for_face()
         
         
         

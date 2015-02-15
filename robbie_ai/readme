@@ -1,0 +1,8 @@
+meet n greet
+uses face recognition when it recognises a face the first time it will greet you
+the second time it will just say hi
+
+
+todo 
+say hi only for the second time ignore others
+need a way to detect when a face leaves and arrives

@@ -7,7 +7,8 @@
     status/todo
     change face tracker to publish face found then pause itself
     recognise face or add face 
-then restart
+    then restart
+    do we need the script path??
 """
 
 import rospy
@@ -40,9 +41,6 @@ class Meet_N_Greet:
         # listening for goals.
         self.client.wait_for_server()
 
-        # Set the wave file path if used
-        self.wavepath = rospy.get_param("~wavepath", script_path + "/../sounds")
-
         #define afternoon and morning
         self.noon = strftime("%p:", localtime())
         if self.noon == "AM:":
@@ -69,10 +67,10 @@ class Meet_N_Greet:
 
         #start looking for a face with face recognition action server
 
-        #wait for result 
+        #result will be published on this topic
         rospy.Subscriber("/face_recognition/result", FaceRecognitionActionFeedback, self.face_found)
 
-        self.look_for_face()#put this in a while loop 
+        self.look_for_face()
 
     def look_for_face(self):
         '''
@@ -80,7 +78,7 @@ class Meet_N_Greet:
         '''
         goal = face_recognition.msg.FaceRecognitionGoal(order_id=0, order_argument="none")
         self.client.send_goal(goal)
-        #rospy.logwarn("message sent")
+        
 
     def face_found(self,msg):
         '''
@@ -92,14 +90,13 @@ class Meet_N_Greet:
         rospy.logwarn(person)
         
         greet = person in self.greeted
-        if greet == 0:#or !== "true"(not true)
+        if greet == 0:
             self.soundhandle.say("hello   "+ person +"    "+ self.noon1 +"          ",self.voice)
+            #add name to greeted list
+            self.greeted.append(person)
             rospy.sleep(1)
         else:
             self.soundhandle.say("hi     ",self.voice)
-        #add name to greeted list
-        self.greeted.append(person)
-        print self.greeted
         #start looking again
         rospy.sleep(30)
         self.look_for_face()

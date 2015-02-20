@@ -84,7 +84,7 @@
    <include file="$(find robbie_bringup)/launch/tf_head_tracker.launch"/>
 -->
 <!--robbie chat-->
-  <node name="robbie_chat" pkg="robbie_speech" type="./chat_start" />
+  <node name="robbie_chat" pkg="robbie_speech" type="chat_start.bash" />
 
 
 

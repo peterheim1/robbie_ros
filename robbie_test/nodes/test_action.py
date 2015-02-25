@@ -18,12 +18,12 @@ class ActionTasks:
 
         self.client = SimpleActionClient("move_base", MoveBaseAction)
         self.client.wait_for_server()
-        self.move(self.kitchen)
+        self.move_to(self.kitchen)
 
 
     def move_to(self, location):
         goal = MoveBaseGoal()
-        goal.target_pose.pose = self.room_locations[location]
+        goal.target_pose.pose = location
         goal.target_pose.header.frame_id = 'map'
         goal.target_pose.header.stamp = rospy.Time.now()
   
@@ -40,7 +40,7 @@ class ActionTasks:
 
 
     def cleanup(self):
-        self.soundhandle.stopAll()
+        
         rospy.loginfo("Shutting down talk node...")
 
 if __name__=="__main__":

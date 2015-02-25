@@ -1,0 +1,26 @@
+<launch>
+        
+      <rosparam ns="/robbie"/>
+
+    <!-- start the kinect and laser -->
+     <include file="$(find robbie_bringup)/launch/openni.launch"/>
+
+    
+    <!-- start the arduino base controller and urdf-->
+     <include file="$(find robbie_bringup)/launch/robbie_base.launch"/>
+
+
+     <!-- start the dynamixel servos --> 
+     <include file="$(find robbie_bringup)/launch/dynamixels.launch"/>
+
+   <!-- start the gmapping --> 
+     <include file="$(find robbie_bringup)/launch/gmapping_robbie.launch"/>
+    
+    
+ <!-- Start arm control-->
+
+     <include file="$(find robbie_bringup)/launch/arm.launch"/>
+ 
+       
+   
+</launch>

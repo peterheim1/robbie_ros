@@ -14,11 +14,11 @@ class ActionTasks:
     def __init__(self, script_path):
         rospy.init_node('action_testr')
         rospy.on_shutdown(self.cleanup)
-        self.kitchen = (Pose(Point(0.5, 0.5, 0.0), Quaternion(0.0, 0.0, 0.0, 1.0))) 
+        self.fridge = (Pose(Point(0.295, -2.304, 0.0), Quaternion(0.0, 0.0,  -0.715, 0.699))) 
 
         self.client = SimpleActionClient("move_base", MoveBaseAction)
         self.client.wait_for_server()
-        self.move_to(self.kitchen)
+        self.move_to(self.fridge)
 
 
     def move_to(self, location):
@@ -28,7 +28,9 @@ class ActionTasks:
         goal.target_pose.header.stamp = rospy.Time.now()
   
         self.client.send_goal(goal)
-        self.client.wait_for_result()
+        #self.client.wait_for_result()
+        self.client.wait_for_result(rospy.Duration.from_sec(40.0))
+        
 
         if self.client.get_state() == GoalStatus.SUCCEEDED:
             result = self.client.get_result()

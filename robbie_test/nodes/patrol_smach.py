@@ -51,7 +51,7 @@ class Patrol():
             nav_goal.target_pose.header.frame_id = 'map'
             nav_goal.target_pose.pose = waypoint
             move_base_state = SimpleActionState('move_base', MoveBaseAction, goal=nav_goal, result_cb=self.move_base_result_cb,
-                                                 exec_timeout=rospy.Duration(10.0),
+                                                 exec_timeout=rospy.Duration(40.0),
                                                  server_wait_timeout=rospy.Duration(10.0))
             nav_states.append(move_base_state)
         

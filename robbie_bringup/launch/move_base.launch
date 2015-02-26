@@ -1,6 +1,6 @@
 <launch>
   <!-- Run the map server -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find robbie_bringup)/maps/mymap2.yaml.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find robbie_bringup)/maps/mymap.yaml"/>
 
   <!--- Run AMCL -->
   <include file="$(find robbie_bringup)/launch/amcl_robbie.launch" />

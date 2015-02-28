@@ -1,0 +1,31 @@
+<launch>
+
+  
+  <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py" output="screen"/>
+
+  <!-- Launch a node to push terminal input instead of speech recognition 
+    <node pkg="robbie" type="terminal_input.py" name="terminal_input" output="screen" >
+    </node>-->
+
+   <!-- start the laptop power --> 
+     <include file="$(find hal)/launch/laptop_battery.launch"/>
+
+
+  <!-- Launch a node that republishes the output of NLTK as a string (representation of a parse tree) 
+  <node pkg="phoenix_robot" type="nltk_parser.py" name="nltk_parser_service" output="screen" />-->
+
+   <node pkg="nltk_parser" type="language.py" name="simple_chart_parser" output="screen" >
+        <param name="grammar_path" value="$(find phoenix_robot)" />
+        <param name="grammar_name" value="language.cfg" />
+    </node>
+
+
+<!-- Node that republishes the output of language.py to the task cord -->
+    <node pkg="nltk_parser" type="nltk_interpret.py" name="nltk_interpret" output="screen" />
+
+<!-- Node to controll robbie-->
+    <node pkg="phoenix_robot" type="task_cord.py" name="tack_cord" output="screen" />
+
+
+
+</launch>

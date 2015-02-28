@@ -1,0 +1,13 @@
+
+S -> COMMAND | YESNO
+COMMAND -> V | VP
+YESNO -> 'yes' | 'no' | 'what'
+VP -> V P NP
+V ->  'stop' | 'halt' | 'go'  | 'look' | 'point' | 'pick' | 'come' | 'put'
+P -> 'to' | 'at' | 'up' | 'down' | 'here'
+NP -> DET SHAPE | DET ADJ SHAPE | DET ADJ ADJ SHAPE
+DET -> 'the' | 'a' | 'your'
+ADJ -> COLOR | SIZE
+COLOR -> 'black' | 'blue' | 'yellow' | 'gray' | 'green' | 'metal' | 'red'  | 'white' | 'rocky'
+SIZE -> 'small' | 'large'
+SHAPE -> 'ball' | 'sphere' | 'box' | 'cube' | 'cylinder'

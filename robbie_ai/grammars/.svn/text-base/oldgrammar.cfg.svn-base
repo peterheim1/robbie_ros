@@ -1,0 +1,12 @@
+
+S  -> NP VP
+NP -> Det Nom | PropN
+Nom -> Adj Nom | N
+VP -> V | V PP
+PP -> P NP
+PropN -> 'stop' | 'back' | 'up' | 'that'
+Det -> 'the'
+N -> 'ball' | 'cube' | 'cylinder' | 'sphere'
+Adj  -> 'blue' | 'red' |  'green' | 'white'
+V ->  'go'  | 'look'
+P -> 'to'

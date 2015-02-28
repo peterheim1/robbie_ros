@@ -1,0 +1,31 @@
+
+S -> COMMAND | QUESTION | RESPONSE | YESNO
+
+YESNO -> 'yes' | 'no' | 'what'
+COMMAND -> V | VP | UH | ADJ
+QUESTION -> WHP V NP | WHP V PRO
+RESPONSE -> NP V NP | PRO V NP | NP | 
+
+WHP -> WH
+VP -> V P NP | V NP
+V ->  'stop' | 'halt' | 'go'  | 'look' | 'point' | 'pick' | 'come' | 'is' | 'am' | 'are' | 'hate' | 'loathe' | 'like' | 'appreciate' | 'enjoy' | 'take' | 'get' | 'put'| 'doing'
+P -> 'to' | 'at' | 'up' | 'down' | 'here'
+NP -> DET SHAPE | DET ADJ SHAPE | DET ADJ ADJ SHAPE | PRO N | N | DET N | PRO ADJ N | DET N | PROPN ADJ N
+DET -> 'the' | 'a' | 'this' | 'that'
+ADJ -> COLOR | SIZE | AGE
+COLOR -> 'black' | 'blue' | 'gray' | 'green' | 'red' | 'yellow' | 'white' | 'metal' | 'rocky'
+SIZE -> 'small' | 'large'
+SHAPE -> 'ball' | 'sphere' | 'box' | 'cube' | 'cylinder'
+AGE -> '1'| '2'
+
+WH -> 'who' | 'what' | 'when' | 'where' | 'why' | 'how'
+PRO -> 'your' | 'my' | 'his' | 'her' | 'i' | 'he' | 'she' | 'you' | 'we' | 'our'| 'brother' | 'girl friend'
+N -> TOPIC | PROPN | STATE | MAJOR | MAJOR MAJOR | FOOD | FOOD FOOD | MOVIE 
+ADJ -> 'favorite'
+TOPIC -> 'major' | 'name' | 'weather' | 'food'| 'time' | 'status'
+STATE -> 'good' | 'well' | 'bad'
+UH -> 'hello' | 'hi'
+PROPN -> PERSON
+PERSON -> 'peter' | 'matty' | 'mat' | 'tim' | 'del' | 'egon' | 'maria' | 'adelita' | 'raquel' | 'federico' | 'paul' | 'ahn' | 'russell' | 'iris' | 'danny' | 'dan' | 'denis' | 'ian' | 'cohen' | 'wes' | 'wesley' | 'matthew' | 'amr' | 'brian' | 'thanima' | 'nassim' | 'debrijja' | 'nazkar' | 'marcos' | 'jeremy' | 'amit' | 'marco' | 'jeff' | 'adam'
+MAJOR -> 'computer' | 'computers' | 'science' | 'astronomy' | 'physics' | 'engineering' | 'philosophy' | 'psychology' | 'music' | 'math' | 'cs' | 'ece' | 'electrical' | 'linguistics'
+FOOD -> 'pizza' | 'ice' | 'cream' | 'hamburger' | 'hamburgers' | 'pancake' | 'pancakes' | 'waffle' | 'waffles' | 'crepe' |  'crepes' | 'chocolate' | 'peach' | 'peaches' | 'banana' | 'bananas' | 'apple' | 'apples' | 'tea' | 'coffee' | 'grilled' | 'cheese' | 'sushi' | 'chinese' | 'chimichangas' | 'chimis' | 'carne' | 'asada' | 'burritos' | 'chips' | 'salsa' | 'nachos' | 'pepperoni' | 'carrots' | 'dinner' | 'lunch' | 'breakfast' | 'apricot' | 'raspberries' | 'berries' | 'blueberries' | 'strawberries' | 'watermelon' | 'peaches' | 'bananas' | 'apples' | 'pumpkin' | 'squash' | 'peas' | 'broccoli' | 'rabe' | 'potatoes' | 'fruit' | 'vegetable' | 'fruits' | 'vegetables' | 'linguini' | 'ravioli' | 'spaghetti' | 'noodles' | 'vietnamese' | 'korean' | 'thai' | 'tomatoes' | 'salad' | 'pork' | 'ahi' | 'tuna' | 'barbecue' | 'beef' | 'steak' | 'salmon' | 'fish' | 'chicken' | 'eggs' | 'cheese' | 'jack' | 'daniels' | 'coke' | 'wine' | 'beer' | 'vodka' | 'sweets' | 'candy' | 'italian' | 'pasta' | 'mexican' | 'macadamia' | 'nuts' | 'donuts' | 'acid' | 'cucumbers' | 'spinach' | 'pad' | 'kittens' | 'dogs' | 'spheres' | 'cubes' | 'potato' | 'soup' | 'french' | 'fries' | 'toast' | 'dark' | 'chocolate' | 'walnuts' | 'indian' | 'food'

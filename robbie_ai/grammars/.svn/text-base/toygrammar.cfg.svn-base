@@ -1,0 +1,19 @@
+Command -> Action | Action Object | Action Object PP
+
+Object -> Det Color Shape | Det Shape | N
+
+Action -> V | V P
+
+Det -> 'the' | 'that' | 'this'
+
+PP -> P Det Color Shape | P Det Shape | P N
+
+Shape -> 'ball' | 'cube' | 'cylinder' | 'sphere' | 'box' | 'crate' | 'cup' | 'glass' | 'plate' | 'fork' | 'spoon' | 'bin' | 'sphere' | 'drawer'
+
+Color -> 'blue' | 'red' |  'green' | 'white' | 'yellow' | 'black' | 'pink' | 'orange' | 'purple'
+
+V ->  'go'  | 'grab' | 'look' | 'pick' | 'drop' | 'put' | 'go' | 'take' | 'stop' | 'move' | 'forward' | 'left' | 'right' | 'back' | 'backward' | 'turn' | 'get' | 'point' | 'come' | 'up' | 'down'
+
+P -> 'to' | 'up' | 'at' | 'on' | 'in' | 'behind' | 'away' | 'around'
+
+N -> 'here' | 'there' | 'her' | 'him' | 'it'

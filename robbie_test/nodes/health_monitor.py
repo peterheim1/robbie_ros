@@ -56,7 +56,7 @@ class Patrol():
         goal.target_pose.pose = self.docking_station_pose
         
         # Assign the docking station pose to a move_base action task
-        NAV_DOCK_TASK = SimpleActionTask("NAV_DOC_TASK", "move_base", MoveBaseAction, goal, reset_after=True)
+        NAV_DOCK_TASK = SimpleActionTask("NAV_DOC_TASK", "move_base", MoveBaseAction, goal, result_timeout=40, reset_after=True)
         #NAV_TASK = SimpleActionTask("NAV_TASK", "move_base", MoveBaseAction, self.target, reset_after=False)
         #MOVE_BASE_TASK = SimpleActionTask("MOVE_BASE_TASK", "move_base", MoveBaseAction, goal, reset_after=False)
         
@@ -89,10 +89,10 @@ class Patrol():
         with STAY_HEALTHY:
             # The check battery condition (uses MonitorTask)
             CHECK_BATTERY = MonitorTask("CHECK_BATTERY", "battery_level", Float32, self.check_battery)
-            #AUTODOCK = AutoDock()
+            AUTODOCK = AutoDock()
             
-            AUTODOCK = ServiceTask("AUTODOCK", "auto_dock", Docker, 100, result_cb=self.recharge_cb)
-            CHARGING = MonitorTask("CHARGING", "battery_status", Float32, self.battery_state)
+            #AUTODOCK = ServiceTask("AUTODOCK", "start_auto_dock", AutoDock, "dock")
+            CHARGING = MonitorTask("CHARGING", "charge_state", Float32, self.battery_state)
             
             # Build the recharge sequence using inline construction
             #RECHARGE = Sequence("RECHARGE", [NAV_DOCK_TASK, AUTODOCK, CHARGE_ROBOT])
@@ -119,7 +119,7 @@ class Patrol():
         if msg.data is None:
             return TaskStatus.RUNNING
         else:
-            if msg.data < 11.0:
+            if msg.data < 13.1:
                 #rospy.loginfo("Battery low - level: " + str(int(msg.data)))
                 return TaskStatus.FAILURE
             else:
@@ -131,11 +131,11 @@ class Patrol():
             #return TaskStatus.RUNNING
         #else:
             if msg.data < 13:
-                rospy.loginfo("BATTERY charging - level: " + str(int(msg.data)))
+                #rospy.loginfo("BATTERY charging - level: " + str(int(msg.data)))
                 return TaskStatus.RUNNING
             else:
                 rospy.loginfo("Battery charged - level: " + str(int(msg.data)))
-                return TaskStatus.FAILURE
+                return TaskStatus.SUCCESS
     
     def recharge_cb(self, result):
         rospy.loginfo("Auto dock completed")

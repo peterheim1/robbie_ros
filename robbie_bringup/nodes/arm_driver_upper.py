@@ -417,10 +417,11 @@ class R_shoulder(object):
                 """
                 v = Command.data      # angel request in radians
                 self.right_lift = v
-                v1 =int(1023 -((v + 1.05) * 195.3786081396))#convert encoder value
+                #v1 =int(1023 -((v + 1.05) * 195.3786081396))#convert encoder value
+                v1 = int((abs(v-1.57)/0.0042913)+511)
                 if v1 < 100: v1 = 100 #degrees * 10
                 if v1 > 1000: v1 = 1000 #degrees * 10
-                rospy.logwarn("Handling rotate command: " + str(v1) )
+                rospy.logwarn("Handling lift command: " + str(v1) )
 
                 #message = 's %.2f %.2f %.2f\r' % self._GetBaseAndExponents((v1))
                 message = 'j1 %d \r' % (v1)#% self._GetBaseAndExponents((v1)

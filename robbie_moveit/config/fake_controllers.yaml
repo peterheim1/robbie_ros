@@ -6,8 +6,8 @@ controller_list:
       - right_arm_lift_joint
       - right_arm_rotate_joint
       - right_arm_elbow_joint
-      - right_arm_wrist_pan_joint
       - right_arm_wrist_yaw_joint
+      - right_arm_wrist_tilt_joint
   - name: fake_left_arm_controller
     joints:
       - pan_joint
@@ -15,7 +15,6 @@ controller_list:
       - left_arm_lift_joint
       - left_arm_rotate_joint
       - left_arm_elbow_joint
-      - left_arm_wrist_pan_joint
       - left_arm_wrist_yaw_joint
       - left_arm_wrist_tilt_joint
   - name: fake_right_gripper_controller

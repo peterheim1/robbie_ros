@@ -54,8 +54,8 @@ class Neck_Tilt(object):
             rospy.init_node('neck_tilt')
             rospy.Subscriber('/head_tilt_joint/state',JointState, self._HandleJoint_1_Command)
             rospy.Subscriber('/head_tilt_mod_joint/command',Float64, self._nect_tilt_Command)
-            self._neckPublisher = rospy.Publisher("head_tilt_mod_joint/state", JointState)
-            self._neck_Tilt_Publisher = rospy.Publisher("head_tilt_joint/command", Float64)
+            self._neckPublisher = rospy.Publisher("head_tilt_mod_joint/state", JointState, queue_size=5)
+            self._neck_Tilt_Publisher = rospy.Publisher("head_tilt_joint/command", Float64, queue_size=5)
             self.gear_ratio = 0.3
 
         def _HandleJoint_1_Command(self, data):

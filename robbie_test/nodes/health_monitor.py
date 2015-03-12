@@ -26,10 +26,10 @@ import time
 from std_msgs.msg import Float32, String, Int16
 from geometry_msgs.msg import Twist
 from pi_trees_ros.pi_trees_ros import *
-from rbx2_tasks.task_setup import *#use standered setup for testing
+from robbie_test.task_setup import *#use standered setup for testing
 from rbx2_msgs.srv import *
-from robbie.srv import *
-from phoenix_robot.clean_house_tasks_tree import *
+from robbie_msgs.srv import *
+from robbie_test.clean_house_tasks_tree import *
 from collections import OrderedDict
 from math import pi, sqrt
 
@@ -56,7 +56,7 @@ class Patrol():
         goal.target_pose.pose = self.docking_station_pose
         
         # Assign the docking station pose to a move_base action task
-        NAV_DOCK_TASK = SimpleActionTask("NAV_DOC_TASK", "move_base", MoveBaseAction, goal, result_timeout=40, reset_after=True)
+        NAV_DOCK_TASK = SimpleActionTask("NAV_DOC_TASK", "move_base", MoveBaseAction, goal, result_timeout=40, reset_after=False)
         #NAV_TASK = SimpleActionTask("NAV_TASK", "move_base", MoveBaseAction, self.target, reset_after=False)
         #MOVE_BASE_TASK = SimpleActionTask("MOVE_BASE_TASK", "move_base", MoveBaseAction, goal, reset_after=False)
         
@@ -91,11 +91,10 @@ class Patrol():
             CHECK_BATTERY = MonitorTask("CHECK_BATTERY", "battery_level", Float32, self.check_battery)
             AUTODOCK = AutoDock()
             
-            #AUTODOCK = ServiceTask("AUTODOCK", "start_auto_dock", AutoDock, "dock")
+            
             CHARGING = MonitorTask("CHARGING", "charge_state", Float32, self.battery_state)
             
-            # Build the recharge sequence using inline construction
-            #RECHARGE = Sequence("RECHARGE", [NAV_DOCK_TASK, AUTODOCK, CHARGE_ROBOT])
+            # Build the recharge sequence 
             RECHARGE = Sequence("RECHARGE")
             RECHARGE.add_child(NAV_DOCK_TASK)#navigate to the autodock prestage area
             RECHARGE.add_child(AUTODOCK)#start auto dock sequence finish when docked
@@ -119,7 +118,7 @@ class Patrol():
         if msg.data is None:
             return TaskStatus.RUNNING
         else:
-            if msg.data < 13.1:
+            if msg.data < 12.2:
                 #rospy.loginfo("Battery low - level: " + str(int(msg.data)))
                 return TaskStatus.FAILURE
             else:
@@ -130,11 +129,11 @@ class Patrol():
         #if msg.data is None:
             #return TaskStatus.RUNNING
         #else:
-            if msg.data < 13:
+            if msg.data < 13.0:
                 #rospy.loginfo("BATTERY charging - level: " + str(int(msg.data)))
                 return TaskStatus.RUNNING
             else:
-                rospy.loginfo("Battery charged - level: " + str(int(msg.data)))
+                #rospy.loginfo("Battery charged - level: " + str(int(msg.data)))
                 return TaskStatus.SUCCESS
     
     def recharge_cb(self, result):
@@ -148,11 +147,11 @@ class Patrol():
             goal = MoveBaseGoal()
             goal.target_pose.header.frame_id = 'map'
             goal.target_pose.header.stamp = rospy.Time.now()
-            goal.target_pose.pose = (Pose(Point(1.5, 1.5, 0.0), Quaternion(0.0, 0.0, 0.0, 1.0))) #self.room_locations[msg.data]
+            goal.target_pose.pose = self.room_locations[msg.data]
             ##self.target = goal
             #print goal
-            #print str(self.room_locations[msg.data])
-            #MOVE_BASE_TASK = SimpleActionTask("MOVE_BASE_TASK", "move_base", MoveBaseAction, goal, reset_after=False)
+            print str(self.room_locations[msg.data])
+            MOVE_BASE_TASK = SimpleActionTask("MOVE_BASE_TASK", "move_base", MoveBaseAction, goal, reset_after=False)
             return TaskStatus.SUCCESS
             
     def shutdown(self):

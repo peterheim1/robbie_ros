@@ -28,7 +28,7 @@ class Robbie_Chat():
         self.brainLoaded = False
         self.forceReload = False
         # Set the default TTS voice to use
-        self.voice = rospy.get_param("~voice", "voice_don_diphone")
+        self.voice = rospy.get_param("~voice", "voice_en1_mbrola")
         self.robot = rospy.get_param("~robot", "robbie")
         # Create the sound client object
         self.soundhandle = SoundClient()

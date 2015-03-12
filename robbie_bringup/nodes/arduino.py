@@ -38,6 +38,7 @@ import math
 from math import sin, cos, pi
 import sys
 import time
+import socket
 from geometry_msgs.msg import Quaternion
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
@@ -45,8 +46,7 @@ from std_msgs.msg import String
 from std_msgs.msg import Float32, Int16
 from robbie_msgs.srv import *
 #from robbie.msg import *
-
-from robbie.SerialDataGateway import SerialDataGateway
+from SerialDataGateway import SerialDataGateway
 
 class Arduino(object):
 	'''
@@ -239,7 +239,7 @@ class Arduino(object):
 		self._SerialPublisher.publish(String(str(self._Counter) + ", out: " + message))
 		self._SerialDataGateway.Write(message)
 
-	def __init__(self, port="/dev/ttyUSB0", baudrate=115200):
+	def __init__(self, port="/dev/sensors/ftdi_A500CNMH", baudrate=57600):
 		'''
 		Initializes the receiver class. 
 		port: The serial port to listen to.
@@ -253,24 +253,24 @@ class Arduino(object):
 		port = rospy.get_param("~port", "/dev/ttyUSB0")
 		baudRate = int(rospy.get_param("~baudRate", 115200))
 
-		rospy.loginfo("Starting with serial port: " + port + ", baud rate: " + str(baudRate))
+		rospy.logwarn("Starting with serial port: " + port + ", baud rate: " + str(baudRate))
 
 		# subscriptions
 		rospy.Subscriber("cmd_vel", Twist, self._HandleVelocityCommand)
                 rospy.Subscriber("auto_dock", String, self._AutoDock)
                 # A service to maually start Auto dock
                 rospy.Service('start_auto_dock', AutoDock, self.Start_Auto_Dock)
-		self._SerialPublisher = rospy.Publisher('serial', String)
+		self._SerialPublisher = rospy.Publisher('serial', String, queue_size=5)
 
 		self._OdometryTransformBroadcaster = tf.TransformBroadcaster()
-		self._OdometryPublisher = rospy.Publisher("odom", Odometry)
+		self._OdometryPublisher = rospy.Publisher("odom", Odometry, queue_size=5)
 
 		self._VoltageLowlimit = rospy.get_param("~batteryStateParams/voltageLowlimit", "12.0")
 		self._VoltageLowLowlimit = rospy.get_param("~batteryStateParams/voltageLowLowlimit", "11.7")
-		self._BatteryStatePublisher = rospy.Publisher("battery_level", Float32)
-                self._V_leftPublisher = rospy.Publisher("v_left", Float32)
-                self._V_rightPublisher = rospy.Publisher("v_right", Float32)
-                self._dock_state_Publisher = rospy.Publisher("charge_state", Float32)
+		self._BatteryStatePublisher = rospy.Publisher("battery_level", Float32, queue_size=5)
+                self._V_leftPublisher = rospy.Publisher("v_left", Float32, queue_size=5)
+                self._V_rightPublisher = rospy.Publisher("v_right", Float32, queue_size=5)
+                self._dock_state_Publisher = rospy.Publisher("charge_state", Float32, queue_size=5)
 		
 		#self._SetDriveGainsService = rospy.Service('setDriveControlGains', SetDriveControlGains, self._HandleSetDriveGains)
 
@@ -313,7 +313,7 @@ class Arduino(object):
 
 		#message = 's %.2f %.2f\r' % (v_des_left, v_des_right)
                 message = 's %d %d %d %d \r' % self._GetBaseAndExponents((v_des_left, v_des_right))
-		rospy.logwarn("Sending speed command message: " + message)
+		#rospy.logwarn("Sending speed command message: " + message)
 		#self._WriteSerial(message)
                 self._SerialDataGateway.Write(message)
 

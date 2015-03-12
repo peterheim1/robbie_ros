@@ -12,7 +12,8 @@ from time import localtime, strftime
 from std_msgs.msg import String
 from sound_play.libsoundplay import SoundClient
 import sys
-from phoenix_robot.interact import *
+from robbie_ai.interact import *
+from speech_recognition_msgs.msg import SpeechRecognitionCandidates
 
 class TalkBack:
     def __init__(self, script_path):
@@ -21,7 +22,7 @@ class TalkBack:
         rospy.on_shutdown(self.cleanup)
         
         # Set the default TTS voice to use
-        self.voice = rospy.get_param("~voice", "voice_don_diphone")
+        self.voice = rospy.get_param("~voice", "voice_en1_mbrola")
         self.robot = rospy.get_param("~robot", "robbie")
         
         # Set the wave file path if used
@@ -55,23 +56,26 @@ class TalkBack:
         #rospy.loginfo("Say one of the navigation commands...")
 
         # Subscribe to the recognizer output and set the callback function
-        rospy.Subscriber('/speech_text', String, self.talkback)
-        self.pub = rospy.Publisher('/speech_parse', String)
+        rospy.Subscriber('/voice', SpeechRecognitionCandidates, self.talkback)
+        #rospy.Subscriber('/speech_text', String, self.talkback)
+        self.pub = rospy.Publisher('/speech_parse', String, queue_size=5)
+        self.pub_chat = rospy.Publisher('/speech_text', String, queue_size=5)
         
     def talkback(self, msg):
         # Print the recognized words on the screen
-        rospy.loginfo(msg.data)
-        self.hold = msg.data
+        rospy.loginfo(msg.transcript[0])
+        self.hold = msg.transcript[0]
         matchObj = re.match( r'^robbie', self.hold, re.M|re.I)
         if matchObj:
-            self.task1 = re.sub('robbie ','',self.hold,1)
-            self.hold1 = Dictum(self.task1)
+            self.task1 = re.sub('robbie ','',self.hold,1)#for commands
+            #self.hold1 = Dictum(self.task1)
             self.pub.publish(self.task1)
-            self.soundhandle.say(self.task1, self.voice)
+            #self.soundhandle.say(self.hold1, self.voice)
             # send sentence to NLTK /nltk_parse
         else:
-            self.soundhandle.say("alt input",self.voice)
+            #self.soundhandle.say("alt input",self.voice)
             #send to chat minion chat
+            self.pub_chat.publish(self.hold)
         
         
 

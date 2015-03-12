@@ -105,7 +105,7 @@
 			<visual>
 				<origin xyz="${xyz}" rpy="${rpy}" />
 				<geometry>
-					<mesh filename="package://robbie/meshes/ax12_box2.${MESH_EXT}" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+					<mesh filename="package://robbie_description/meshes/ax12_box2.${MESH_EXT}" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
 				</geometry>
 				<xacro:ax12_color />
              </visual>
@@ -115,7 +115,7 @@
 				<geometry>
 					<!--<box size="0.032 0.038 0.05" />-->
 					
-					<mesh filename="package://robbie/meshes/ax12_box2.${MESH_EXT}" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+					<mesh filename="package://robbie_description/meshes/ax12_box2.${MESH_EXT}" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
 					
 				</geometry>
              </collision>
@@ -129,7 +129,7 @@
 			<visual>
 				<origin xyz="${xyz}" rpy="${rpy}" />
 				<geometry>
-          			<mesh filename="package://robbie/meshes/F2.${MESH_EXT}" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+          			<mesh filename="package://robbie_description/meshes/F2.${MESH_EXT}" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
 				</geometry>
 				<xacro:bracket_color />
              </visual>
@@ -137,7 +137,7 @@
 				<origin xyz="${xyz}" rpy="${rpy}" />
 					<geometry>
 						
-          				<mesh filename="package://robbie/meshes/F2.${MESH_EXT}" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+          				<mesh filename="package://robbie_description/meshes/F2.${MESH_EXT}" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
           				
 					</geometry>
              </collision>
@@ -151,7 +151,7 @@
 			<visual>
 				<origin xyz="${xyz}" rpy="${rpy}" />
 				<geometry>
-          			<mesh filename="package://robbie/meshes/F3.${MESH_EXT}" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+          			<mesh filename="package://robbie_description/meshes/F3.${MESH_EXT}" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
 				</geometry><material name="grey1">
 			<color rgba="0.75 0.75 0.75 1.0"/>
 		</material>
@@ -161,7 +161,7 @@
 				<origin xyz="${xyz}" rpy="${rpy}" />
 					<geometry>
 						
-          				<mesh filename="package://robbie/meshes/F3.${MESH_EXT}" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+          				<mesh filename="package://robbie_description/meshes/F3.${MESH_EXT}" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
 						
 					</geometry>
              </collision>

@@ -13,7 +13,7 @@
     <property name="MESH_EXT" value="stl"/>
     <xacro:include filename="$(find robbie_description)/urdf/robbie_hardware.xacro" />
 
-<xacro:my_box name="base_link" lwh="0.41 0.35 0.06" xyz="0 0 .135" rpy="0 0 0" mass="0.1" material="Gazebo/FlatBlack">
+<xacro:my_box name="base_link" lwh="0.41 0.35 0.064" xyz="0 0 -0.032" rpy="0 0 0" mass="0.1" material="Gazebo/FlatBlack">
 	        <xacro:gold />
         </xacro:my_box>
 
@@ -46,7 +46,7 @@
 		<xacro:grey1 />
 	</xacro:my_cylinder>
 
-  <xacro:my_cylinder name="deck_link" l="0.520" r="0.175" xyz="0.1 0 0" rpy="0 0 0" mass="0.2" material="Gazebo/grey">
+  <xacro:my_cylinder name="deck_link" l="0.520" r="0.175" xyz="0 0 -0.26" rpy="0 0 0" mass="0.2" material="Gazebo/grey">
 			<xacro:black />
 		</xacro:my_cylinder>
 
@@ -63,7 +63,7 @@
         <mesh filename="package://robbie_description/meshes/chest.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
       </geometry>
          <xacro:black/>
-      <origin rpy="0 0 -1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 -1.57" xyz="0.04 0 -0.15"/>
     </visual>
   </link>
 
@@ -73,7 +73,7 @@
         <mesh filename="package://robbie_description/meshes/chest_cover.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
       </geometry>
          <xacro:gold/>
-      <origin rpy="0 0 1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 1.57" xyz="0 0 -0.085"/>
     </visual>
   </link>
 
@@ -94,7 +94,7 @@
         <mesh filename="package://robbie_description/meshes/right_shoulder_assy.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
       </geometry>
        <xacro:black />
-      <origin rpy="0 0 1.57" xyz="-0.025 0 0.01"/>
+      <origin rpy="-1.57 0 1.57" xyz="-0.01 0 -0.025"/>
     </visual>
   </link>
 
@@ -104,7 +104,7 @@
         <mesh filename="package://robbie_description/meshes/gearbox.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
       </geometry>
        <xacro:black/>
-      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
     </visual>
   </link>
 
@@ -114,7 +114,7 @@
         <mesh filename="package://robbie_description/meshes/right_upper_arm.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
       </geometry>
        <xacro:gold/>
-      <origin rpy="0 3.14 0" xyz="0 0 0"/>
+      <origin rpy="0 1.57 0" xyz="-0.19 0 0"/>
     </visual>
   </link>
 
@@ -124,7 +124,7 @@
         <mesh filename="package://robbie_description/meshes/elbow_pivot.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
       </geometry>
        <xacro:gold />
-      <origin rpy="3.14 0 0" xyz="0.025 -0.05 0.03"/>
+      <origin rpy="0 0 3.14" xyz="-0.025 -0.055 -0.02"/>
     </visual>
   </link>
 
@@ -134,30 +134,30 @@
         <mesh filename="package://robbie_description/meshes/fore_arm.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
       </geometry>
         <xacro:gold />
-      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 1.57 0" xyz="-0.23 0 0"/>
     </visual></link>
 
-  <!-- wrist_pan_ joint--> 
-  <xacro:ax12 name="wrist_pan_servo" xyz="0 0 0" rpy="0 0 0" />
-  <xacro:F3_bracket name="wrist_pan_servo_bracket_f3" xyz="0 0.005 0" rpy="1.57 0 0" />
- <!-- <xacro:F3_bracket name="wrist_pan_servo_bracket2_f3" xyz="0 0 0" rpy="0 -1.57 0" />-->
-    
+  <!-- wrist_yaw_ joint--> 
+  <xacro:ax12 name="wrist_yaw_servo" xyz="0 0 0" rpy="-1.57 0 -1.57" />
+  <xacro:F3_bracket name="wrist_yaw_servo_bracket_f3" xyz="0 0.005 0" rpy="1.57 0 -1.57" />
+   <xacro:F2_bracket name="right_wrist_yaw_bracket_f2" xyz="0 0 0" rpy="-1.57 0 -1.57" />
+  
   <!-- wrist_tilt joint-->
-  <xacro:ax12 name="wrist_tilt_servo" xyz="-0.04 0.05 0" rpy="-1.57 0 0" />
-  <xacro:F2_bracket name="wrist_tilt_bracket_f2" xyz="0 0 0" rpy="0 1.57 0" /><!--here-->
+  <xacro:ax12 name="wrist_tilt_servo" xyz="0 0 0" rpy="0 -1.57 0" />
+  <xacro:F2_bracket name="wrist_tilt_bracket_f2" xyz="0 0 0" rpy="0 -1.57 0" /><!--here-->
  
- <xacro:F3_bracket name="gripper_bracket_f3" xyz="0 0 0" rpy="1.57 1.57 0" />
+ <xacro:F3_bracket name="gripper_bracket_f3" xyz="0 0 0" rpy="1.57 0 -1.57" />
   
 <!-- Gripper_joint-->
   <xacro:ax12 name="gripper_servo" xyz="0 0 0" rpy="1.57 0 0" />
-  <xacro:F2_bracket name="gripper_bracket_f2" xyz="0 0 0" rpy="0 0 1.57" />
+  <xacro:F2_bracket name="gripper_bracket_f2" xyz="0 0 0" rpy="1.57 0 0" />
 
-  <xacro:my_box name="right_finger_link" lwh="-0.08 0.005 0.035" xyz="0 0 0" rpy="1.57 0 1.57" mass="0.1" material="Gazebo/FlatBlack">
+  <xacro:my_box name="right_finger_link" lwh="-0.08 0.005 0.035" xyz="-0.04 0 0" rpy="0 0 0" mass="0.1" material="Gazebo/FlatBlack">
 	        <xacro:blue1 />
         </xacro:my_box>
 
 
-  <xacro:my_box name="left_finger_link" lwh="0.08 0.005 0.035" xyz="0 0 0" rpy="1.57 0 1.57" mass="0.1" material="Gazebo/FlatBlack">
+  <xacro:my_box name="left_finger_link" lwh="0.08 0.005 0.035" xyz="-0.04 0 0" rpy="0 0 0" mass="0.1" material="Gazebo/FlatBlack">
 	        <xacro:grey3/>
         </xacro:my_box>
 
@@ -178,8 +178,8 @@
       <geometry>
         <mesh filename="package://robbie_description/meshes/left_shoulder_assy.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
       </geometry>
-       <xacro:black />
-      <origin rpy="0 0 1.57" xyz="0 0 0"/>
+       <xacro:grey1 />
+      <origin rpy="-1.57 0 1.57" xyz="0 -0.06 0"/>
     </visual>
   </link>
 
@@ -189,9 +189,10 @@
         <mesh filename="package://robbie_description/meshes/right_upper_arm.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
       </geometry>
        <xacro:gold/>
-      <origin rpy="0 3.14 0" xyz="0 0 0"/>
+      <origin rpy="0 1.57 0" xyz="-0.19 0 0"/>
     </visual>
   </link>
+
 
 <link name="left_elbow_link" >
    <visual>
@@ -199,7 +200,7 @@
         <mesh filename="package://robbie_description/meshes/gearbox.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
       </geometry>
        <xacro:black/>
-      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
     </visual>
   </link>
 
@@ -209,7 +210,7 @@
         <mesh filename="package://robbie_description/meshes/elbow_pivot.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
       </geometry>
        <xacro:gold />
-      <origin rpy="3.14 0 0" xyz="0.025 -0.05 0.03"/>
+      <origin rpy="0 0 3.14" xyz="-0.025 -0.055 -0.02"/>
     </visual>
   </link>
 
@@ -219,35 +220,35 @@
         <mesh filename="package://robbie_description/meshes/fore_arm.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
       </geometry>
         <xacro:gold />
-      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 1.57 0" xyz="-0.23 0 0"/>
     </visual>
   </link>
 
  <!-- left_wrist_pan_ joint--> 
-  <xacro:ax12 name="left_wrist_pan_servo" xyz="0 0 0" rpy="0 0 0" />
-  <xacro:F3_bracket name="left_wrist_pan_servo_bracket_f3" xyz="0 0.005 0" rpy="1.57 0 0" />
+ 
+  <xacro:F3_bracket name="left_wrist_pan_servo_bracket_f3" xyz="0 0.005 0" rpy="1.57 0 -1.57" />
  <!-- <xacro:F3_bracket name="left_wrist_pan_servo_bracket2_f3" xyz="0 0 0" rpy="0 -1.57 0" />-->
   
  <!-- left_wrist_yaw joint-->
-  <xacro:ax12 name="left_wrist_yaw_servo" xyz="-0.04 0.05 0" rpy="-1.57 0 0" />
-  <xacro:F2_bracket name="left_wrist_yaw_bracket_f2" xyz="0 0 0" rpy="-1.57 0 0" />
+  <xacro:ax12 name="left_wrist_yaw_servo" xyz="0.0 0 0" rpy="-1.57 0 -1.57" />
+  <xacro:F2_bracket name="left_wrist_yaw_bracket_f2" xyz="0 0 0" rpy="-1.57 0 -1.57" />
   
   <!-- left_wrist_tilt joint-->
-  <xacro:ax12 name="left_wrist_tilt_servo" xyz="0 0 0" rpy="1.57 1.57 0" />
-  <xacro:F2_bracket name="left_wrist_tilt_bracket_f2" xyz="0 0 0" rpy="1.57 1.57 0" />
+  <xacro:ax12 name="left_wrist_tilt_servo" xyz="0 0 0" rpy="0 -1.57 0" />
+  <xacro:F2_bracket name="left_wrist_tilt_bracket_f2" xyz="0 0 0" rpy="0 -1.57 0" />
  
- <xacro:F3_bracket name="left_gripper_bracket_f3" xyz="0 0 0" rpy="1.57 1.57 0" />
+ <xacro:F3_bracket name="left_gripper_bracket_f3" xyz="0 0 0" rpy="1.57 0 -1.57" />
   
 <!-- left_Gripper_joint-->
-  <xacro:ax12 name="left_gripper_servo" xyz="0 0 0" rpy="0 0 -1.57" />
-  <xacro:F2_bracket name="left_gripper_bracket_f2" xyz="0 0 0" rpy="0 0 1.57" />
+  <xacro:ax12 name="left_gripper_servo" xyz="0 0 0" rpy="1.57 0 0" />
+  <xacro:F2_bracket name="left_gripper_bracket_f2" xyz="0 0 0" rpy="1.57 0 0" />
 
-  <xacro:my_box name="left_right_finger_link" lwh="-0.08 0.005 0.035" xyz="0 0 0" rpy="1.57 0 1.57" mass="0.1" material="Gazebo/FlatBlack">
+  <xacro:my_box name="left_right_finger_link" lwh="-0.08 0.005 0.035" xyz="-0.04 0 0" rpy="0 0 0" mass="0.1" material="Gazebo/FlatBlack">
 	        <xacro:blue1 />
         </xacro:my_box>
 
 
-  <xacro:my_box name="left_left_finger_link" lwh="0.08 0.005 0.035" xyz="0 0 0" rpy="1.57 0 1.57" mass="0.1" material="Gazebo/FlatBlack">
+  <xacro:my_box name="left_left_finger_link" lwh="0.08 0.005 0.035" xyz="-0.04 0 0" rpy="0 0 0" mass="0.1" material="Gazebo/FlatBlack">
 	        <xacro:grey3/>
         </xacro:my_box>
 
@@ -357,43 +358,43 @@
 <joint name="base_footprint_joint" type="fixed">
     	<parent link="base_footprint" />
     	<child link="base_link" />
-    	<origin xyz="-0.1 0 0" rpy="0 0 0" />
+    	<origin xyz="-0.1 0 0.08" rpy="0 0 0" />
 	</joint> 
 
 <joint name="base_link_joint" type="fixed">
     	<parent link="base_link" />
     	<child link="deck_link" />
-    	<origin xyz="-0.1 0 .36" rpy="0 0 0" />
+    	<origin xyz="0 0 0.51" rpy="0 0 0" />
 	</joint>
 
   <joint name="left_wheel_joint" type="fixed">
     	<parent link="base_link" />
     	<child link="left_wheel" />
-    	<origin xyz="0.1 -0.2 0.1" rpy="0 0 0" />
+    	<origin xyz="0.1 -0.2 -0.04" rpy="0 0 0" />
 	</joint>
 
   <joint name="right_wheel_joint" type="fixed">
     	<parent link="base_link" />
     	<child link="right_wheel" />
-    	<origin xyz="0.1 0.2 0.1" rpy="0 0 0" />
+    	<origin xyz="0.1 0.2 -0.04" rpy="0 0 0" />
 	</joint>
 
   <joint name="castor_wheel_joint_l" type="fixed">
     	<parent link="base_link" />
     	<child link="castor_wheel_l" />
-    	<origin xyz="-0.20 -0.13 0.05" rpy="0 0 0" />
+    	<origin xyz="-0.20 -0.13 -0.1" rpy="0 0 0" />
 	</joint>
 
   <joint name="castor_wheel_joint_r" type="fixed">
     	<parent link="base_link" />
     	<child link="castor_wheel_r" />
-    	<origin xyz="-0.20 0.13 0.05" rpy="0 0 0" />
+    	<origin xyz="-0.20 0.13 -0.1" rpy="0 0 0" />
 	</joint>
 <!--#################  Upper torso#############################-->
  <joint name="pan_joint" type="revolute">
     	<parent link="deck_link" />
     	<child link="pan_link" />
-    	<origin xyz="0.1 0 0.275" rpy="0 0 0" />
+    	<origin xyz="0.0 0 0" rpy="0 0 0" />
         <axis xyz="0 0 1" />
         <limit lower="-1" upper="1" effort="10" velocity="0" />
 	</joint> 
@@ -401,19 +402,19 @@
   <joint name="torso_link" type="fixed">
     	<parent link="pan_link" />
     	<child link="upper_torso" />
-    	<origin xyz="0.05 0 0.26" rpy="0 0 0" />
+    	<origin xyz="0.0 0 0.47" rpy="0 0 0" />
 	</joint> 
 
 <joint name="chest_link" type="fixed">
     	<parent link="upper_torso" />
     	<child link="upper_chest" />
-    	<origin xyz="0.02 0 0.03" rpy="0 0 0" />
+    	<origin xyz="0.065 0 -0.04" rpy="0 0 0" />
 	</joint> 
 
 <joint name="right_arm_tilt_joint" type="revolute">
     	<parent link="upper_torso" />
     	<child link="right_shoulder_tilt" />
-    	<origin xyz="-0.045 -0.145 0.105" rpy="0 0 0" />
+    	<origin xyz="0 -0.14 -0.045" rpy="0 0 0" />
         <axis xyz="1 0 0" />
         <limit lower="-1.34" upper="0.1" effort="10" velocity="0" />
 	</joint> 
@@ -421,7 +422,7 @@
 <joint name="right_arm_lift_joint" type="revolute">
     	<parent link="right_shoulder_tilt" />
     	<child link="right_shoulder_lift" />
-    	<origin xyz="-0.0 -0.077 -0.04" rpy="0 -1.57 0" />
+    	<origin xyz="0 -0.078 -0.042" rpy="0 0 0" />
         <axis xyz="0 1 0" />
         <limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
 	</joint> 
@@ -429,21 +430,21 @@
 <joint name="right_arm_rotate_joint" type="revolute">
     	<parent link="right_shoulder_lift" />
     	<child link="right_shoulder_rotate" />
-    	<origin xyz="0 0 -0.065" rpy="0 0 0" />
-        <axis xyz="0 0 -1" />
+    	<origin xyz="0.255 0 0" rpy="0 0 0" />
+        <axis xyz="1 0 0" />
         <limit lower="-3.14" upper="0.2" effort="10" velocity="0" />
 	</joint> 
 
 <joint name="right_elbow_link" type="fixed">
     	<parent link="right_shoulder_rotate" />
     	<child link="right_elbow_link" />
-    	<origin xyz="0.01 0 -0.17" rpy="0 0 0" />
+    	<origin xyz="-0.01 0 0.01" rpy="0 0 0" />
         </joint> 
 
 <joint name="right_arm_elbow_joint" type="revolute">
     <parent link="right_elbow_link"/>
     <child link="right_elbow"/>
-    <origin xyz="0.01 0.01 0.0" rpy="0 -1.57 0" />
+    <origin xyz="0.01 0.01 0.0" rpy="0 0 0" />
     <axis xyz="0 1 0" />
    <limit lower="-2.20" upper="0.1" effort="10" velocity="0" />
   </joint>
@@ -451,41 +452,49 @@
   <joint name="right_arm_forearm_link" type="fixed">
     <parent link="right_elbow"/>
     <child link="right_forearm_link"/>
-    <origin xyz="-0.08 -0.0 -0.0" rpy="1.57 0 0" />
+    <origin xyz="0.31 -0.0 -0.0" rpy="0 0 0" />
   </joint>
 
-  <!--right_arm_wrist_pan_joint-->
-  <joint name="right_arm_wrist_pan_bracket" type="fixed">
+  <!--right_arm_wrist_yaw_joint-->
+  <joint name="right_arm_wrist_yaw_bracket" type="fixed">
     	<parent link="right_forearm_link" />
-    	<child link="wrist_pan_servo" />
-    	<origin xyz="-0.21 0.0 0.0" rpy="0 0 1.57" />
+    	<child link="wrist_yaw_servo_bracket_f3" />
+    	<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
     	
 	</joint>
-  <joint name="right_arm_wrist_pan_joint" type="revolute">
-    	<parent link="wrist_pan_servo" />
-    	<child link="wrist_pan_servo_bracket_f3" />
-    	<origin xyz="0. 0.015 0.0" rpy="0 1.57 0" />
-        <axis xyz="0 1 0" />
+  <joint name="right_arm_wrist_yaw_bracket1" type="fixed">
+    	<parent link="wrist_yaw_servo_bracket_f3" />
+    	<child link="wrist_yaw_servo" />
+    	<origin xyz="0.04 0 0.0" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
     	<limit lower="-2.61" upper="2.61" effort="10" velocity="0" />
       	<dynamics damping="0.0"/>
 	</joint>   
 
 
-   <joint name="right_arm_wrist_tilt_bracket" type="fixed">
-    	<parent link="wrist_pan_servo_bracket_f3" />
-    	<child link="wrist_tilt_servo" />
-    	<origin xyz="0.04 0 0.0" rpy="0 0 0" />
-        <axis xyz="1 0 0" />
+   <joint name="right_arm_wrist_yaw_joint" type="revolute">
+    	<parent link="wrist_yaw_servo" />
+    	<child link="right_wrist_yaw_bracket_f2" />
+    	<origin xyz="0.0 0 0.0" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+    	<limit lower="-2.61" upper="2.61" effort="10" velocity="0" />
+	</joint> 
+
+<joint name="right_arm_wrist_tilt1_bracket" type="fixed">
+    	<parent link="right_wrist_yaw_bracket_f2" />
+    	<child link="wrist_tilt_bracket_f2" />
+    	<origin xyz="0.053 0 0.0" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
     	
 	</joint> 
 
 
 
 <!--wrist_tilt_joint-->
-  <joint name="right_arm_wrist_yaw_joint" type="revolute">
-    	<parent link="wrist_tilt_servo" />
-    	<child link="wrist_tilt_bracket_f2" />
-    	<origin xyz="-0.04 0.05 0" rpy="-1.57 0 1.57" />
+  <joint name="right_arm_wrist_tilt_joint" type="revolute">
+    	<parent link="wrist_tilt_bracket_f2" />
+    	<child link="wrist_tilt_servo" />
+    	<origin xyz="0 0 0" rpy="0 0 0" />
         <axis xyz="0 1 0" />
     	<limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
       	<dynamics damping="0.0"/>
@@ -493,21 +502,21 @@
 
  
   <joint name="right_arm_gripper_bracket" type="fixed">
-    	<parent link="wrist_tilt_bracket_f2" />
+    	<parent link="wrist_tilt_servo" />
     	<child link="gripper_bracket_f3" />
-    	<origin xyz="0.025 0.025 0.0" rpy="1.57 1.57 0" /><!--now-->
+    	<origin xyz="0.04 0 0.0" rpy="0 0 0" /><!--now-->
 	</joint> 
 
    <joint name="right_arm_gripper_servo" type="fixed">
     	<parent link="gripper_bracket_f3" />
     	<child link="gripper_servo" />
-    	<origin xyz="0.0 0.02 0.02" rpy="-1.57 0 1.57" />
+    	<origin xyz="0.02 -0.015 0.0" rpy="0 0 0" />
 	</joint>
 
   <joint name="right_gripper_joint" type="fixed">
-    <origin rpy="-1.570795 0 1.570795" xyz="0 0.06 0.01"/>
     <parent link="gripper_bracket_f3"/>
     <child link="right_gripper_link"/>
+    <origin xyz="0.06 -0.01 0" rpy="0 0 0" />
   </joint>
 
 
@@ -515,9 +524,9 @@
    <joint name="right_arm_gripper_joint" type="revolute">
     	<parent link="gripper_servo" />
     	<child link="gripper_bracket_f2" />
-    	<origin xyz="0 0.0 0.0" rpy="0 1.57 -1.57" />
-        <axis xyz="1 0 0" />
-    	<limit lower="-0.36" upper="0.28" effort="10" velocity="0" />
+    	<origin xyz="0 0.0 0.0" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+    	<limit lower="-0.1" upper="0.50" effort="10" velocity="0" />
       	<dynamics damping="0.0"/>
 	</joint> 
 
@@ -526,14 +535,14 @@
   <joint name="right_arm_finger_link_l" type="fixed">
     	<parent link="gripper_servo" />
     	<child link="left_finger_link" />
-    	<origin xyz="0.03 0.04 0.0" rpy="0 1.57 -1.57" />
+    	<origin xyz="0.08 0.04 0" rpy="0 0 0" />
         
 	</joint> 
 <!-- moving finger   ############-->
   <joint name="right_arm_finger_link_r" type="fixed">
     	<parent link="gripper_bracket_f2" />
     	<child link="right_finger_link" />
-    	<origin xyz="0 0.03 0.03" rpy="0 0 0" />
+    	<origin xyz="0.08 -0.03 0" rpy="0 0 0" />
 	</joint>
 
  
@@ -542,7 +551,7 @@
 <joint name="left_arm_tilt_joint" type="revolute">
     	<parent link="upper_torso" />
     	<child link="left_shoulder_tilt" />
-    	<origin xyz="-0.045 0.145 0.105" rpy="0 0 0" />
+    	<origin xyz="0.003 0.142 -0.05" rpy="0 0 0" />
         <axis xyz="-1 0 0" />
         <limit lower="-1.34" upper="0.1" effort="10" velocity="0" />
 	</joint> 
@@ -550,7 +559,7 @@
 <joint name="left_arm_lift_joint" type="revolute">
     	<parent link="left_shoulder_tilt" />
     	<child link="left_shoulder_lift" />
-    	<origin xyz="0 0.02 -0.04" rpy="0 -1.57 0" />
+    	<origin xyz="0 0.08 -0.04" rpy="0 0 0" />
         <axis xyz="0 1 0" />
         <limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
 	</joint> 
@@ -558,21 +567,21 @@
 <joint name="left_arm_rotate_joint" type="revolute">
     	<parent link="left_shoulder_lift" />
     	<child link="left_shoulder_rotate" />
-    	<origin xyz="0 0.06 -0.055" rpy="0 0 0" />
-        <axis xyz="0 0 -1" />
-        <limit lower="0.2" upper="3.14" effort="10" velocity="0" />
+    	<origin xyz="0.24 0 0" rpy="0 0 0" />
+        <axis xyz="1 0 0" />
+        <limit lower="-0.2" upper="3.14" effort="10" velocity="0" />
 	</joint> 
 
 <joint name="left_elbow_link" type="fixed">
     	<parent link="left_shoulder_rotate" />
     	<child link="left_elbow_link" />
-    	<origin xyz="0.01 0 -0.17" rpy="0 0 0" />
+    	<origin xyz="-0.01 0 0.008" rpy="0 0 0" />
 	</joint> 
 
 <joint name="left_arm_elbow_joint" type="revolute">
     <parent link="left_elbow_link"/>
     <child link="left_elbow"/>
-    <origin xyz="0.01 0.01 0.0" rpy="0 -1.57 0" />
+    <origin xyz="0 0 0" rpy="0 -0 0" />
     <axis xyz="0 1 0" />
    <limit lower="-2.20" upper="0.17" effort="10" velocity="0" />
   </joint>
@@ -581,22 +590,15 @@
  <joint name="left_arm_forearm_link" type="fixed">
     <parent link="left_elbow"/>
     <child link="left_forearm_link"/>
-    <origin xyz="-0.08 -0.0 -0.0" rpy="1.57 0 0" />
+    <origin xyz="0.31 -0.0 -0.0" rpy="0 0 0" />
   </joint>
 
-    <!--left_arm_wrist_pan_joint-->
-  <joint name="left_arm_wrist_pan_bracket" type="fixed">
-    	<parent link="left_forearm_link" />
-    	<child link="left_wrist_pan_servo" />
-    	<origin xyz="-0.21 0.0 0.0" rpy="0 0 1.57" /><!--now-->
+    
     	
-	</joint>
-  <joint name="left_arm_wrist_pan_joint" type="revolute"> <!--revolute-->
-    	<parent link="left_wrist_pan_servo" />
+  <joint name="left_arm_wrist_yaw_attach" type="fixed"> <!--revolute-->
+    	<parent link="left_forearm_link" />
     	<child link="left_wrist_pan_servo_bracket_f3" />
-    	<origin xyz="0. 0.015 0.0" rpy="0 0 0" />
-        <axis xyz="0 1 0" />
-    	<limit lower="-2.61" upper="2.61" effort="10" velocity="0" />
+    	<origin xyz="0. 0 0" rpy="0 0 0" />
       	<dynamics damping="0.0"/>
 	</joint>   
 
@@ -614,8 +616,8 @@
   <joint name="left_arm_wrist_yaw_joint" type="revolute"> <!--revolute-->
     	<parent link="left_wrist_yaw_servo" />
     	<child link="left_wrist_yaw_bracket_f2" />
-    	<origin xyz="-0.04 0.05 0" rpy="0 0 0" />
-        <axis xyz="0 0 -1" />
+    	<origin xyz="0.0 0 0" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
     	<limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
       	<dynamics damping="0.0"/>
 	</joint>
@@ -623,7 +625,7 @@
   <joint name="left_arm_wrist_yaw_bracket" type="fixed">
     	<parent link="left_wrist_yaw_bracket_f2" />
     	<child link="left_wrist_tilt_bracket_f2" />
-    	<origin xyz="-0.0 0.052 0.0" rpy="0 0 0" />
+    	<origin xyz="0.055 0 0.0" rpy="0 0 0" />
         <axis xyz="1 0 0" />
     	<limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
       	<dynamics damping="0.0"/>
@@ -634,7 +636,7 @@
     	<parent link="left_wrist_tilt_bracket_f2" />
     	<child link="left_wrist_tilt_servo" />
     	<origin xyz="-0 -0.0 0" rpy="0 0 0" />
-        <axis xyz="1 0 0" />
+        <axis xyz="0 1 0" />
     	<limit lower="-1.57" upper="1.57" effort="10" velocity="0" />
       	<dynamics damping="0.0"/>
 	</joint>
@@ -643,17 +645,17 @@
   <joint name="left_arm_gripper_bracket" type="fixed">
     	<parent link="left_wrist_tilt_servo" />
     	<child link="left_gripper_bracket_f3" />
-    	<origin xyz="0.0 0.035 0.0" rpy="0 1.57 0" />
+    	<origin xyz="0.04 0 0.0" rpy="0 0 0" />
 	</joint> 
 
    <joint name="left_arm_gripper_servo" type="fixed">
     	<parent link="left_gripper_bracket_f3" />
     	<child link="left_gripper_servo" />
-    	<origin xyz="0.0 0.02 -0.02" rpy="0 3.14 0" />
+    	<origin xyz="0.02 -0.02 -0." rpy="0 0 0" />
 	</joint>
 
   <joint name="left_gripper_joint" type="fixed">
-    <origin rpy="1.570795 0 1.570795" xyz="0 0.06 -0.01"/>
+    <origin rpy="0 0 0" xyz="0.06 -0.01 0"/>
     <parent link="left_gripper_bracket_f3"/>
     <child link="left_gripper_link"/>
   </joint>
@@ -663,7 +665,7 @@
     	<parent link="left_gripper_servo" />
     	<child link="left_gripper_bracket_f2" />
     	<origin xyz="0 0.0 0.0" rpy="0 0 0" />
-        <axis xyz="1 0 0" />
+        <axis xyz="0 0 1" />
     	<limit lower="-1.0" upper="0.3" effort="10" velocity="0" />
       	<dynamics damping="0.0"/>
 	</joint> 
@@ -671,21 +673,21 @@
   <joint name="left_arm_finger_link_l" type="fixed">
     	<parent link="left_gripper_servo" />
     	<child link="left_left_finger_link" />
-    	<origin xyz="0. 0.03 -0.04" rpy="0 0 0" />
+    	<origin xyz="0.08 0.04 0" rpy="0 0 0" />
         
 	</joint> 
 
   <joint name="left_arm_finger_link_r" type="fixed">
     	<parent link="left_gripper_bracket_f2" />
     	<child link="left_right_finger_link" />
-    	<origin xyz="0 0.03 0.03" rpy="0 0 0" />
+    	<origin xyz="0.08 -0.03 0" rpy="0 0 0" />
 	</joint>
 
 <!-- #####################################Head joints#########################################-->
   <joint name="head_tilt_servo" type="fixed">
     	<parent link="upper_torso" />
     	<child link="head_tilt_bracket" />
-    	<origin xyz="-0.05 0. 0.15" rpy="0 0 0" />
+    	<origin xyz="-0.0 0. 0.05" rpy="0 0 0" />
 	</joint>
 <!-- Head tilt joint-->
   <joint name="head_tilt_mod_joint" type="revolute">
@@ -753,7 +755,7 @@
   <joint name="kinect_joint" type="fixed">
     	<parent link="base_link" />
     	<child link="kinect_link" />
-    	<origin xyz="0.2 0 0.26" rpy="0 0 0" />
+    	<origin xyz="0.2 0 0.33" rpy="0 0 0" />
 	</joint>
 
 

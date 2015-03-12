@@ -56,7 +56,7 @@ class Driver(object):
 		self._TransformListener = tf.TransformListener()
 
 		# wait for the listener to get the first transform message
-		self._TransformListener.waitForTransform("/odom", "/base_link", rospy.Time(), rospy.Duration(4.0))
+		self._TransformListener.waitForTransform("/odom", "/base_footprint", rospy.Time(), rospy.Duration(4.0))
 
 	def driveX(self, distance, speed):
 		'''
@@ -67,12 +67,12 @@ class Driver(object):
 
 		forward = (distance >= 0)
 		
-		# record the starting transform from the odom to the base_link frame
+		# record the starting transform from the odom to the base_footprint frame
 		# Note that here the 'from' frame precedes 'to' frame which is opposite to how they are
 		# ordered in tf.TransformBroadcaster's sendTransform function.
 		# startTranslation is a tuple holding the x,y,z components of the translation vector
 		# startRotation is a tuple holding the four components of the quaternion
-		(startTranslation, startRotation) = self._TransformListener.lookupTransform("/odom", "/base_link", rospy.Time(0))
+		(startTranslation, startRotation) = self._TransformListener.lookupTransform("/odom", "/base_footprint", rospy.Time(0))
 		
 		done = False
 
@@ -86,7 +86,7 @@ class Driver(object):
 
 		while not rospy.is_shutdown():
 			try:
-				(currentTranslation, currentRotation) = self._TransformListener.lookupTransform("/odom", "/base_link", rospy.Time(0))
+				(currentTranslation, currentRotation) = self._TransformListener.lookupTransform("/odom", "/base_footprint", rospy.Time(0))
 				
 				dx = currentTranslation[0] - startTranslation[0]
 				dy = currentTranslation[1] - startTranslation[1]
@@ -130,7 +130,7 @@ class Driver(object):
 		# record the starting transform from the odom to the base frame
 		# Note that here the 'from' frame precedes 'to' frame which is opposite to how they are
 		# ordered in tf.TransformBroadcaster's sendTransform function.
-		(startTranslation, startRotation) = self._TransformListener.lookupTransform("/odom", "/base_link", rospy.Time(0))
+		(startTranslation, startRotation) = self._TransformListener.lookupTransform("/odom", "/base_footprint", rospy.Time(0))
 		startAngle = 2 * math.atan2(startRotation[2], startRotation[3])
 
 		print "start angle: " + str(startAngle)
@@ -148,7 +148,7 @@ class Driver(object):
 
 		while not rospy.is_shutdown():
 			try:
-				(currentTranslation, currentRotation) = self._TransformListener.lookupTransform("/odom", "/base_link", rospy.Time(0))
+				(currentTranslation, currentRotation) = self._TransformListener.lookupTransform("/odom", "/base_footprint", rospy.Time(0))
 				currentAngle = 2 * math.atan2(currentRotation[2], currentRotation[3])
 				print "currentAngle: " + str(currentAngle)
 				

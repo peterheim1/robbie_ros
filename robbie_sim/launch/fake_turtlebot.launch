@@ -1,0 +1,73 @@
+<launch>
+
+  <param name="/use_sim_time" value="false" />
+  
+  <!-- Set the name of the map yaml file: can be overridden on the command line. -->
+  <arg name="map" default="blank_map.yaml" />
+
+  
+    
+  <node name="arbotix" pkg="arbotix_python" type="arbotix_driver" clear_params="true" output="screen">
+     <rosparam file="$(find rbx1_bringup)/config/fake_turtlebot_arbotix.yaml" command="load" />
+     <param name="sim" value="true"/>
+  </node>
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+      <param name="publish_frequency" type="double" value="20.0" />
+  </node>
+  
+  
+  <!-- Run the map server with a blank map -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find rbx2_nav)/maps/$(arg map)" />
+  
+  <!-- The move_base node -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
+     <rosparam file="$(find rbx2_nav)/config/fake/costmap_common_params.yaml" command="load" ns="global_costmap" />
+     <rosparam file="$(find rbx2_nav)/config/fake/costmap_common_params.yaml" command="load" ns="local_costmap" />
+     <rosparam file="$(find rbx2_nav)/config/fake/local_costmap_params.yaml" command="load" />
+     <rosparam file="$(find rbx2_nav)/config/fake/global_costmap_params.yaml" command="load" />
+     <rosparam file="$(find rbx2_nav)/config/fake/base_local_planner_params.yaml" command="load" />
+     <rosparam file="$(find rbx2_nav)/config/nav_test_params.yaml" command="load" />
+
+  </node>
+  
+  
+  <!-- Run fake localization compatible with AMCL output -->
+  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen" />
+      
+  <!-- Run a static transform between /odom and /map -->
+  <node pkg="tf" type="static_transform_publisher" name="odom_map_broadcaster" args="0 0 0 0 0 0 /map /odom 100" />
+
+
+<!-- moveit demo -->
+
+
+<!-- By default, we are not in debug mode -->
+  <arg name="debug" default="false" />
+
+  <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+  <include file="$(find robbie_moveit)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="true"/>
+  </include>
+
+  
+
+
+  <!-- We do not have a robot connected, so publish fake joint states -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="/use_gui" value="false"/> 
+    <rosparam param="/source_list">[/move_group/fake_controller_joint_states]</rosparam>
+  </node>
+  
+  
+
+  <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default) -->
+  <include file="$(find robbie_moveit)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>  
+    <arg name="fake_execution" value="true"/>
+    <arg name="info" value="true"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  
+</launch>

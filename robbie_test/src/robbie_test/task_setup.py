@@ -75,10 +75,10 @@ def setup_task_environment(self):
             
     # Append each of the four waypoints to the list.  Each waypoint
     # is a pose consisting of a position and orientation in the map frame.
-    self.waypoints.append(Pose(Point(0.5, 0.0, 0.0), quaternions[3]))
-    self.waypoints.append(Pose(Point(1.5, 0.0, 0.0), quaternions[0]))
-    self.waypoints.append(Pose(Point(1.5, 1.5, 0.0), quaternions[1]))
-    self.waypoints.append(Pose(Point(0.5, 1.5, 0.0), quaternions[2]))
+    self.waypoints.append(Pose(Point(2.174, 0.851, 0.0), Quaternion(0.000, 0.000, -0.704, 0.710)))
+    self.waypoints.append(Pose(Point(2.009, -1.264, 0.0), Quaternion(0.000, 0.000, -0.384, 0.923)))
+    self.waypoints.append(Pose(Point(0.641, -1.568, 0.0), Quaternion(0.000, 0.000, -0.851, 0.526)))
+    self.waypoints.append(Pose(Point(1.521, -0.262, 0.0), Quaternion(0.000, 0.000, 0.745, 0.667)))
     
     # Create a mapping of room names to waypoint locations
     room_locations = (('hallway', self.waypoints[0]),
@@ -90,7 +90,7 @@ def setup_task_environment(self):
     self.room_locations = OrderedDict(room_locations)
     
     # Where is the docking station?
-    self.docking_station_pose = (Pose(Point(0.1, 0.0, 0.0), Quaternion(0.0, 0.0, 0.0, 1.0)))            
+    self.docking_station_pose = (Pose(Point(0.4, 0.0, 0.0), Quaternion(0.0, 0.0, 0.0, 1.0)))            
     
     # Initialize the waypoint visualization markers for RViz
     init_waypoint_markers(self)
@@ -105,7 +105,7 @@ def setup_task_environment(self):
     init_docking_station_marker(self)
         
     # Publisher to manually control the robot (e.g. to stop it)
-    self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist)
+    self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=5)
     
     rospy.loginfo("Starting Tasks")
     
@@ -127,7 +127,7 @@ def init_waypoint_markers(self):
     marker_color = {'r': 1.0, 'g': 0.7, 'b': 1.0, 'a': 1.0}
     
     # Define a marker publisher.
-    self.marker_pub = rospy.Publisher('waypoint_markers', Marker)
+    self.marker_pub = rospy.Publisher('waypoint_markers', Marker, queue_size=5)
     
     # Initialize the marker points list.
     self.waypoint_markers = Marker()
@@ -155,7 +155,7 @@ def init_docking_station_marker(self):
     marker_id = 0
     marker_color = {'r': 0.7, 'g': 0.7, 'b': 0.0, 'a': 1.0}
     
-    self.docking_station_marker_pub = rospy.Publisher('docking_station_marker', Marker)
+    self.docking_station_marker_pub = rospy.Publisher('docking_station_marker', Marker, queue_size=5)
     
     self.docking_station_marker = Marker()
     self.docking_station_marker.ns = marker_ns

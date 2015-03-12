@@ -43,7 +43,7 @@ from std_msgs.msg import Float64, Float32
 from dynamixel_msgs.msg import MotorState
 from dynamixel_msgs.msg import JointState
 #from sensor_msgs.msg import JointState
-from robbie.SerialDataGateway import SerialDataGateway
+from SerialDataGateway import SerialDataGateway
 
 class R_shoulder(object):
         '''
@@ -330,31 +330,31 @@ class R_shoulder(object):
                 rospy.Subscriber('right_arm_elbow_joint/command',Float64, self._HandleJoint_7_Command)
                 rospy.Subscriber('pan_joint/command',Float64, self._HandleJoint_8_Command)
                 
-                self._SerialPublisher = rospy.Publisher('arm_lower', String)
+                self._SerialPublisher = rospy.Publisher('arm_lower', String, queue_size=5)
 
                
                 
                 
-                self.P5_MotorPublisher = rospy.Publisher("/right_arm_rotate/motor_state", MotorState)
-                self.P6_MotorPublisher = rospy.Publisher("/left_arm_rotate/motor_state", MotorState)
-                self.P7_MotorPublisher = rospy.Publisher("/right_arm_elbow/motor_state", MotorState)
-                #self.P8_MotorPublisher = rospy.Publisher("/left_arm_elbow/motor_state", MotorState)
-                self.P9_MotorPublisher = rospy.Publisher("/pan/motor_state", MotorState)
+                self.P5_MotorPublisher = rospy.Publisher("/right_arm_rotate/motor_state", MotorState, queue_size=5)
+                self.P6_MotorPublisher = rospy.Publisher("/left_arm_rotate/motor_state", MotorState, queue_size=5)
+                self.P7_MotorPublisher = rospy.Publisher("/right_arm_elbow/motor_state", MotorState, queue_size=5)
+                #self.P8_MotorPublisher = rospy.Publisher("/left_arm_elbow/motor_state", MotorState, queue_size=5)
+                self.P9_MotorPublisher = rospy.Publisher("/pan/motor_state", MotorState, queue_size=5)
 
 
                 
-                self._P5_JointPublisher = rospy.Publisher("/right_arm_rotate_joint/state", JointState)
-                self._P6_JointPublisher = rospy.Publisher("/left_arm_rotate_joint/state", JointState)
-                self._P7_JointPublisher = rospy.Publisher("/right_arm_elbow_joint/state", JointState)
-                #self._P8_JointPublisher = rospy.Publisher("/left_arm_elbow_joint/state", JointState)
-                self._P9_JointPublisher = rospy.Publisher("/pan_joint/state", JointState)
+                self._P5_JointPublisher = rospy.Publisher("/right_arm_rotate_joint/state", JointState, queue_size=5)
+                self._P6_JointPublisher = rospy.Publisher("/left_arm_rotate_joint/state", JointState, queue_size=5)
+                self._P7_JointPublisher = rospy.Publisher("/right_arm_elbow_joint/state", JointState, queue_size=5)
+                #self._P8_JointPublisher = rospy.Publisher("/left_arm_elbow_joint/state", JointState, queue_size=5)
+                self._P9_JointPublisher = rospy.Publisher("/pan_joint/state", JointState, queue_size=5)
                 
-                self._right_rotate_Publisher = rospy.Publisher("right_rotate", Float32)
-                self._right_elbow_Publisher = rospy.Publisher("right_elbow", Float32)
-                self._left_rotate_Publisher = rospy.Publisher("left_rotate", Float32)
-                #self._left_elbow_Publisher = rospy.Publisher("left_elbow", Float32)
+                self._right_rotate_Publisher = rospy.Publisher("right_rotate", Float32, queue_size=5)
+                self._right_elbow_Publisher = rospy.Publisher("right_elbow", Float32, queue_size=5)
+                self._left_rotate_Publisher = rospy.Publisher("left_rotate", Float32, queue_size=5)
+                #self._left_elbow_Publisher = rospy.Publisher("left_elbow", Float32, queue_size=5)
 
-                self._left_rotate_Publisher = rospy.Publisher("pan", Float32)
+                self._left_rotate_Publisher = rospy.Publisher("pan", Float32, queue_size=5)
                
                
 

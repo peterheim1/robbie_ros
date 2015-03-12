@@ -36,17 +36,17 @@ from copy import deepcopy
 GROUP_NAME_ARM = 'right_arm'
 GROUP_NAME_GRIPPER = 'right_gripper'
 
-GRIPPER_FRAME = 'wrist_tilt_bracket_f2'
+GRIPPER_FRAME = 'right_gripper_link'
 
-GRIPPER_OPEN = [0.03]
-GRIPPER_CLOSED = [-0.02]
-GRIPPER_NEUTRAL = [0.01]
+GRIPPER_OPEN = [0.1]
+GRIPPER_CLOSED = [0.5]
+GRIPPER_NEUTRAL = [0.0]
 
 GRIPPER_JOINT_NAMES = ['right_arm_gripper_joint']
 
 GRIPPER_EFFORT = [1.0]
 
-REFERENCE_FRAME = 'odom'
+REFERENCE_FRAME = 'base_footprint'
 
 class MoveItDemo:
     def __init__(self):
@@ -87,10 +87,10 @@ class MoveItDemo:
         right_arm.set_pose_reference_frame(REFERENCE_FRAME)
         
         # Allow 5 seconds per planning attempt
-        right_arm.set_planning_time(5)
+        right_arm.set_planning_time(10)
         
         # Set a limit on the number of pick attempts before bailing
-        max_pick_attempts = 5
+        max_pick_attempts = 10
         
         # Set a limit on the number of place attempts
         max_place_attempts = 5
@@ -142,7 +142,7 @@ class MoveItDemo:
         # Add a table top and two boxes to the scene
         table_pose = PoseStamped()
         table_pose.header.frame_id = REFERENCE_FRAME
-        table_pose.pose.position.x = 0.45
+        table_pose.pose.position.x = 0.55
         table_pose.pose.position.y = 0.0
         table_pose.pose.position.z = table_ground + table_size[2] / 2.0
         table_pose.pose.orientation.w = 1.0
@@ -150,7 +150,7 @@ class MoveItDemo:
         
         box1_pose = PoseStamped()
         box1_pose.header.frame_id = REFERENCE_FRAME
-        box1_pose.pose.position.x = 0.41
+        box1_pose.pose.position.x = 0.55
         box1_pose.pose.position.y = -0.1
         box1_pose.pose.position.z = table_ground + table_size[2] + box1_size[2] / 2.0
         box1_pose.pose.orientation.w = 1.0   
@@ -158,7 +158,7 @@ class MoveItDemo:
         
         box2_pose = PoseStamped()
         box2_pose.header.frame_id = REFERENCE_FRAME
-        box2_pose.pose.position.x = 0.39
+        box2_pose.pose.position.x = 0.54
         box2_pose.pose.position.y = 0.13
         box2_pose.pose.position.z = table_ground + table_size[2] + box2_size[2] / 2.0
         box2_pose.pose.orientation.w = 1.0   
@@ -167,7 +167,7 @@ class MoveItDemo:
         # Set the target pose in between the boxes and on the table
         target_pose = PoseStamped()
         target_pose.header.frame_id = REFERENCE_FRAME
-        target_pose.pose.position.x = 0.42
+        target_pose.pose.position.x = 0.60
         target_pose.pose.position.y = 0.0
         target_pose.pose.position.z = table_ground + table_size[2] + target_size[2] / 2.0
         target_pose.pose.orientation.w = 1.0
@@ -192,8 +192,8 @@ class MoveItDemo:
         # Specify a pose to place the target after being picked up
         place_pose = PoseStamped()
         place_pose.header.frame_id = REFERENCE_FRAME
-        place_pose.pose.position.x = 0.88
-        place_pose.pose.position.y = -0.18
+        place_pose.pose.position.x = 0.50
+        place_pose.pose.position.y = -0.25
         place_pose.pose.position.z = table_ground + table_size[2] + target_size[2] / 2.0
         place_pose.pose.orientation.w = 1.0
 

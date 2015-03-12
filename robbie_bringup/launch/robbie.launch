@@ -3,19 +3,19 @@
       
 
     <!-- start the kinect and laser -->
-     <include file="$(find robbie_bringup)/launch/openni.launch"/>
+     <include file="$(find robbie_bringup)/launch/freenect.launch"/>
 
     <!-- launch head cam camers-->
      <include file="$(find robbie_bringup)/launch/uvc_cam.launch"/>
 
     <!-- start the kinect and laser  
-     <include file="$(find robbie_bringup)/launch/openni2.launch"/>
+     <include file="$(find robbie_bringup)/launch/freenect2.launch"/>
 -->
 
 
     <!-- start the arduino base controller and urdf-->
      <include file="$(find robbie_bringup)/launch/robbie_base.launch"/>
-    <!--<include file="$(find ros_arduino_python)/launch/arduino.launch"/>-->
+    
 
 
     <!-- start the dynamixel servos --> 
@@ -47,28 +47,28 @@
 
 <!-- Launch a node that republishes the output of NLTK as a string (representation of a parse tree) -->
   <!--<node pkg="nltk_parser" type="nltk_parser.py" name="nltk_parser_service" output="screen" >-->
-   <node pkg="nltk_parser" type="language.py" name="simple_chart_parser" output="screen" >
-        <param name="grammar_path" value="$(find phoenix_robot)" />
+   <node pkg="robbie_ai" type="language.py" name="simple_chart_parser" output="screen" >
+        <param name="grammar_path" value="$(find robbie_ai)" />
         <param name="grammar_name" value="language.cfg" />
     </node>
 
 
 <!-- Node that republishes the output of language.py to be useful for meet_greet_demo -->
-    <node pkg="nltk_parser" type="nltk_interpret.py" name="nltk_interpret" output="screen" />
+    <node pkg="robbie_ai" type="nltk_interpret.py" name="nltk_interpret" output="screen" />
 
 <!-- Node that republishes the output to nltk or chat node -->
-    <node pkg="phoenix_robot" type="talk_w.py" name="speach_director" output="screen" />
+    <node pkg="robbie_ai" type="talk_w.py" name="speach_director" output="screen" />
 
 <!-- Node that monitors robbies battery and auto recharge 
     <node pkg="robbie" type="health_monitor.py" name="health_monitor" output="screen" />
 -->
 <!-- robot task coordinator -->
-    <node pkg="phoenix_robot" type="task_cord.py" name="task_coordinator" output="screen" />
+    <node pkg="robbie_ai" type="task_cord.py" name="task_coordinator" output="screen" />
 
 
-<!-- launch Face recognition server-->
+<!-- launch Face recognition server
   <include file="$(find robbie_bringup)/launch/face_server.launch"/>
-
+-->
 
 
   <!-- Start moveit

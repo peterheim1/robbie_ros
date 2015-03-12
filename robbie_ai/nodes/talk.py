@@ -12,7 +12,7 @@ from time import localtime, strftime
 from std_msgs.msg import String
 from sound_play.libsoundplay import SoundClient
 import sys
-from phoenix_robot.interact import *
+from robbie_ai.interact import *
 
 class TalkBack:
     def __init__(self, script_path):
@@ -57,7 +57,7 @@ class TalkBack:
 
         # Subscribe to the recognizer output and set the callback function
         rospy.Subscriber('/speech_text', String, self.talkback)
-        self.pub = rospy.Publisher('/speech_parse', String)
+        self.pub = rospy.Publisher('/speech_parse', String, queue_size=5)
         
     def talkback(self, msg):
         # republis input to task coord or chat engine

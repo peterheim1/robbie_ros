@@ -3,7 +3,7 @@
 # freely inspired by http://www.ros.org/wiki/arbotix_python/follow_controller
      
 import roslib
-roslib.load_manifest('robbie')
+
      
 import rospy, actionlib
      
@@ -44,7 +44,7 @@ class JointCommander():
     def __init__(self,joint):
            
         self.joint_name = joint
-        self.pub = rospy.Publisher(joint + '/command',Float64)
+        self.pub = rospy.Publisher(joint + '/command',Float64, queue_size=5)
            
     def command(self,pos):
            

@@ -21,9 +21,10 @@
   <run_depend>robbie_utils</run_depend>
   <run_depend>robbie_moveit</run_depend>
   <run_depend>robbie_nav</run_depend>
-  <run_depend>robbie_sandbox</run_depend>
   <run_depend>robbie_diagnostics</run_depend>
   <run_depend>robbie_speech</run_depend>
+  <run_depend>robbie_test</run_depend>
+  <run_depend>robbie_ai</run_depend>
   
   <export>
     <metapackage/>

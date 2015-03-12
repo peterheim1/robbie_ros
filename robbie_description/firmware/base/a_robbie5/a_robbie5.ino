@@ -30,6 +30,7 @@ float Voltage = 0;
 float Amps = 0;
 
 //auto dock
+int chargepin = 9;
 int Right_Ir = 10;
 int Left_Ir = 11;
 int Rear_bumper = 12;
@@ -103,7 +104,7 @@ void setup()
   Serial.begin(BAUDRATE);
   _Messenger.attach(OnMssageCompleted);
  
-  
+  pinMode(chargepin, OUTPUT);
   pinMode(Right_Ir, INPUT);
   pinMode(Left_Ir, INPUT);
   pinMode(Rear_bumper, INPUT);
@@ -133,15 +134,16 @@ void loop()
 {
    
    ReadSerial();
-   Voltage = (analogRead(2)*0.00488)*3.75;
+   Voltage = (getFeedback(2)*0.00488)*3.52;
    Amps = (analogRead(9)*0.0133);
    Right_Ir_State = digitalRead(Right_Ir);
    Left_Ir_State = digitalRead(Left_Ir);
    Rear_Bumper_State = digitalRead(Rear_bumper);
    //FrontRightDistance = analogRead(FrontRightIR);
    //FrontLeftDistance = read_gp2d12_range(FrontLeftIR);
-   Rear_Bumper_State = digitalRead(Rear_bumper);
-   
+   //Rear_Bumper_State = digitalRead(Rear_bumper);
+   if (Rear_Bumper_State == LOW){digitalWrite(chargepin, HIGH);}
+   if (Rear_Bumper_State == HIGH){digitalWrite(chargepin, LOW    );}
    
    //timing loop
    milliSecsSinceLastUpdate = millis() - CurrentTime;
@@ -270,5 +272,39 @@ void AutoDock1(){
   //RightWheel.write(90);}
 
 }
+
+///feedback
+int getFeedback(int a){
+int j;
+int mean;
+int result;
+int test;
+int reading[20];
+boolean done;
+
+for (j=0; j<20; j++){
+reading[j] = analogRead(a); //get raw data from servo potentiometer
+delay(3);
+} // sort the readings low to high in array
+done = false; // clear sorting flag
+while(done != true){ // simple swap sort, sorts numbers from lowest to highest
+done = true;
+for (j=0; j<20; j++){
+if (reading[j] > reading[j + 1]){ // sorting numbers here
+test = reading[j + 1];
+reading [j+1] = reading[j] ;
+reading[j] = test;
+done = false;
+}
+}
+}
+mean = 0;
+for (int k=6; k<14; k++){ //discard the 6 highest and 6 lowest readings
+mean += reading[k];
+}
+result = mean/8; //average useful readings
+return(result);
+}    // END GET FEEDBACK
+
 
 

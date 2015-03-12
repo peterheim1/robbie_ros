@@ -21,10 +21,6 @@ void DoWork()
   Serial.print("\t");
   Serial.print(SpeedLeft_req);
   Serial.print("\t");
-  Serial.print(90 + RightPower, 3);
-  Serial.print("\t");
-  Serial.print(test);
-  Serial.print("\t");
   Serial.print("\n");
   
   Serial.print("m"); // o indicates battery message

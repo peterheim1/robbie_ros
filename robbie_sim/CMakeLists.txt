@@ -16,6 +16,4 @@ catkin_package(
 #  DEPENDS system_lib
 )
 
-  ${catkin_INCLUDE_DIRS}
-)
-
+ 

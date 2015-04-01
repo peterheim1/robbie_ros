@@ -3,9 +3,8 @@
       <rosparam ns="/robbie"/>
 
     <!-- start the kinect and laser -->
-     <include file="$(find robbie_bringup)/launch/openni.launch"/>
+     <include file="$(find robbie_bringup)/launch/freenect.launch"/>
 
-    
     <!-- start the arduino base controller and urdf-->
      <include file="$(find robbie_bringup)/launch/robbie_base.launch"/>
 

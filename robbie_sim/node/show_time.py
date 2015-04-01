@@ -28,7 +28,7 @@ class ShowTime:
         
 
         # Set the default TTS voice to use
-        self.voice = rospy.get_param("~voice", "voice_don_diphone")
+        self.voice = rospy.get_param("~voice", "voice_en1_mbrola")
         self.robot = rospy.get_param("~robot", "robbie")
         self.start =(Pose(Point(1.7, 0, 0.0), Quaternion(0.0, 0.0, 1.000, 0.018)))
         self.left =(Pose(Point(1.960, -1.854, 0.0), Quaternion(0.0, 0.0, 0.916, 0.401)))
@@ -63,26 +63,36 @@ class ShowTime:
 
         self.soundhandle.say(self.noon1 + self.robot +"   is on line" + " the time is   " + self.local, self.voice)
 
-        rospy.sleep(2)
+        rospy.sleep(6)
         self.move_to(self.start)
         self.soundhandle.say("Welcome to SHOW time.     This is where I get to demonstrate my capabilities" , self.voice)
-        
+        rospy.sleep(5)
+
+        self.soundhandle.say("I can move to my left", self.voice)
         rospy.sleep(2)
         self.move_to(self.left)
-        self.soundhandle.say("I can move to my left", self.voice)
-
+        
+        self.soundhandle.say("now back to the start position", self.voice)
         rospy.sleep(2)
         self.move_to(self.start)
-        self.soundhandle.say("now back to the start position", self.voice)
-
+        
+        self.soundhandle.say("I can move to my right", self.voice)
         rospy.sleep(2)
         self.move_to(self.right)
-        self.soundhandle.say("I can move to my right", self.voice)
-
+        
+        self.soundhandle.say("And again back to the start position", self.voice)
         rospy.sleep(2)
         self.move_to(self.start)
-        self.soundhandle.say("And again back to the start position", self.voice)
+
+        rospy.sleep(2)
+        self.soundhandle.say("Thank you for your time ", self.voice)
         
+        
+
+        rospy.sleep(2)
+
+        #rospy.sleep(2)
+        self.move_to(self.auto_dock)
     
 
     def move_to(self, location):
@@ -92,7 +102,7 @@ class ShowTime:
         goal.target_pose.header.stamp = rospy.Time.now()
   
         self.client.send_goal(goal)
-        self.client.wait_for_result(rospy.Duration.from_sec(40.0))
+        self.client.wait_for_result(rospy.Duration.from_sec(50.0))
 
         if self.client.get_state() == GoalStatus.SUCCEEDED:
             result = self.client.get_result()

@@ -1,7 +1,8 @@
 # robbie_ros
-meta package for robbie
-I wanted add more structure to Robbie the Robot stage 1 is complete
-and its time to clean up the files and clarify what launch files do what 
 
-robbie.launch  will launch the complete robot minus moveit
-robbie_moveit is the moveit package
+meta package for robbie
+With this package Robbie has more structure as we try to mature the system 
+The aim for stage 2 is for Robbie to be a fully autonomous robot able to navigate 
+to a target in the house, retrieve or deliver a item without assistance or doing damage
+We have made large strides in reliability of software and hardware but more is  still
+required

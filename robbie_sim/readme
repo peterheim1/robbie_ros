@@ -1,0 +1,17 @@
+the get me a beer project
+
+the aim is for robbie to navigate to a location and pick up a 
+object then drive to a new location with the object
+
+
+status
+pick and place works in indigo
+cant use motion planning in rviz it crashes
+
+
+
+
+todo
+verify position on map 
+pick is very picky on start location to far out no result
+

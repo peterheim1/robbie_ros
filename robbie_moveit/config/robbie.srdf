@@ -76,6 +76,42 @@
         <joint name="left_arm_wrist_yaw_joint" value="0" />
         <joint name="pan_joint" value="0" />
     </group_state>
+    <group_state name="r_travel" group="right_arm">
+        <joint name="pan_joint" value="0" />
+        <joint name="right_arm_elbow_joint" value="-1.2882" />
+        <joint name="right_arm_lift_joint" value="1.2727" />
+        <joint name="right_arm_rotate_joint" value="-0.5312" />
+        <joint name="right_arm_tilt_joint" value="0" />
+        <joint name="right_arm_wrist_tilt_joint" value="-0.2322" />
+        <joint name="right_arm_wrist_yaw_joint" value="-0.417" />
+    </group_state>
+    <group_state name="l_travel" group="left_arm">
+        <joint name="left_arm_elbow_joint" value="-0.9379" />
+        <joint name="left_arm_lift_joint" value="1.3099" />
+        <joint name="left_arm_rotate_joint" value="0.7882" />
+        <joint name="left_arm_tilt_joint" value="0" />
+        <joint name="left_arm_wrist_tilt_joint" value="0" />
+        <joint name="left_arm_wrist_yaw_joint" value="0.8454" />
+        <joint name="pan_joint" value="0" />
+    </group_state>
+    <group_state name="l_fish" group="left_arm">
+        <joint name="left_arm_elbow_joint" value="-0.9519" />
+        <joint name="left_arm_lift_joint" value="1.4585" />
+        <joint name="left_arm_rotate_joint" value="-0.2" />
+        <joint name="left_arm_tilt_joint" value="-1.34" />
+        <joint name="left_arm_wrist_tilt_joint" value="-0.7896" />
+        <joint name="left_arm_wrist_yaw_joint" value="0.0464" />
+        <joint name="pan_joint" value="0" />
+    </group_state>
+    <group_state name="r_fish" group="right_arm">
+        <joint name="pan_joint" value="0" />
+        <joint name="right_arm_elbow_joint" value="-0.9207" />
+        <joint name="right_arm_lift_joint" value="1.217" />
+        <joint name="right_arm_rotate_joint" value="0" />
+        <joint name="right_arm_tilt_joint" value="-1.34" />
+        <joint name="right_arm_wrist_tilt_joint" value="-0.8082" />
+        <joint name="right_arm_wrist_yaw_joint" value="-0.2625" />
+    </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="right_eef" parent_link="right_gripper_link" group="right_gripper" />
     <end_effector name="left_eef" parent_link="left_gripper_link" group="left_gripper" />

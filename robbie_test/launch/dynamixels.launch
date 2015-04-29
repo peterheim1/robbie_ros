@@ -19,7 +19,7 @@
    
     <!-- Load joint controller configuration from YAML file to parameter server -->
     
-   <rosparam file="$(find robbie_bringup)/params/dynamixel.yaml" command="load"/>
+   <rosparam file="$(find robbie_test)/params/dynamixel.yaml" command="load"/>
 
    <!-- Start the head pan and tilt controllers -->
    <node name="dynamixel_controller_spawner_ax12" pkg="dynamixel_controllers"
@@ -29,18 +29,11 @@
               --type=simple
         head_pan_joint
         head_tilt_joint
-        right_arm_wrist_yaw_joint
-        right_arm_wrist_tilt_joint
-        right_arm_gripper_joint
-        left_arm_wrist_tilt_joint
-        left_arm_wrist_yaw_joint
-        left_arm_gripper_joint
+        
         "
         output="screen" />
-<!-- node to republish neck tilt with gearing-->
-        
-    <node name="neck" pkg="robbie_bringup" type="neck_tilt.py"/>
 
-  
+  <!-- Start the Dynamixel Joint States Publisher -->
+   <node name="robbie_joint_states_publisher" pkg="robbie_bringup" type="robbie_joint_state_publisher.py" output="screen" />
   
 </launch>

@@ -78,25 +78,25 @@
     </group_state>
     <group_state name="r_travel" group="right_arm">
         <joint name="pan_joint" value="0" />
-        <joint name="right_arm_elbow_joint" value="-1.2882" />
+        <joint name="right_arm_elbow_joint" value="-2.1742" />
         <joint name="right_arm_lift_joint" value="1.2727" />
-        <joint name="right_arm_rotate_joint" value="-0.5312" />
+        <joint name="right_arm_rotate_joint" value="-0.6069" />
         <joint name="right_arm_tilt_joint" value="0" />
-        <joint name="right_arm_wrist_tilt_joint" value="-0.2322" />
+        <joint name="right_arm_wrist_tilt_joint" value="0.0882" />
         <joint name="right_arm_wrist_yaw_joint" value="-0.417" />
     </group_state>
     <group_state name="l_travel" group="left_arm">
-        <joint name="left_arm_elbow_joint" value="-0.9379" />
+        <joint name="left_arm_elbow_joint" value="-2.2" />
         <joint name="left_arm_lift_joint" value="1.3099" />
-        <joint name="left_arm_rotate_joint" value="0.7882" />
+        <joint name="left_arm_rotate_joint" value="0.5881" />
         <joint name="left_arm_tilt_joint" value="0" />
-        <joint name="left_arm_wrist_tilt_joint" value="0" />
-        <joint name="left_arm_wrist_yaw_joint" value="0.8454" />
+        <joint name="left_arm_wrist_tilt_joint" value="0.3528" />
+        <joint name="left_arm_wrist_yaw_joint" value="0.688" />
         <joint name="pan_joint" value="0" />
     </group_state>
     <group_state name="l_fish" group="left_arm">
         <joint name="left_arm_elbow_joint" value="-0.9519" />
-        <joint name="left_arm_lift_joint" value="1.4585" />
+        <joint name="left_arm_lift_joint" value="1.376" />
         <joint name="left_arm_rotate_joint" value="-0.2" />
         <joint name="left_arm_tilt_joint" value="-1.34" />
         <joint name="left_arm_wrist_tilt_joint" value="-0.7896" />
@@ -577,6 +577,7 @@
     <disable_collisions link1="left_elbow" link2="left_left_finger_link" reason="Never" />
     <disable_collisions link1="left_elbow" link2="left_right_finger_link" reason="Never" />
     <disable_collisions link1="left_elbow" link2="left_shoulder_lift" reason="Never" />
+    <disable_collisions link1="left_elbow" link2="left_shoulder_rotate" reason="User" />
     <disable_collisions link1="left_elbow" link2="left_shoulder_tilt" reason="Never" />
     <disable_collisions link1="left_elbow" link2="left_wheel" reason="Never" />
     <disable_collisions link1="left_elbow" link2="left_wrist_pan_servo_bracket_f3" reason="Never" />
@@ -863,6 +864,7 @@
     <disable_collisions link1="right_elbow" link2="right_forearm_link" reason="Adjacent" />
     <disable_collisions link1="right_elbow" link2="right_gripper_link" reason="Never" />
     <disable_collisions link1="right_elbow" link2="right_shoulder_lift" reason="Never" />
+    <disable_collisions link1="right_elbow" link2="right_shoulder_rotate" reason="User" />
     <disable_collisions link1="right_elbow" link2="right_shoulder_tilt" reason="Never" />
     <disable_collisions link1="right_elbow" link2="right_wheel" reason="Never" />
     <disable_collisions link1="right_elbow" link2="right_wrist_yaw_bracket_f2" reason="Never" />

@@ -145,14 +145,14 @@ def setup_task_environment(self):
     self.waypoints.append(Pose(Point(2.5, 0.0, 0.0), quaternions[0]))
     self.waypoints.append(Pose(Point(2.5, self.square_size, 0.0), quaternions[1]))
     self.waypoints.append(Pose(Point(1.5, self.square_size, 0.0), quaternions[2]))
-    self.waypoints.append(Pose(Point(2.312, 0.839, 0.0), Quaternion(0.000, 0.000, -0.000, 1.000)))
+    self.waypoints.append(Pose(Point(0.5, -0.01, 0.0), Quaternion(0.000, 0.000, -0.000, 1.000)))
     
     # Create a mapping of room names to waypoint locations
     room_locations = (('hallway', self.waypoints[0]),
-                      ('living_room', self.waypoints[1]),
+                      ('lounge', self.waypoints[1]),
                       ('kitchen', self.waypoints[2]),
                       ('bathroom', self.waypoints[3]),
-                      ('dock', self.waypoints[4]))
+                      ('charger', self.waypoints[4]))
     self.room_locations = OrderedDict(room_locations)
     
     # Where is the docking station?
@@ -177,7 +177,7 @@ def setup_task_environment(self):
     init_work_station_marker(self)
         
     # Publisher to manually control the robot (e.g. to stop it)
-    self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=5)
+    self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
     
     rospy.loginfo("Starting Tasks")
     

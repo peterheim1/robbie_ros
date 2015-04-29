@@ -36,7 +36,7 @@ controller_list:
       - right_arm_gripper_joint
   - name: head_controller
     type: FollowJointTrajectory
-    action_ns: head_trajectory
+    action_ns: follow_joint_trajectory
     joints:
       - head_tilt_mod_joint
       - head_pan_joint

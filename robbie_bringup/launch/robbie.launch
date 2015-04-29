@@ -5,12 +5,12 @@
     <!-- start the kinect and laser -->
      <include file="$(find robbie_bringup)/launch/freenect.launch"/>
 
-    <!-- launch head cam camers-->
+    <!-- launch head cam camers
      <include file="$(find robbie_bringup)/launch/uvc_cam.launch"/>
-
-    <!-- start the kinect and laser  
-     <include file="$(find robbie_bringup)/launch/freenect2.launch"/>
 -->
+    <!-- start the kinect and laser  -->
+     <include file="$(find robbie_bringup)/launch/freenect2.launch"/>
+
 
 
     <!-- start the arduino base controller and urdf-->
@@ -57,23 +57,24 @@
     <node pkg="robbie_ai" type="nltk_interpret.py" name="nltk_interpret" output="screen" />
 
 <!-- Node that republishes the output to nltk or chat node -->
-    <node pkg="robbie_ai" type="talk_w.py" name="speach_director" output="screen" />
+    <node pkg="robbie_ai" type="talk_w.py" name="speach_director" output="screen" >
+    <param name="wavepath" value="$(find robbie_ai)/sounds"/>
+  </node>
 
-<!-- Node that monitors robbies battery and auto recharge 
-    <node pkg="robbie" type="health_monitor.py" name="health_monitor" output="screen" />
--->
+<!-- Node that monitors robbies battery and auto recharge -->
+    <node pkg="robbie_ai" type="health_monitor.py" name="health_monitor" output="screen" />
+
 <!-- robot task coordinator -->
     <node pkg="robbie_ai" type="task_cord.py" name="task_coordinator" output="screen" />
 
-
 <!-- launch Face recognition server
   <include file="$(find robbie_bringup)/launch/face_server.launch"/>
+
 -->
 
-
-  <!-- Start moveit
+  <!-- Start moveit -->
      <include file="$(find robbie_bringup)/launch/robbie_moveit.launch"/>
--->
+
   <!-- start the AI system   
   <include file="$(find robbie_bringup)/launch/a_test.launch"/>
 -->

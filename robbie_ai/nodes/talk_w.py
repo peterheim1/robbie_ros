@@ -14,7 +14,7 @@ from sound_play.libsoundplay import SoundClient
 import sys
 from robbie_ai.interact import *
 from speech_recognition_msgs.msg import SpeechRecognitionCandidates
-from jsk_gui_msgs.msgs import VoiceMessage
+from jsk_gui_msgs.msg import VoiceMessage
 class TalkBack:
     def __init__(self, script_path):
         rospy.init_node('speech_cordinator')
@@ -51,20 +51,21 @@ class TalkBack:
         # Announce that we are ready for input
         self.soundhandle.playWave(self.wavepath + "/R2D2a.wav")
         rospy.sleep(1)
-        self.soundhandle.say(self.noon1 + self.robot +"   is on line" + " the time is   " + self.local, self.voice)
-        
+        #self.soundhandle.say(self.noon1 + self.robot +"   is on line" + " the time is   " + self.local, self.voice)
+        #rospy.sleep(2)
+
         #rospy.loginfo("Say one of the navigation commands...")
 
         # Subscribe to the recognizer output and set the callback function
         rospy.Subscriber('/voice', SpeechRecognitionCandidates, self.talkback)
-        rospy.Subscriber('/tablet/voice', VoiceMessage, self.talkback2)
-        #rospy.Subscriber('/speech_text', String, self.talkback)
-        self.pub = rospy.Publisher('/speech_parse', String, queue_size=5)
-        self.pub_chat = rospy.Publisher('/speech_text', String, queue_size=5)
+        rospy.Subscriber('/Tablet/voice', VoiceMessage, self.talkback2)
+        rospy.Subscriber('/type_text', String, self.talkback3)
+        self.pub = rospy.Publisher('/speech_parse', String, queue_size=1)
+        self.pub_chat = rospy.Publisher('/speech_text', String, queue_size=1)
 
     def talkback2(self, msg):
         # Print the recognized words on the screen
-        rospy.loginfo(msg.texts[0])
+        rospy.logwarn(msg.texts[0])
         self.hold = msg.texts[0]
         matchObj = re.match( r'^robbie', self.hold, re.M|re.I)
         if matchObj:
@@ -82,6 +83,21 @@ class TalkBack:
         # Print the recognized words on the screen
         rospy.loginfo(msg.transcript[0])
         self.hold = msg.transcript[0]
+        matchObj = re.match( r'^robbie', self.hold, re.M|re.I)
+        if matchObj:
+            self.task1 = re.sub('robbie ','',self.hold,1)#for commands
+            
+            self.pub.publish(self.task1)
+            # send sentence to NLTK /nltk_parse
+        else:
+            #self.soundhandle.say("alt input",self.voice)
+            #send to chat minion chat
+            self.pub_chat.publish(self.hold)
+
+    def talkback3(self, msg):
+        # Print the recognized words on the screen
+        rospy.logwarn(msg.data)
+        self.hold = msg.data
         matchObj = re.match( r'^robbie', self.hold, re.M|re.I)
         if matchObj:
             self.task1 = re.sub('robbie ','',self.hold,1)#for commands

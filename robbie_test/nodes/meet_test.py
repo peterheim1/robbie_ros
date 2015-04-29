@@ -32,7 +32,7 @@ class Meet_N_Greet:
         rospy.on_shutdown(self.cleanup)
         
         # Set the default TTS voice to use
-        self.voice = rospy.get_param("~voice", "voice_don_diphone")
+        self.voice = rospy.get_param("~voice", "voice_en1_mbrola")
         self.robot = rospy.get_param("~robot", "robbie")
         self.greeted =[]
 
@@ -69,7 +69,7 @@ class Meet_N_Greet:
 
         #result will be published on this topic
         rospy.Subscriber("/face_recognition/result", FaceRecognitionActionFeedback, self.face_found)
-
+        #rospy.Subscriber("/face_recognition/feedback", FaceRecognitionActionFeedback, self.Unknown)
         self.look_for_face()
 
     def look_for_face(self):
@@ -90,7 +90,7 @@ class Meet_N_Greet:
         rospy.logwarn(person)
         
         greet = person in self.greeted
-        if greet == 0:
+        if greet <= 5:
             self.soundhandle.say("hello   "+ person +"    "+ self.noon1 +"          ",self.voice)
             #add name to greeted list
             self.greeted.append(person)
@@ -98,9 +98,12 @@ class Meet_N_Greet:
         else:
             self.soundhandle.say("hi     ",self.voice)
         #start looking again
-        rospy.sleep(30)
+        rospy.sleep(10)
         self.look_for_face()
-        
+
+    def Unknown(self,msg):
+        self.soundhandle.say("hello     what is your name   " ,self.voice)
+        rospy.sleep(3)
         
         
         

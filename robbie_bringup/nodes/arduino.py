@@ -309,7 +309,7 @@ class Arduino(object):
             
                 v_des_left = int(left * 16065 / 30)# 
                 v_des_right = int(right * 16028/ 30)#ticks_per_meter 15915
-		rospy.logwarn("Handling twist ommand: " + str(v_des_left) + "," + str(v_des_right))
+		#rospy.logwarn("Handling twist ommand: " + str(v_des_left) + "," + str(v_des_right))
 
 		#message = 's %.2f %.2f\r' % (v_des_left, v_des_right)
                 message = 's %d %d %d %d \r' % self._GetBaseAndExponents((v_des_left, v_des_right))

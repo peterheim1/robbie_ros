@@ -27,7 +27,6 @@
   ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-
 import rospy
 import wx
 
@@ -36,8 +35,8 @@ from math import radians
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64
-from robbie.servos import *
-#from arbotix_msgs.srv import Relax
+from arbotix_msgs.srv import Relax
+from arbotix_python.joints import *
 
 width = 325
 
@@ -61,7 +60,7 @@ class controllerGUI(wx.Frame):
     TIMER_ID = 100
 
     def __init__(self, parent, debug = False):  
-        wx.Frame.__init__(self, parent, -1, "Robbie Controller GUI", style = wx.DEFAULT_FRAME_STYLE & ~ (wx.RESIZE_BORDER | wx.MAXIMIZE_BOX))
+        wx.Frame.__init__(self, parent, -1, "ArbotiX Controller GUI", style = wx.DEFAULT_FRAME_STYLE & ~ (wx.RESIZE_BORDER | wx.MAXIMIZE_BOX))
         sizer = wx.GridBagSizer(5,5)
 
         # Move Base
@@ -87,36 +86,36 @@ class controllerGUI(wx.Frame):
         servoBox = wx.StaticBoxSizer(servo,orient=wx.VERTICAL) 
         servoSizer = wx.GridBagSizer(5,5)
 
-        #joint_defaults = 1.57, 1.57 #getServosFromURDF()
-        joint_defaults = getServosFromURDF()
-        #rospy.loginfo(joint_default1s)
+        joint_defaults = getJointsFromURDF()
+        
         i = 0
         dynamixels = rospy.get_param('/joints', dict())
         self.servos = list()
         self.publishers = list()
-        #self.relax = list()
-        self.check_states = list()
+        self.relaxers = list()
+
+        joints = rospy.get_param('/joints', dict())
         # create sliders and publishers
-        for name in sorted(dynamixels):
+        for name in sorted(joints):
             # pull angles
-            min_angle, max_angle = getServoLimits(name, joint_defaults)
-            #min_angle = -1.57
-            #max_angle = 1.57
+            min_angle, max_angle = getJointLimits(name, joint_defaults)
             # create publisher
             self.publishers.append(rospy.Publisher(name+'/command', Float64))
-            #rospy.wait_for_service(name+'/relax')  
-            #self.relax.append(rospy.ServiceProxy(name+'/relax', Relax))
+            if rospy.get_param('/joints/'+name+'/type','dynamixel') == 'dynamixel':
+                self.relaxers.append(rospy.ServiceProxy(name+'/relax', Relax))
+            else:
+                self.relaxers.append(None)
             # create slider
             s = servoSlider(self, min_angle, max_angle, name, i)
             servoSizer.Add(s.enabled,(i,0), wx.GBSpan(1,1),wx.ALIGN_CENTER_VERTICAL)   
             servoSizer.Add(s.position,(i,1), wx.GBSpan(1,1),wx.ALIGN_CENTER_VERTICAL)
             self.servos.append(s)
             i += 1
+
         # add everything
         servoBox.Add(servoSizer) 
         sizer.Add(servoBox, (0,1), wx.GBSpan(1,1), wx.EXPAND|wx.TOP|wx.BOTTOM|wx.RIGHT,5)
         self.Bind(wx.EVT_CHECKBOX, self.enableSliders)
-
         # now we can subscribe
         rospy.Subscriber('joint_states', JointState, self.stateCb)
 
@@ -134,8 +133,6 @@ class controllerGUI(wx.Frame):
         self.SetSizerAndFit(sizer)
         self.Show(True)
 
-    
-
     def onClose(self, event):
         self.timer.Stop()
         self.Destroy()
@@ -146,16 +143,17 @@ class controllerGUI(wx.Frame):
             self.servos[servo].position.Enable()
         else:
             self.servos[servo].position.Disable()
-            #self.relax[servo]()
-            
+            if self.relaxers[servo]:
+                self.relaxers[servo]()
+
     def stateCb(self, msg):        
         for servo in self.servos:
             if not servo.enabled.IsChecked():
-                #try:
-                 idx = msg.name.index(servo.name)
-                 servo.setPosition(msg.position[idx])
-                #except: 
-                #    pass
+                try:
+                    idx = msg.name.index(servo.name)
+                    servo.setPosition(msg.position[idx])
+                except: 
+                    pass
 
     def onPaint(self, event=None):
         # this is the wx drawing surface/canvas
@@ -190,16 +188,14 @@ class controllerGUI(wx.Frame):
                 d = Float64()
                 d.data = s.getPosition()
                 p.publish(d)
-
         # send base updates
         t = Twist()
-        t.linear.x = self.forward/200.0; t.linear.y = 0; t.linear.z = 0
+        t.linear.x = self.forward/150.0; t.linear.y = 0; t.linear.z = 0
         if self.forward > 0:
             t.angular.x = 0; t.angular.y = 0; t.angular.z = -self.turn/50.0
         else:
             t.angular.x = 0; t.angular.y = 0; t.angular.z = self.turn/50.0
         self.cmd_vel.publish(t)
-    
 
 if __name__ == '__main__':
     # initialize GUI

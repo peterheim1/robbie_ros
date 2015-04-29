@@ -58,6 +58,8 @@ class NltkInterpreter():
             if re.search("COMMAND", parse_tree):
                 command = re.search("\(V (\w+)\)", parse_tree)
                 command = "" if command == None else command.group(1)
+                topic = re.search("\(TOPIC (\w+)\)", parse_tree)
+                topic = "" if topic == None else topic.group(1)
                 size = re.search("\(SIZE (\w+)\)", parse_tree)
                 size = "" if size == None else size.group(1)
                 color = re.search("\(COLOR (\w+)\)", parse_tree)
@@ -70,6 +72,8 @@ class NltkInterpreter():
                 person = "" if person == None else person.group(1)
                 uh = re.search("\(UH (\w+)\)", parse_tree)
                 uh = "" if uh == None else uh.group(1)
+                food = re.search("\(FOOD (\w+)\)", parse_tree)
+                food = "" if food == None else food.group(1)  
 
 	    elif re.search("QUESTION", parse_tree):
 		question = re.search("\(WH (\w+)\)", parse_tree)

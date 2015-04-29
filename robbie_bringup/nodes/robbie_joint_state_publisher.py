@@ -41,11 +41,11 @@ class JointStatePublisher():
         # (The namespace is usually null.)
         namespace ='arm_controller'# rospy.get_namespace()
         self.joints = rospy.get_param('joints', '')#delete right_arm joints publisted in dynamixel yaml
-                                                                
+                                                           
         self.servos = list()
         self.controllers = list()
         self.joint_states = dict({})
-        
+        #rospy.logwarn(self.joint_states) 
         for controller in sorted(self.joints):
             self.joint_states[controller] = JointStateMessage(controller, 0.0, 0.0, 0.0)
             self.controllers.append(controller)
@@ -54,7 +54,7 @@ class JointStatePublisher():
         [rospy.Subscriber(c + '/state', JointStateDynamixel, self.controller_state_handler) for c in self.controllers]
      
         # Start publisher
-        self.joint_states_pub = rospy.Publisher('/joint_states', JointStatePR2, queue_size=5)
+        self.joint_states_pub = rospy.Publisher('/joint_states', JointStatePR2, queue_size=1)
        
         rospy.loginfo("Starting Dynamixel Joint State Publisher at " + str(rate) + "Hz")
        
@@ -81,7 +81,7 @@ class JointStatePublisher():
             msg.effort.append(joint.effort)
            
         msg.header.stamp = rospy.Time.now()
-        msg.header.frame_id = 'base_link'
+        msg.header.frame_id = 'base_footprint'
         self.joint_states_pub.publish(msg)
         
 if __name__ == '__main__':

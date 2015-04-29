@@ -3,28 +3,33 @@
   
   <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py" output="screen"/>
 
-  <!-- Launch a node to push terminal input instead of speech recognition 
-    <node pkg="robbie" type="terminal_input.py" name="terminal_input" output="screen" >
-    </node>-->
+  <!-- Launch a node to push terminal input instead of speech recognition -->
+    <node pkg="robbie_utils" type="terminal_input.py" name="terminal_input" output="screen" >
+    </node>
 
    
 
 
-  <!-- Launch a node that republishes the output of NLTK as a string (representation of a parse tree) 
-  <node pkg="phoenix_robot" type="nltk_parser.py" name="nltk_parser_service" output="screen" />-->
-
-   <node pkg="nltk_parser" type="language.py" name="simple_chart_parser" output="screen" >
-        <param name="grammar_path" value="$(find phoenix_robot)" />
+  <!-- Launch a node that republishes the output of NLTK as a string (representation of a parse tree)--> 
+ 
+   <node pkg="robbie_ai" type="language.py" name="simple_chart_parser" output="screen" >
+        <param name="grammar_path" value="$(find robbie_ai)" />
         <param name="grammar_name" value="language.cfg" />
     </node>
 
 
 <!-- Node that republishes the output of language.py to the task cord -->
-    <node pkg="nltk_parser" type="nltk_interpret.py" name="nltk_interpret" output="screen" />
+    <node pkg="robbie_ai" type="nltk_interpret.py" name="nltk_interpret" output="screen" />
+
+<!-- Node that republishes the output to nltk or chat node -->
+    <node pkg="robbie_ai" type="talk_w.py" name="speach_director" output="screen" >
+    <param name="wavepath" value="$(find robbie_ai)/sounds"/>
+  </node>
 
 <!-- Node to controll robbie-->
-    <node pkg="phoenix_robot" type="task_cord.py" name="tack_cord" output="screen" />
+    <node pkg="robbie_ai" type="task_cord.py" name="tack_cord" output="screen" />
 
-
+<!--robbie chat-->
+  <node name="robbie_chat" pkg="robbie_speech" type="chat_start.bash" />
 
 </launch>

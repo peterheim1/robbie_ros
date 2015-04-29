@@ -68,7 +68,7 @@ class FollowController():
            
         # action server
         
-        self.name = self.ns + '/head_trajectory'
+        self.name = self.ns + '/follow_joint_trajectory'
         self.server = actionlib.SimpleActionServer(self.name, FollowJointTrajectoryAction, execute_cb=self.actionCb, auto_start=False)
      
         rospy.loginfo("Started head_Controller ("+self.name+"). Joints: " + str(self.joints))

@@ -35,7 +35,7 @@ class Vacuum(Task):
         self.room = room
         self.counter = timer
         self.finished = False
-        self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist)
+        self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
         self.cmd_vel_msg = Twist()
         self.cmd_vel_msg.linear.x = 0.05
 
@@ -68,7 +68,7 @@ class Mop(Task):
         self.room = room
         self.counter = timer
         self.finished = False
-        self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist)
+        self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
         self.cmd_vel_msg = Twist()
         self.cmd_vel_msg.linear.x = 0.05
         self.cmd_vel_msg.angular.z = 1.2
@@ -80,7 +80,7 @@ class Mop(Task):
             rospy.loginfo('Mopping the floor in the ' + str(self.room))
             #self.speak_text_service('mopping the floor in the ' + str(self.room))
             while self.counter > 0:
-                self.cmd_vel_pub.publish(self.cmd_vel_msg)
+                self.cmd_vel_pub.publish(self.cmd_vel_msg, queue_size=1)
                 self.cmd_vel_msg.linear.x *= -1
                 rospy.loginfo(self.counter)
                 self.counter -= 1
@@ -101,7 +101,7 @@ class Scrub(Task):
         self.room = room
         self.finished = False
         self.counter = timer
-        self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist)
+        self.cmd_vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
         self.cmd_vel_msg = Twist()
         self.cmd_vel_msg.linear.x = 0.3
         self.cmd_vel_msg.angular.z = 0.2
@@ -136,7 +136,7 @@ class AutoDock(Task):
         self.finished = False
         self.counter = timer
         self.name = name
-        self._Auto_dock_Publisher = rospy.Publisher('auto_dock', String)     
+        self._Auto_dock_Publisher = rospy.Publisher('auto_dock', String, queue_size=1)     
     def run(self):
         if self.finished:
             #rospy.loginfo("Docking Success")

@@ -118,7 +118,7 @@ class Patrol():
         if msg.data is None:
             return TaskStatus.RUNNING
         else:
-            if msg.data < 12.2:
+            if msg.data < 11.5:
                 #rospy.loginfo("Battery low - level: " + str(int(msg.data)))
                 return TaskStatus.FAILURE
             else:

@@ -372,7 +372,7 @@ class R_shoulder(object):
                 v1 =int((90-degrees(v))/1.6)+27
                 if v1 < 83: v1 = 83 #ticks
                 if v1 > 160: v1 = 160 #ticks 
-                #rospy.logwarn("Handling tilt command: " + str(v1))
+                rospy.logwarn("Handling left tilt command: " + str(v))
                 message = 'j6 %d \r' % (v1)#% self._GetBaseAndExponents((v1)
                 rospy.logwarn("Sending left_arm_tilt_joint command: " + (message))
                 self._WriteSerial(message)

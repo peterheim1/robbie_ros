@@ -110,7 +110,7 @@ class MoveItDemo:
         right_gripper.set_joint_value_target(GRIPPER_NEUTRAL)
         right_gripper.go()
        
-        rospy.sleep(1)
+        rospy.sleep(5)
 
         # Set the height of the table off the ground
         table_ground = 0.65
@@ -204,7 +204,7 @@ class MoveItDemo:
             n_attempts += 1
             rospy.loginfo("Pick attempt: " +  str(n_attempts))
             result = right_arm.pick(target_id, grasps)
-            rospy.sleep(0.2)
+            rospy.sleep(2)
         
         # If the pick was successful, attempt the place operation   
         if result == MoveItErrorCodes.SUCCESS:
@@ -233,6 +233,7 @@ class MoveItDemo:
         # Return the arm to the "resting" pose stored in the SRDF file
         right_arm.set_named_target('right_start')
         right_arm.go()
+        rospy.sleep(5)
         
         # Open the gripper to the neutral position
         right_gripper.set_joint_value_target(GRIPPER_NEUTRAL)

@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+
+<!-- XML namespaces -->
+  <robot name="robbie" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <property name="PI" value="3.1415" />  
+    <property name="M_PI" value="3.14159"/>
+    <property name="M_SCALE" value="0.001"/>
+    <property name="MESH_EXT" value="stl"/>
+    <xacro:include filename="$(find robbie_description)/urdf/robbie_hardware.xacro" />
+
+   <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <xacro:include filename="$(find robbie_description)/urdf/robbie.gazebo" />
+
+<xacro:my_box name="base_link" lwh="0.41 0.35 0.065" xyz="0 0 -0.032" rpy="0 0 0" mass="0.1" material="Gazebo/FlatBlack">
+	        <xacro:gold />
+        </xacro:my_box>
+
+ <link name="base_footprint">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.05 0.05 0.001" />
+        </geometry>
+        <material name="TransparentGreen" />
+      </visual>
+  </link>
+
+
+  
+
+  <xacro:my_cylinder name="left_wheel" l="0.035" r="0.1025" xyz="0 0 0" rpy="1.57 0 0" mass="0.1" material="Gazebo/Grey">
+		<xacro:grey1 />
+	</xacro:my_cylinder>
+
+  <xacro:my_cylinder name="right_wheel" l="0.035" r="0.1025" xyz="0 0 0" rpy="1.57 0 0" mass="0.1" material="Gazebo/Grey">
+		<xacro:grey1 />
+	</xacro:my_cylinder>
+
+  <xacro:my_cylinder name="castor_wheel_l" l="0.035" r="0.04" xyz="0 0 0" rpy="1.57 0 0" mass="0.1" material="Gazebo/Grey">
+		<xacro:grey1 />
+	</xacro:my_cylinder>
+
+  <xacro:my_cylinder name="castor_wheel_r" l="0.035" r="0.04" xyz="0 0 0" rpy="1.57 0 0" mass="0.1" material="Gazebo/Grey">
+		<xacro:grey1 />
+	</xacro:my_cylinder>
+
+ 
+
+  <link name="deck_link" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie_description/meshes/drive_base.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+         <xacro:yellow2/>
+      <origin rpy="0 0 1.57" xyz=" 0.015 -0.175 -0"/>
+    </visual>
+    <xacro:default_inertial mass="0.0001" />
+
+  </link>
+
+ <xacro:my_cylinder name="pan_link" l="0.005" r="0.1" xyz="0.0 0 -0.02" rpy="0 0 0" mass="0.2" material="Gazebo/Grey">
+			<xacro:yellow2 />
+		</xacro:my_cylinder>
+
+  <!-- ##############################   upper torso   ##################333333-->
+
+<link name="lower_torso" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie_description/meshes/chest_lower.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+         <xacro:yellow2/>
+      <origin rpy="0 0 1.57" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+
+<link name="upper_torso" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie_description/meshes/chest.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+         <xacro:black/>
+      <origin rpy="0 0 -1.57" xyz="0.04 0 -0.15"/>
+    </visual>
+  </link>
+
+<link name="upper_chest" >
+   <visual>
+      <geometry>
+        <mesh filename="package://robbie_description/meshes/chest_cover.stl" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+      </geometry>
+         <xacro:gold/>
+      <origin rpy="0 0 1.57" xyz="0 0 -0.085"/>
+    </visual>
+  </link>
+
+
+
+
+
+
+<!-- ##############################   joints ##################333333--> 
+<joint name="base_footprint_joint" type="fixed">
+    	<parent link="base_footprint" />
+    	<child link="base_link" />
+    	<origin xyz="-0.1 0 0.15" rpy="0 0 0" />
+	</joint> 
+
+<joint name="base_link_joint" type="fixed">
+    	<parent link="base_link" />
+    	<child link="deck_link" />
+    	<origin xyz="0 0 0.138" rpy="0 0 0" />
+	</joint>
+
+  <joint name="base_l_wheel_joint" type="fixed">
+    	<parent link="base_link" />
+    	<child link="left_wheel" />
+    	<origin xyz="0.1 -0.2 -0.04" rpy="0 0 0" />
+	</joint>
+
+  <joint name="base_r_wheel_joint" type="fixed">
+    	<parent link="base_link" />
+    	<child link="right_wheel" />
+    	<origin xyz="0.1 0.2 -0.04" rpy="0 0 0" />
+	</joint>
+
+  <joint name="castor_wheel_joint_l" type="fixed">
+    	<parent link="base_link" />
+    	<child link="castor_wheel_l" />
+    	<origin xyz="-0.20 -0.13 -0.1" rpy="0 0 0" />
+	</joint>
+
+  <joint name="castor_wheel_joint_r" type="fixed">
+    	<parent link="base_link" />
+    	<child link="castor_wheel_r" />
+    	<origin xyz="-0.20 0.13 -0.1" rpy="0 0 0" />
+        </joint>
+
+  <!--#################  Upper torso#############################-->
+ <joint name="pan_joint" type="revolute">
+    	<parent link="deck_link" />
+    	<child link="pan_link" />
+    	<origin xyz="0 0 0.35" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+        <limit lower="-1" upper="1" effort="10" velocity="0" />
+	</joint> 
+
+  <joint name="torso_lower_link" type="fixed">
+    	<parent link="pan_link" />
+    	<child link="lower_torso" />
+    	<origin xyz="0.0 0.005 0." rpy="0 0 0" />
+	</joint> 
+
+  <joint name="torso_link" type="fixed">
+    	<parent link="pan_link" />
+    	<child link="upper_torso" />
+    	<origin xyz="0.0 0.005 0.465" rpy="0 0 0" />
+	</joint> 
+
+<joint name="chest_link" type="fixed">
+    	<parent link="upper_torso" />
+    	<child link="upper_chest" />
+    	<origin xyz="0.065 0 -0.04" rpy="0 0 0" />
+	</joint>
+
+
+<gazebo reference="robbie">
+  	</gazebo>
+
+
+</robot>

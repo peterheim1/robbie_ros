@@ -5,7 +5,7 @@
     
     <!-- Read in the URDF model of our robot. -->
    <!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(find pr2_description)/robots/pr2.urdf.xacro'" />-->
-    <param name="robot_description" command="$(find xacro)/xacro.py '$(find robbie_description)/urdf/rob_inmoov.xacro'" />
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find robbie_description)/urdf/robbie.xacro'" />
     
     <param name="/use_gui" value="True" />
  

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="hector_base" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="robbie" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <!-- ============================  A Few Color Macros  ============================ -->
 	
@@ -9,8 +9,8 @@
 		</material>
 	</xacro:macro>
 	
-	<xacro:macro name="white">
-		<material name="white">
+	<xacro:macro name="White">
+		<material name="White">
 			<color rgba="1.0 1.0 1.0 1.0"/>
 		</material>
 	</xacro:macro>
@@ -143,7 +143,7 @@
              </collision>
              <xacro:default_inertial mass="0.02" />   
         </link>
-        <xacro:default_gazebo name="${name}" material="Gazebo/WhiteEmissive" />
+        <xacro:default_gazebo name="${name}" material="Gazebo/White" />
 	</xacro:macro>
 	
 	<xacro:macro name="F3_bracket" params="name xyz rpy">
@@ -167,7 +167,7 @@
              </collision>
              <xacro:default_inertial mass="0.01" />   
         </link>
-        <xacro:default_gazebo name="${name}" material="Gazebo/WhiteEmissive" />
+        <xacro:default_gazebo name="${name}" material="Gazebo/White" />
 	</xacro:macro>
 
 	<xacro:macro name="bracket_f3" params="name xyz rpy">
@@ -187,7 +187,7 @@
              </collision>
              <xacro:default_inertial mass="0.02" />   
         </link>
-        <xacro:default_gazebo name="${name}" material="Gazebo/WhiteEmissive" />
+        <xacro:default_gazebo name="${name}" material="Gazebo/White" />
 	</xacro:macro>
 	
 	<xacro:macro name="bracket2" params="name xyz rpy">
@@ -207,7 +207,7 @@
              </collision>
              <xacro:default_inertial mass="0.01" />   
         </link>
-        <xacro:default_gazebo name="${name}" material="Gazebo/WhiteEmissive" />
+        <xacro:default_gazebo name="${name}" material="Gazebo/White" />
 	</xacro:macro>
 	
         <xacro:macro name="bracket3" params="name xyz rpy">
@@ -227,28 +227,10 @@
              </collision>
              <xacro:default_inertial mass="0.01" />   
         </link>
-        <xacro:default_gazebo name="${name}" material="Gazebo/WhiteEmissive" />
+        <xacro:default_gazebo name="${name}" material="Gazebo/White" />
 	</xacro:macro>	
 
-        <xacro:macro name="h_beam" params="name xyz rpy">
-		<link name="${name}">
-			<visual>
-				<origin xyz="${xyz}" rpy="${rpy}" />
-				<geometry>
-					<box size="0.025 0.11 0.01" />	
-				</geometry>
-				<xacro:bracket_color />
-             </visual>
-             <collision>
-				<origin xyz="${xyz}" rpy="${rpy}" />
-					<geometry>
-					<box size="0.025 0.11 0.01" />	
-					</geometry>
-             </collision>
-             <xacro:default_inertial mass="0.01" />   
-        </link>
-        <xacro:default_gazebo name="${name}" material="Gazebo/WhiteEmissive" />
-	</xacro:macro>	
+        
 
 
         <xacro:macro name="my_box" params="name lwh xyz rpy mass material *rviz_color">
@@ -265,9 +247,11 @@
 					<geometry>
 						<box size="${lwh}" />
 					</geometry>
+              <xacro:default_inertial mass="0.01" />  
              </collision>
                
         </link>
+
         <xacro:default_gazebo name="${name}" material="${material}" />
 	</xacro:macro>
 
@@ -294,9 +278,9 @@
     <xacro:macro name="default_inertial" params="mass">
 		<inertial>
 			<mass value="${mass}" />
-			<inertia ixx="0.001" ixy="0.0" ixz="0.0"
-                     iyy="0.001" iyz="0.0"
-                     izz="0.001" />                     
+			<inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                     iyy="0.0001" iyz="0.0"
+                     izz="0.0001" />                     
 			</inertial>
     </xacro:macro>
     
@@ -304,7 +288,7 @@
  		<gazebo reference="${name}">
 			<material>${material}</material>
 			<selfCollide>false</selfCollide>
-			<turnGravityOff>true</turnGravityOff>
+			<turnGravityOff>false</turnGravityOff>
 		</gazebo>
     </xacro:macro>
 

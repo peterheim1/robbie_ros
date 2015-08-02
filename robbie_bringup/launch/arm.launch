@@ -6,7 +6,7 @@ This is the launch file robbies arms
   
 
      <!-- start the upper arms controller -->
-   <node name="upper_arms" pkg="robbie_bringup" type="arm_driver_upper.py">
+   <node name="upper_arms" pkg="robbie_bringup" type="new_driver.py">
    <rosparam file="$(find robbie_bringup)/params/upper_arms.yaml" command="load" />
    </node>
 

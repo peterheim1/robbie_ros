@@ -5,20 +5,22 @@
 <!-- =================================================================================== -->
 <!-- XML namespaces -->
 <robot name="robbie" xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller" xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface" xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor" xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- ============================  A Few Color Macros  ============================ -->
+  <!-- ============================   A Few Shape Macros  ============================ -->
   <link name="base_link">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 .135"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.032"/>
       <geometry>
-        <box size="0.41 0.35 0.06"/>
+        <box size="0.41 0.35 0.065"/>
       </geometry>
       <material name="gold">
         <color rgba="0.5 0.3 0 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 .135"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.032"/>
       <geometry>
-        <box size="0.41 0.35 0.06"/>
+        <box size="0.41 0.35 0.065"/>
       </geometry>
     </collision>
   </link>
@@ -140,46 +142,34 @@
     <selfCollide>false</selfCollide>
     <turnGravityOff>true</turnGravityOff>
   </gazebo>
+  <!--<xacro:my_cylinder name="deck_link" l="0.520" r="0.175" xyz="0 0 -0.26" rpy="0 0 0" mass="0.2" material="Gazebo/grey">
+			<xacro:black />
+		</xacro:my_cylinder>-->
   <link name="deck_link">
     <visual>
-      <origin rpy="0 0 0" xyz="0.1 0 0"/>
       <geometry>
-        <cylinder length="0.52" radius="0.175"/>
+        <mesh filename="package://robbie_description/meshes/drive_base.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="black">
-        <color rgba="0.1 0.1 0.1 1.0"/>
+      <material name="yellow2">
+        <color rgba="0.8 0.9 0 1.0"/>
       </material>
+      <origin rpy="0 0 1.57" xyz=" 0.015 -0.175 -0"/>
     </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0.1 0 0"/>
-      <geometry>
-        <cylinder length="0.52" radius="0.175"/>
-      </geometry>
-    </collision>
-    <inertial>
-      <mass value="0.2"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
-    </inertial>
   </link>
-  <gazebo reference="deck_link">
-    <material>Gazebo/grey</material>
-    <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
-  </gazebo>
   <link name="pan_link">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0.0 0 -0.02"/>
       <geometry>
-        <cylinder length="0.02" radius="0.17"/>
+        <cylinder length="0.005" radius="0.1"/>
       </geometry>
-      <material name="blue1">
-        <color rgba="0 0 0.9 1.0"/>
+      <material name="yellow2">
+        <color rgba="0.8 0.9 0 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0.0 0 -0.02"/>
       <geometry>
-        <cylinder length="0.02" radius="0.17"/>
+        <cylinder length="0.005" radius="0.1"/>
       </geometry>
     </collision>
     <inertial>
@@ -193,6 +183,17 @@
     <turnGravityOff>true</turnGravityOff>
   </gazebo>
   <!-- ##############################   upper torso   ##################333333-->
+  <link name="lower_torso">
+    <visual>
+      <geometry>
+        <mesh filename="package://robbie_description/meshes/chest_lower.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="yellow2">
+        <color rgba="0.8 0.9 0 1.0"/>
+      </material>
+      <origin rpy="0 0 1.57" xyz="0 0 0"/>
+    </visual>
+  </link>
   <link name="upper_torso">
     <visual>
       <geometry>
@@ -201,7 +202,7 @@
       <material name="black">
         <color rgba="0.1 0.1 0.1 1.0"/>
       </material>
-      <origin rpy="0 0 -1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 -1.57" xyz="0.04 0 -0.15"/>
     </visual>
   </link>
   <link name="upper_chest">
@@ -212,7 +213,7 @@
       <material name="gold">
         <color rgba="0.5 0.3 0 1.0"/>
       </material>
-      <origin rpy="0 0 1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 1.57" xyz="0 0 -0.085"/>
     </visual>
   </link>
   <!-- ##############################   right arm ##################333333-->
@@ -235,7 +236,7 @@
       <material name="black">
         <color rgba="0.1 0.1 0.1 1.0"/>
       </material>
-      <origin rpy="0 0 1.57" xyz="-0.025 0 0.01"/>
+      <origin rpy="-1.57 0 1.57" xyz="-0.01 0 -0.025"/>
     </visual>
   </link>
   <link name="right_elbow_link">
@@ -246,7 +247,7 @@
       <material name="black">
         <color rgba="0.1 0.1 0.1 1.0"/>
       </material>
-      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
     </visual>
   </link>
   <link name="right_shoulder_rotate">
@@ -257,7 +258,7 @@
       <material name="gold">
         <color rgba="0.5 0.3 0 1.0"/>
       </material>
-      <origin rpy="0 3.14 0" xyz="0 0 0"/>
+      <origin rpy="0 1.57 0" xyz="-0.19 0 0"/>
     </visual>
   </link>
   <link name="right_elbow">
@@ -268,7 +269,7 @@
       <material name="gold">
         <color rgba="0.5 0.3 0 1.0"/>
       </material>
-      <origin rpy="3.14 0 0" xyz="0.025 -0.05 0.03"/>
+      <origin rpy="0 0 3.14" xyz="-0.025 -0.055 -0.02"/>
     </visual>
   </link>
   <link name="right_forearm_link">
@@ -279,25 +280,25 @@
       <material name="gold">
         <color rgba="0.5 0.3 0 1.0"/>
       </material>
-      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 1.57 0" xyz="-0.23 0 0"/>
     </visual>
   </link>
-  <!-- wrist_pan_ joint-->
-  <link name="wrist_pan_servo">
+  <!-- wrist_yaw_ joint-->
+  <link name="wrist_yaw_servo">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-1.57 0 -1.57" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="ax12_color">
         <color rgba="0.1 0.1 0.1 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="-1.57 0 -1.57" xyz="0 0 0"/>
       <geometry>
         <!--<box size="0.032 0.038 0.05" />-->
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -305,16 +306,16 @@
       <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
     </inertial>
   </link>
-  <gazebo reference="wrist_pan_servo">
+  <gazebo reference="wrist_yaw_servo">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
     <turnGravityOff>true</turnGravityOff>
   </gazebo>
-  <link name="wrist_pan_servo_bracket_f3">
+  <link name="wrist_yaw_servo_bracket_f3">
     <visual>
-      <origin rpy="1.57 0 0" xyz="0 0.005 0"/>
+      <origin rpy="1.57 0 -1.57" xyz="0 0.005 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="grey1">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -324,9 +325,9 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="1.57 0 0" xyz="0 0.005 0"/>
+      <origin rpy="1.57 0 -1.57" xyz="0 0.005 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -334,28 +335,53 @@
       <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
     </inertial>
   </link>
-  <gazebo reference="wrist_pan_servo_bracket_f3">
+  <gazebo reference="wrist_yaw_servo_bracket_f3">
     <material>Gazebo/WhiteEmissive</material>
     <selfCollide>false</selfCollide>
     <turnGravityOff>true</turnGravityOff>
   </gazebo>
-  <!-- <xacro:F3_bracket name="wrist_pan_servo_bracket2_f3" xyz="0 0 0" rpy="0 -1.57 0" />-->
+  <link name="right_wrist_yaw_bracket_f2">
+    <visual>
+      <origin rpy="-1.57 0 -1.57" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="bracket_color">
+        <color rgba="0.9 0.9 0.9 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="-1.57 0 -1.57" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.02"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+  </link>
+  <gazebo reference="right_wrist_yaw_bracket_f2">
+    <material>Gazebo/WhiteEmissive</material>
+    <selfCollide>false</selfCollide>
+    <turnGravityOff>true</turnGravityOff>
+  </gazebo>
   <!-- wrist_tilt joint-->
   <link name="wrist_tilt_servo">
     <visual>
-      <origin rpy="-1.57 0 0" xyz="-0.04 0.05 0"/>
+      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="ax12_color">
         <color rgba="0.1 0.1 0.1 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="-1.57 0 0" xyz="-0.04 0.05 0"/>
+      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
       <geometry>
         <!--<box size="0.032 0.038 0.05" />-->
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -370,18 +396,18 @@
   </gazebo>
   <link name="wrist_tilt_bracket_f2">
     <visual>
-      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="bracket_color">
         <color rgba="0.9 0.9 0.9 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -397,9 +423,9 @@
   <!--here-->
   <link name="gripper_bracket_f3">
     <visual>
-      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+      <origin rpy="1.57 0 -1.57" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="grey1">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -409,9 +435,9 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+      <origin rpy="1.57 0 -1.57" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -429,7 +455,7 @@
     <visual>
       <origin rpy="1.57 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="ax12_color">
         <color rgba="0.1 0.1 0.1 1.0"/>
@@ -439,7 +465,7 @@
       <origin rpy="1.57 0 0" xyz="0 0 0"/>
       <geometry>
         <!--<box size="0.032 0.038 0.05" />-->
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -454,18 +480,18 @@
   </gazebo>
   <link name="gripper_bracket_f2">
     <visual>
-      <origin rpy="0 0 1.57" xyz="0 0 0"/>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="bracket_color">
         <color rgba="0.9 0.9 0.9 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 1.57" xyz="0 0 0"/>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -480,7 +506,7 @@
   </gazebo>
   <link name="right_finger_link">
     <visual>
-      <origin rpy="1.57 0 1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.04 0 0"/>
       <geometry>
         <box size="-0.08 0.005 0.035"/>
       </geometry>
@@ -489,7 +515,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="1.57 0 1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.04 0 0"/>
       <geometry>
         <box size="-0.08 0.005 0.035"/>
       </geometry>
@@ -502,7 +528,7 @@
   </gazebo>
   <link name="left_finger_link">
     <visual>
-      <origin rpy="1.57 0 1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.04 0 0"/>
       <geometry>
         <box size="0.08 0.005 0.035"/>
       </geometry>
@@ -511,7 +537,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="1.57 0 1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.04 0 0"/>
       <geometry>
         <box size="0.08 0.005 0.035"/>
       </geometry>
@@ -542,7 +568,7 @@
       <material name="black">
         <color rgba="0.1 0.1 0.1 1.0"/>
       </material>
-      <origin rpy="0 0 1.57" xyz="0 0 0"/>
+      <origin rpy="-1.57 0 1.57" xyz="0 -0.06 0"/>
     </visual>
   </link>
   <link name="left_shoulder_rotate">
@@ -553,7 +579,7 @@
       <material name="gold">
         <color rgba="0.5 0.3 0 1.0"/>
       </material>
-      <origin rpy="0 3.14 0" xyz="0 0 0"/>
+      <origin rpy="0 1.57 0" xyz="-0.19 0 0"/>
     </visual>
   </link>
   <link name="left_elbow_link">
@@ -564,7 +590,7 @@
       <material name="black">
         <color rgba="0.1 0.1 0.1 1.0"/>
       </material>
-      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
     </visual>
   </link>
   <link name="left_elbow">
@@ -575,7 +601,7 @@
       <material name="gold">
         <color rgba="0.5 0.3 0 1.0"/>
       </material>
-      <origin rpy="3.14 0 0" xyz="0.025 -0.05 0.03"/>
+      <origin rpy="0 0 3.14" xyz="-0.025 -0.055 -0.02"/>
     </visual>
   </link>
   <link name="left_forearm_link">
@@ -586,42 +612,15 @@
       <material name="gold">
         <color rgba="0.5 0.3 0 1.0"/>
       </material>
-      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 1.57 0" xyz="-0.23 0 0"/>
     </visual>
   </link>
   <!-- left_wrist_pan_ joint-->
-  <link name="left_wrist_pan_servo">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="ax12_color">
-        <color rgba="0.1 0.1 0.1 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <!--<box size="0.032 0.038 0.05" />-->
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-    <inertial>
-      <mass value="0.055"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
-    </inertial>
-  </link>
-  <gazebo reference="left_wrist_pan_servo">
-    <material>Gazebo/FlatBlack</material>
-    <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
-  </gazebo>
   <link name="left_wrist_pan_servo_bracket_f3">
     <visual>
-      <origin rpy="1.57 0 0" xyz="0 0.005 0"/>
+      <origin rpy="1.57 0 -1.57" xyz="0 0.005 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="grey1">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -631,9 +630,9 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="1.57 0 0" xyz="0 0.005 0"/>
+      <origin rpy="1.57 0 -1.57" xyz="0 0.005 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -650,19 +649,19 @@
   <!-- left_wrist_yaw joint-->
   <link name="left_wrist_yaw_servo">
     <visual>
-      <origin rpy="-1.57 0 0" xyz="-0.04 0.05 0"/>
+      <origin rpy="-1.57 0 -1.57" xyz="0.0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="ax12_color">
         <color rgba="0.1 0.1 0.1 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="-1.57 0 0" xyz="-0.04 0.05 0"/>
+      <origin rpy="-1.57 0 -1.57" xyz="0.0 0 0"/>
       <geometry>
         <!--<box size="0.032 0.038 0.05" />-->
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -677,18 +676,18 @@
   </gazebo>
   <link name="left_wrist_yaw_bracket_f2">
     <visual>
-      <origin rpy="-1.57 0 0" xyz="0 0 0"/>
+      <origin rpy="-1.57 0 -1.57" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="bracket_color">
         <color rgba="0.9 0.9 0.9 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="-1.57 0 0" xyz="0 0 0"/>
+      <origin rpy="-1.57 0 -1.57" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -704,19 +703,19 @@
   <!-- left_wrist_tilt joint-->
   <link name="left_wrist_tilt_servo">
     <visual>
-      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="ax12_color">
         <color rgba="0.1 0.1 0.1 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
       <geometry>
         <!--<box size="0.032 0.038 0.05" />-->
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -731,18 +730,18 @@
   </gazebo>
   <link name="left_wrist_tilt_bracket_f2">
     <visual>
-      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="bracket_color">
         <color rgba="0.9 0.9 0.9 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 -1.57 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -757,9 +756,9 @@
   </gazebo>
   <link name="left_gripper_bracket_f3">
     <visual>
-      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+      <origin rpy="1.57 0 -1.57" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="grey1">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -769,9 +768,9 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+      <origin rpy="1.57 0 -1.57" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -787,19 +786,19 @@
   <!-- left_Gripper_joint-->
   <link name="left_gripper_servo">
     <visual>
-      <origin rpy="0 0 -1.57" xyz="0 0 0"/>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="ax12_color">
         <color rgba="0.1 0.1 0.1 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 -1.57" xyz="0 0 0"/>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
       <geometry>
         <!--<box size="0.032 0.038 0.05" />-->
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -814,18 +813,18 @@
   </gazebo>
   <link name="left_gripper_bracket_f2">
     <visual>
-      <origin rpy="0 0 1.57" xyz="0 0 0"/>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="bracket_color">
         <color rgba="0.9 0.9 0.9 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="0 0 1.57" xyz="0 0 0"/>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -840,7 +839,7 @@
   </gazebo>
   <link name="left_right_finger_link">
     <visual>
-      <origin rpy="1.57 0 1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.04 0 0"/>
       <geometry>
         <box size="-0.08 0.005 0.035"/>
       </geometry>
@@ -849,7 +848,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="1.57 0 1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.04 0 0"/>
       <geometry>
         <box size="-0.08 0.005 0.035"/>
       </geometry>
@@ -862,7 +861,7 @@
   </gazebo>
   <link name="left_left_finger_link">
     <visual>
-      <origin rpy="1.57 0 1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.04 0 0"/>
       <geometry>
         <box size="0.08 0.005 0.035"/>
       </geometry>
@@ -871,7 +870,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="1.57 0 1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.04 0 0"/>
       <geometry>
         <box size="0.08 0.005 0.035"/>
       </geometry>
@@ -887,7 +886,7 @@
     <visual>
       <origin rpy="0 3.1415 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="bracket_color">
         <color rgba="0.9 0.9 0.9 1.0"/>
@@ -896,7 +895,7 @@
     <collision>
       <origin rpy="0 3.1415 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -913,7 +912,7 @@
     <visual>
       <origin rpy="3.1415 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="ax12_color">
         <color rgba="0.1 0.1 0.1 1.0"/>
@@ -923,7 +922,7 @@
       <origin rpy="3.1415 0 0" xyz="0 0 0"/>
       <geometry>
         <!--<box size="0.032 0.038 0.05" />-->
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -940,7 +939,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="grey1">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -952,7 +951,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -969,7 +968,7 @@
     <visual>
       <origin rpy=" 1.57 0 1.57" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="ax12_color">
         <color rgba="0.1 0.1 0.1 1.0"/>
@@ -979,7 +978,7 @@
       <origin rpy=" 1.57 0 1.57" xyz="0 0 0"/>
       <geometry>
         <!--<box size="0.032 0.038 0.05" />-->
-        <mesh filename="package://robbie/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/ax12_box2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -996,7 +995,7 @@
     <visual>
       <origin rpy="1.57 0 -1.570" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="grey1">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -1008,7 +1007,7 @@
     <collision>
       <origin rpy="1.57 0 -1.570" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://robbie/meshes/F3.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/F3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
     <inertial>
@@ -1046,12 +1045,12 @@
   <link name="head_link">
     <visual>
       <geometry>
-        <mesh filename="package://robbie_description/meshes/head.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robbie_description/meshes/head1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="gold">
         <color rgba="0.5 0.3 0 1.0"/>
       </material>
-      <origin rpy="1.57 0 1.57" xyz="0 0 0"/>
+      <origin rpy="0 0 1.57" xyz="0 0 0"/>
     </visual>
   </link>
   <link name="head_link_fake">
@@ -1083,32 +1082,31 @@
       </geometry>
     </collision>
   </link>
-  <link name="camera_link">
+  <link name="head_cam_link">
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
     <visual>
-      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz=" 0 0 0 "/>
       <geometry>
-        <cylinder length="0.035" radius="0.01"/>
+        <mesh filename="package://robbie_description/meshes/kinect.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="grey1">
-        <color rgba="0.75 0.75 0.75 1.0"/>
+      <material name="ax12_color">
+        <color rgba="0.1 0.1 0.1 1.0"/>
       </material>
     </visual>
     <collision>
-      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <cylinder length="0.035" radius="0.01"/>
+        <mesh filename="package://robbie_description/meshes/kinect.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
-    <inertial>
-      <mass value="0.1"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
-    </inertial>
   </link>
-  <gazebo reference="camera_link">
-    <material>Gazebo/Grey</material>
-    <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
-  </gazebo>
+  <!--<xacro:my_cylinder name="camera_link" l="0.035" r="0.01" xyz="0 0 0" rpy="0 1.57 0" mass="0.1" material="Gazebo/Grey">		
+      <xacro:grey1 />
+	</xacro:my_cylinder>-->
   <!-- virtal joints-->
   <link name="right_gripper_link">
     <visual>
@@ -1142,207 +1140,210 @@
   <joint name="base_footprint_joint" type="fixed">
     <parent link="base_footprint"/>
     <child link="base_link"/>
-    <origin rpy="0 0 0" xyz="-0.1 0 0"/>
+    <origin rpy="0 0 0" xyz="-0.1 0 0.15"/>
   </joint>
   <joint name="base_link_joint" type="fixed">
     <parent link="base_link"/>
     <child link="deck_link"/>
-    <origin rpy="0 0 0" xyz="-0.1 0 .36"/>
+    <origin rpy="0 0 0" xyz="0 0 0.138"/>
   </joint>
-  <joint name="left_wheel_joint" type="fixed">
+  <joint name="base_l_wheel_joint" type="fixed">
     <parent link="base_link"/>
     <child link="left_wheel"/>
-    <origin rpy="0 0 0" xyz="0.1 -0.2 0.1"/>
+    <origin rpy="0 0 0" xyz="0.1 -0.2 -0.04"/>
   </joint>
-  <joint name="right_wheel_joint" type="fixed">
+  <joint name="base_r_wheel_joint" type="fixed">
     <parent link="base_link"/>
     <child link="right_wheel"/>
-    <origin rpy="0 0 0" xyz="0.1 0.2 0.1"/>
+    <origin rpy="0 0 0" xyz="0.1 0.2 -0.04"/>
   </joint>
   <joint name="castor_wheel_joint_l" type="fixed">
     <parent link="base_link"/>
     <child link="castor_wheel_l"/>
-    <origin rpy="0 0 0" xyz="-0.20 -0.13 0.05"/>
+    <origin rpy="0 0 0" xyz="-0.20 -0.13 -0.1"/>
   </joint>
   <joint name="castor_wheel_joint_r" type="fixed">
     <parent link="base_link"/>
     <child link="castor_wheel_r"/>
-    <origin rpy="0 0 0" xyz="-0.20 0.13 0.05"/>
+    <origin rpy="0 0 0" xyz="-0.20 0.13 -0.1"/>
   </joint>
   <!--#################  Upper torso#############################-->
   <joint name="pan_joint" type="revolute">
     <parent link="deck_link"/>
     <child link="pan_link"/>
-    <origin rpy="0 0 0" xyz="0.1 0 0.275"/>
+    <origin rpy="0 0 0" xyz="0 0 0.35"/>
     <axis xyz="0 0 1"/>
     <limit effort="10" lower="-1" upper="1" velocity="0"/>
+  </joint>
+  <joint name="torso_lower_link" type="fixed">
+    <parent link="pan_link"/>
+    <child link="lower_torso"/>
+    <origin rpy="0 0 0" xyz="0.0 0.005 0."/>
   </joint>
   <joint name="torso_link" type="fixed">
     <parent link="pan_link"/>
     <child link="upper_torso"/>
-    <origin rpy="0 0 0" xyz="0.05 0 0.26"/>
+    <origin rpy="0 0 0" xyz="0.0 0.005 0.465"/>
   </joint>
   <joint name="chest_link" type="fixed">
     <parent link="upper_torso"/>
     <child link="upper_chest"/>
-    <origin rpy="0 0 0" xyz="0.02 0 0.03"/>
+    <origin rpy="0 0 0" xyz="0.065 0 -0.04"/>
   </joint>
   <joint name="right_arm_tilt_joint" type="revolute">
     <parent link="upper_torso"/>
     <child link="right_shoulder_tilt"/>
-    <origin rpy="0 0 0" xyz="-0.045 -0.145 0.105"/>
+    <origin rpy="0 0 0" xyz="0 -0.14 -0.045"/>
     <axis xyz="1 0 0"/>
-    <limit effort="10" lower="-1.34" upper="0.1" velocity="0"/>
+    <limit effort="10" lower="-1.34" upper="0.1" velocity="1"/>
   </joint>
   <joint name="right_arm_lift_joint" type="revolute">
     <parent link="right_shoulder_tilt"/>
     <child link="right_shoulder_lift"/>
-    <origin rpy="0 -1.57 0" xyz="-0.0 -0.077 -0.04"/>
+    <origin rpy="0 0 0" xyz="0 -0.078 -0.042"/>
     <axis xyz="0 1 0"/>
-    <limit effort="10" lower="-1.57" upper="1.57" velocity="0"/>
+    <limit effort="10" lower="-1.57" upper="1.57" velocity="1"/>
   </joint>
   <joint name="right_arm_rotate_joint" type="revolute">
     <parent link="right_shoulder_lift"/>
     <child link="right_shoulder_rotate"/>
-    <origin rpy="0 0 0" xyz="0 0 -0.065"/>
-    <axis xyz="0 0 -1"/>
-    <limit effort="10" lower="-3.14" upper="0.2" velocity="0"/>
+    <origin rpy="0 0 0" xyz="0.255 -0.01 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="10" lower="-2.6" upper="2.6" velocity="1"/>
   </joint>
   <joint name="right_elbow_link" type="fixed">
     <parent link="right_shoulder_rotate"/>
     <child link="right_elbow_link"/>
-    <origin rpy="0 0 0" xyz="0.01 0 -0.17"/>
+    <origin rpy="0 0 0" xyz="-0.01 0 0.01"/>
   </joint>
   <joint name="right_arm_elbow_joint" type="revolute">
     <parent link="right_elbow_link"/>
     <child link="right_elbow"/>
-    <origin rpy="0 -1.57 0" xyz="0.01 0.01 0.0"/>
+    <origin rpy="0 0 0" xyz="0.01 0.01 0.0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="10" lower="-2.20" upper="0.1" velocity="0"/>
+    <limit effort="10" lower="-2.20" upper="0.1" velocity="10"/>
   </joint>
   <joint name="right_arm_forearm_link" type="fixed">
     <parent link="right_elbow"/>
     <child link="right_forearm_link"/>
-    <origin rpy="1.57 0 0" xyz="-0.08 -0.0 -0.0"/>
+    <origin rpy="0 0 0" xyz="0.31 -0.0 -0.0"/>
   </joint>
-  <!--right_arm_wrist_pan_joint-->
-  <joint name="right_arm_wrist_pan_bracket" type="fixed">
+  <!--right_arm_wrist_yaw_joint-->
+  <joint name="right_arm_wrist_yaw_bracket" type="fixed">
     <parent link="right_forearm_link"/>
-    <child link="wrist_pan_servo"/>
-    <origin rpy="0 0 1.57" xyz="-0.21 0.0 0.0"/>
+    <child link="wrist_yaw_servo_bracket_f3"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
   </joint>
-  <joint name="right_arm_wrist_pan_joint" type="revolute">
-    <parent link="wrist_pan_servo"/>
-    <child link="wrist_pan_servo_bracket_f3"/>
-    <origin rpy="0 1.57 0" xyz="0. 0.015 0.0"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="10" lower="-2.61" upper="2.61" velocity="0"/>
+  <joint name="right_arm_wrist_yaw_bracket1" type="fixed">
+    <parent link="wrist_yaw_servo_bracket_f3"/>
+    <child link="wrist_yaw_servo"/>
+    <origin rpy="0 0 0" xyz="0.04 0 0.0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" lower="-2.61" upper="2.61" velocity="1"/>
     <dynamics damping="0.0"/>
   </joint>
-  <joint name="right_arm_wrist_tilt_bracket" type="fixed">
-    <parent link="wrist_pan_servo_bracket_f3"/>
-    <child link="wrist_tilt_servo"/>
-    <origin rpy="0 0 0" xyz="0.04 0 0.0"/>
-    <axis xyz="1 0 0"/>
+  <joint name="right_arm_wrist_yaw_joint" type="revolute">
+    <parent link="wrist_yaw_servo"/>
+    <child link="right_wrist_yaw_bracket_f2"/>
+    <origin rpy="0 0 0" xyz="0.0 0 0.0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" lower="-2.61" upper="2.61" velocity="1"/>
+  </joint>
+  <joint name="right_arm_wrist_tilt1_bracket" type="fixed">
+    <parent link="right_wrist_yaw_bracket_f2"/>
+    <child link="wrist_tilt_bracket_f2"/>
+    <origin rpy="0 0 0" xyz="0.053 0 0.0"/>
+    <axis xyz="0 0 1"/>
   </joint>
   <!--wrist_tilt_joint-->
-  <joint name="right_arm_wrist_yaw_joint" type="revolute">
-    <parent link="wrist_tilt_servo"/>
-    <child link="wrist_tilt_bracket_f2"/>
-    <origin rpy="-1.57 0 1.57" xyz="-0.04 0.05 0"/>
+  <joint name="right_arm_wrist_tilt_joint" type="revolute">
+    <parent link="wrist_tilt_bracket_f2"/>
+    <child link="wrist_tilt_servo"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="10" lower="-1.57" upper="1.57" velocity="0"/>
+    <limit effort="10" lower="-1.57" upper="1.57" velocity="1"/>
     <dynamics damping="0.0"/>
   </joint>
   <joint name="right_arm_gripper_bracket" type="fixed">
-    <parent link="wrist_tilt_bracket_f2"/>
+    <parent link="wrist_tilt_servo"/>
     <child link="gripper_bracket_f3"/>
-    <origin rpy="1.57 1.57 0" xyz="0.025 0.025 0.0"/>
+    <origin rpy="0 0 0" xyz="0.04 0 0.0"/>
     <!--now-->
   </joint>
   <joint name="right_arm_gripper_servo" type="fixed">
     <parent link="gripper_bracket_f3"/>
     <child link="gripper_servo"/>
-    <origin rpy="-1.57 0 1.57" xyz="0.0 0.02 0.02"/>
+    <origin rpy="0 0 0" xyz="0.02 -0.015 0.0"/>
   </joint>
   <joint name="right_gripper_joint" type="fixed">
-    <origin rpy="-1.570795 0 1.570795" xyz="0 0.06 0.01"/>
     <parent link="gripper_bracket_f3"/>
     <child link="right_gripper_link"/>
+    <origin rpy="0 0 0" xyz="0.06 -0.01 0"/>
   </joint>
   <!-- gripper_joint-->
   <joint name="right_arm_gripper_joint" type="revolute">
     <parent link="gripper_servo"/>
     <child link="gripper_bracket_f2"/>
-    <origin rpy="0 1.57 -1.57" xyz="0 0.0 0.0"/>
-    <axis xyz="1 0 0"/>
-    <limit effort="10" lower="-0.36" upper="0.28" velocity="0"/>
+    <origin rpy="0 0 0" xyz="0 0.0 0.0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" lower="-0.1" upper="0.50" velocity="1"/>
     <dynamics damping="0.0"/>
   </joint>
   <joint name="right_arm_finger_link_l" type="fixed">
     <parent link="gripper_servo"/>
     <child link="left_finger_link"/>
-    <origin rpy="0 1.57 -1.57" xyz="0.03 0.04 0.0"/>
+    <origin rpy="0 0 0" xyz="0.08 0.04 0"/>
   </joint>
   <!-- moving finger   ############-->
   <joint name="right_arm_finger_link_r" type="fixed">
     <parent link="gripper_bracket_f2"/>
     <child link="right_finger_link"/>
-    <origin rpy="0 0 0" xyz="0 0.03 0.03"/>
+    <origin rpy="0 0 0" xyz="0.08 -0.03 0"/>
   </joint>
   <!--##########################        left arm             #############################-->
   <joint name="left_arm_tilt_joint" type="revolute">
     <parent link="upper_torso"/>
     <child link="left_shoulder_tilt"/>
-    <origin rpy="0 0 0" xyz="-0.045 0.145 0.105"/>
+    <origin rpy="0 0 0" xyz="0.003 0.142 -0.05"/>
     <axis xyz="-1 0 0"/>
-    <limit effort="10" lower="-1.34" upper="0.1" velocity="0"/>
+    <limit effort="10" lower="-1.34" upper="0.03" velocity="1"/>
   </joint>
   <joint name="left_arm_lift_joint" type="revolute">
     <parent link="left_shoulder_tilt"/>
     <child link="left_shoulder_lift"/>
-    <origin rpy="0 -1.57 0" xyz="0 0.02 -0.04"/>
+    <origin rpy="0 0 0" xyz="0 0.08 -0.04"/>
     <axis xyz="0 1 0"/>
-    <limit effort="10" lower="-1.57" upper="1.57" velocity="0"/>
+    <limit effort="10" lower="-1.57" upper="1.57" velocity="1"/>
   </joint>
   <joint name="left_arm_rotate_joint" type="revolute">
     <parent link="left_shoulder_lift"/>
     <child link="left_shoulder_rotate"/>
-    <origin rpy="0 0 0" xyz="0 0.06 -0.055"/>
-    <axis xyz="0 0 -1"/>
-    <limit effort="10" lower="0.2" upper="3.14" velocity="0"/>
+    <origin rpy="0 0 0" xyz="0.24 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="10" lower="-2.6" upper="2.6" velocity="1"/>
   </joint>
   <joint name="left_elbow_link" type="fixed">
     <parent link="left_shoulder_rotate"/>
     <child link="left_elbow_link"/>
-    <origin rpy="0 0 0" xyz="0.01 0 -0.17"/>
+    <origin rpy="0 0 0" xyz="-0.01 0 0.008"/>
   </joint>
   <joint name="left_arm_elbow_joint" type="revolute">
     <parent link="left_elbow_link"/>
     <child link="left_elbow"/>
-    <origin rpy="0 -1.57 0" xyz="0.01 0.01 0.0"/>
+    <origin rpy="0 -0 0" xyz="0 0 0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="10" lower="-2.20" upper="0.17" velocity="0"/>
+    <limit effort="10" lower="-2.20" upper="0.17" velocity="1"/>
   </joint>
   <joint name="left_arm_forearm_link" type="fixed">
     <parent link="left_elbow"/>
     <child link="left_forearm_link"/>
-    <origin rpy="1.57 0 0" xyz="-0.08 -0.0 -0.0"/>
+    <origin rpy="0 0 0" xyz="0.31 -0.0 -0.0"/>
   </joint>
-  <!--left_arm_wrist_pan_joint-->
-  <joint name="left_arm_wrist_pan_bracket" type="fixed">
-    <parent link="left_forearm_link"/>
-    <child link="left_wrist_pan_servo"/>
-    <origin rpy="0 0 1.57" xyz="-0.21 0.0 0.0"/>
-    <!--now-->
-  </joint>
-  <joint name="left_arm_wrist_pan_joint" type="revolute">
+  <joint name="left_arm_wrist_yaw_attach" type="fixed">
     <!--revolute-->
-    <parent link="left_wrist_pan_servo"/>
+    <parent link="left_forearm_link"/>
     <child link="left_wrist_pan_servo_bracket_f3"/>
-    <origin rpy="0 0 0" xyz="0. 0.015 0.0"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="10" lower="-2.61" upper="2.61" velocity="0"/>
+    <origin rpy="0 0 0" xyz="0. 0 0"/>
     <dynamics damping="0.0"/>
   </joint>
   <joint name="left_arm_wrist_tilt_bracket" type="fixed">
@@ -1356,17 +1357,17 @@
     <!--revolute-->
     <parent link="left_wrist_yaw_servo"/>
     <child link="left_wrist_yaw_bracket_f2"/>
-    <origin rpy="0 0 0" xyz="-0.04 0.05 0"/>
-    <axis xyz="0 0 -1"/>
-    <limit effort="10" lower="-1.57" upper="1.57" velocity="0"/>
+    <origin rpy="0 0 0" xyz="0.0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" lower="-1.57" upper="1.57" velocity="1"/>
     <dynamics damping="0.0"/>
   </joint>
   <joint name="left_arm_wrist_yaw_bracket" type="fixed">
     <parent link="left_wrist_yaw_bracket_f2"/>
     <child link="left_wrist_tilt_bracket_f2"/>
-    <origin rpy="0 0 0" xyz="-0.0 0.052 0.0"/>
+    <origin rpy="0 0 0" xyz="0.055 0 0.0"/>
     <axis xyz="1 0 0"/>
-    <limit effort="10" lower="-1.57" upper="1.57" velocity="0"/>
+    <limit effort="10" lower="-1.57" upper="1.57" velocity="1"/>
     <dynamics damping="0.0"/>
   </joint>
   <!--wrist_tilt_joint-->
@@ -1375,22 +1376,22 @@
     <parent link="left_wrist_tilt_bracket_f2"/>
     <child link="left_wrist_tilt_servo"/>
     <origin rpy="0 0 0" xyz="-0 -0.0 0"/>
-    <axis xyz="1 0 0"/>
-    <limit effort="10" lower="-1.57" upper="1.57" velocity="0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10" lower="-1.57" upper="1.57" velocity="1"/>
     <dynamics damping="0.0"/>
   </joint>
   <joint name="left_arm_gripper_bracket" type="fixed">
     <parent link="left_wrist_tilt_servo"/>
     <child link="left_gripper_bracket_f3"/>
-    <origin rpy="0 1.57 0" xyz="0.0 0.035 0.0"/>
+    <origin rpy="3.14 0 0" xyz="0.04 0 0.0"/>
   </joint>
   <joint name="left_arm_gripper_servo" type="fixed">
     <parent link="left_gripper_bracket_f3"/>
     <child link="left_gripper_servo"/>
-    <origin rpy="0 3.14 0" xyz="0.0 0.02 -0.02"/>
+    <origin rpy="0 0 0" xyz="0.02 -0.02 -0."/>
   </joint>
   <joint name="left_gripper_joint" type="fixed">
-    <origin rpy="1.570795 0 1.570795" xyz="0 0.06 -0.01"/>
+    <origin rpy="0 0 0" xyz="0.06 -0.01 0"/>
     <parent link="left_gripper_bracket_f3"/>
     <child link="left_gripper_link"/>
   </joint>
@@ -1400,25 +1401,25 @@
     <parent link="left_gripper_servo"/>
     <child link="left_gripper_bracket_f2"/>
     <origin rpy="0 0 0" xyz="0 0.0 0.0"/>
-    <axis xyz="1 0 0"/>
-    <limit effort="10" lower="-1.0" upper="0.3" velocity="0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" lower="-1.0" upper="0.3" velocity="1"/>
     <dynamics damping="0.0"/>
   </joint>
   <joint name="left_arm_finger_link_l" type="fixed">
     <parent link="left_gripper_servo"/>
     <child link="left_left_finger_link"/>
-    <origin rpy="0 0 0" xyz="0. 0.03 -0.04"/>
+    <origin rpy="0 0 0" xyz="0.08 0.04 0"/>
   </joint>
   <joint name="left_arm_finger_link_r" type="fixed">
     <parent link="left_gripper_bracket_f2"/>
     <child link="left_right_finger_link"/>
-    <origin rpy="0 0 0" xyz="0 0.03 0.03"/>
+    <origin rpy="0 0 0" xyz="0.08 -0.03 0"/>
   </joint>
   <!-- #####################################Head joints#########################################-->
   <joint name="head_tilt_servo" type="fixed">
     <parent link="upper_torso"/>
     <child link="head_tilt_bracket"/>
-    <origin rpy="0 0 0" xyz="-0.05 0. 0.15"/>
+    <origin rpy="0 0 0" xyz="-0.0 0. 0.05"/>
   </joint>
   <!-- Head tilt joint-->
   <joint name="head_tilt_mod_joint" type="revolute">
@@ -1426,7 +1427,7 @@
     <child link="head_tilt_link"/>
     <origin rpy="0 0 0" xyz="0 0 0.0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="10" lower="-2.6" upper="2.6" velocity="0"/>
+    <limit effort="10" lower="-2.6" upper="2.6" velocity="1"/>
     <dynamics damping="0.0"/>
   </joint>
   <!-- Head tilt joint fake-->
@@ -1435,7 +1436,7 @@
     <child link="head_link_fake"/>
     <origin rpy="0 0 0" xyz="0 0 0.0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="10" lower="-2.6" upper="2.6" velocity="0"/>
+    <limit effort="10" lower="-2.6" upper="2.6" velocity="1"/>
     <dynamics damping="0.0"/>
   </joint>
   <joint name="head_pan_servo" type="fixed">
@@ -1450,7 +1451,7 @@
     <origin rpy="0 0 0" xyz="0.0 0 0.02"/>
     <origin rpy="0 0 0" xyz="0 0 0.0"/>
     <axis xyz="0 0 1"/>
-    <limit effort="10" lower="-2" upper="2" velocity="0"/>
+    <limit effort="10" lower="-2" upper="2" velocity="1"/>
     <dynamics damping="0.0"/>
   </joint>
   <joint name="head_neck_link" type="fixed">
@@ -1466,50 +1467,115 @@
   <joint name="head_joint" type="fixed">
     <parent link="head_base_link"/>
     <child link="head_link"/>
-    <origin rpy="0 0 0" xyz="-0.02 -0.097 -0.45"/>
+    <origin rpy="0 0 0" xyz="-0.02 -0.097 0"/>
   </joint>
-  <joint name="camera_link" type="fixed">
-    <parent link="head_link"/>
-    <child link="camera_link"/>
-    <origin rpy="0 0 0" xyz="0.13 0.1 0.6"/>
-  </joint>
+  <!--<joint name="camera_link" type="fixed">
+    	<parent link="head_link" />
+    	<child link="camera_link" />
+    	<origin xyz="0.13 0.1 0.6" rpy="0 0 0" />
+	</joint>-->
   <joint name="kinect_joint" type="fixed">
     <parent link="base_link"/>
     <child link="kinect_link"/>
-    <origin rpy="0 0 0" xyz="0.2 0 0.26"/>
+    <origin rpy="0 0 0" xyz="0.2 0 0.32"/>
   </joint>
   <joint name="kinect_depth_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.018 0"/>
+    <origin rpy="0 0 0" xyz="0 0.0125 0.015"/>
     <parent link="kinect_link"/>
     <child link="kinect_depth_frame"/>
   </joint>
   <link name="kinect_depth_frame">
     <inertial>
-      <mass value="0.0001"/>
+      <mass value="0.000001"/>
       <origin xyz="0 0 0"/>
       <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <joint name="kinect_depth_optical_joint" type="fixed">
-    <origin rpy="-1.570795 0 -1.570795" xyz="0 0 0"/>
-    <parent link="kinect_link"/>
+    <origin rpy="-1.57075 0 -1.57075" xyz="0 0 0"/>
+    <parent link="kinect_depth_frame"/>
     <child link="kinect_depth_optical_frame"/>
   </joint>
   <link name="kinect_depth_optical_frame">
     <inertial>
-      <mass value="0.0001"/>
+      <mass value="0.000001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+  <joint name="kinect_rgb_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.0125 0.015"/>
+    <parent link="kinect_link"/>
+    <child link="kinect_rgb_frame"/>
+  </joint>
+  <link name="kinect_rgb_frame">
+    <inertial>
+      <mass value="0.000001"/>
       <origin xyz="0 0 0"/>
       <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <joint name="kinect_rgb_optical_joint" type="fixed">
-    <origin rpy="-1.570795 0 -1.570795" xyz="0 0 0"/>
-    <parent link="kinect_depth_optical_frame"/>
+    <origin rpy="-1.57075 0 -1.57075" xyz="0 0 0"/>
+    <parent link="kinect_rgb_frame"/>
     <child link="kinect_rgb_optical_frame"/>
   </joint>
   <link name="kinect_rgb_optical_frame">
     <inertial>
-      <mass value="0.001"/>
+      <mass value="0.000001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+  <joint name="head_cam_joint" type="fixed">
+    <parent link="head_link"/>
+    <child link="head_cam_link"/>
+    <origin rpy="0 0.1 0" xyz="0.15 0.11 0.13"/>
+  </joint>
+  <joint name="head_cam_depth_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0125 0.015"/>
+    <parent link="head_cam_link"/>
+    <child link="head_cam_depth_frame"/>
+  </joint>
+  <link name="head_cam_depth_frame">
+    <inertial>
+      <mass value="0.000001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+  <joint name="head_cam_depth_optical_joint" type="fixed">
+    <origin rpy="-1.57075 0 -1.57075" xyz="0 0 0"/>
+    <parent link="head_cam_depth_frame"/>
+    <child link="head_cam_depth_optical_frame"/>
+  </joint>
+  <link name="head_cam_depth_optical_frame">
+    <inertial>
+      <mass value="0.000001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+  <joint name="head_cam_rgb_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.0125 0.015"/>
+    <parent link="head_cam_link"/>
+    <child link="head_cam_rgb_frame"/>
+  </joint>
+  <link name="head_cam_rgb_frame">
+    <inertial>
+      <mass value="0.000001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+  <joint name="head_cam_rgb_optical_joint" type="fixed">
+    <origin rpy="-1.57075 0 -1.57075" xyz="0 0 0"/>
+    <parent link="head_cam_rgb_frame"/>
+    <child link="head_cam_rgb_optical_frame"/>
+  </joint>
+  <link name="head_cam_rgb_optical_frame">
+    <inertial>
+      <mass value="0.000001"/>
       <origin xyz="0 0 0"/>
       <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
@@ -1517,4 +1583,3 @@
   <gazebo reference="robbie">
   	</gazebo>
 </robot>
-

@@ -1,0 +1,75 @@
+robbie:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+  
+  # Position Controllers ---------------------------------------
+  pan_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: pan_joint
+    pid: {p: 25.0, i: 0.01, d: 1}
+  right_arm_tilt_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: right_arm_tilt_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  right_arm_lift_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: right_arm_lift_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  right_arm_rotate_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: right_arm_rotate_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  right_arm_elbow_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: right_arm_elbow_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  right_arm_wrist_yaw_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: right_arm_wrist_yaw_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  right_arm_wrist_tilt_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: right_arm_wrist_tilt_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  right_arm_gripper_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: right_arm_gripper_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  left_arm_tilt_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: left_arm_tilt_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  left_arm_lift_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: left_arm_lift_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  left_arm_rotate_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: left_arm_rotate_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  left_arm_elbow_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: left_arm_elbow_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  left_arm_wrist_yaw_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: left_arm_wrist_yaw_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  left_arm_wrist_tilt_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: left_arm_wrist_tilt_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  left_arm_gripper_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: left_arm_gripper_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  head_tilt_mod_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: head_tilt_mod_joint
+    pid: {p: 100.0, i: 0.01, d: 1}
+  head_pan_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: head_pan_joint
+    pid: {p: 100.0, i: 0.01, d: 1}

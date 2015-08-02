@@ -2,6 +2,7 @@
 
   <param name="/use_sim_time" value="false" />
   
+  
   <!-- Set the name of the map yaml file: can be overridden on the command line. -->
   <arg name="map" default="map.yaml" />
 
@@ -54,7 +55,7 @@
 
   <!-- We do not have a robot connected, so publish fake joint states -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-    <param name="/use_gui" value="false"/> 
+    <param name="/use_gui" value="true"/> 
     <rosparam param="/source_list">[/move_group/fake_controller_joint_states]</rosparam>
   </node>
   

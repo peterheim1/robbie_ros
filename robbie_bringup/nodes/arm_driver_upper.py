@@ -83,7 +83,7 @@ class R_shoulder(object):
                 if (partsCount  < 7):
                         pass
                 try:
-                        P1 = ((321-float(lineParts[1]))*0.008)-0.15
+                        P1 = ((321-float(lineParts[1]))*0.008)-0.25
                         P2 = self.left_tilt
                         P3 = float(lineParts[3])# current
                         P4 = 0#float(lineParts[4])# speed
@@ -120,7 +120,7 @@ class R_shoulder(object):
                         pass
                 try:
                         
-                        P1 = ((321-float(lineParts[1]))*0.008)-0.07
+                        P1 = ((321-float(lineParts[1]))*0.008)-0.12
                         P2 = self.right_tilt
                         P3 = 0#float(lineParts[3])# current
                         P4 = 0#float(lineParts[4])# speed
@@ -229,7 +229,7 @@ class R_shoulder(object):
         def _BroadcastJointStateinfo_P5(self, lineParts):
                 partsCount = len(lineParts)
                 #rospy.logwarn(partsCount)
-                if (partsCount  < 7):
+                if (partsCount  < 6):
                         pass
                 try:
                         
@@ -402,7 +402,7 @@ class R_shoulder(object):
                 v = Command.data      # angel request in radians
                 self.left_lift = v
                 v1 =int(1023 -((v + 1.82) * 195.3786081396))#convert encoder value
-                if v1 < 100: v1 = 100 #degrees * 10
+                if v1 < 400: v1 = 400 #degrees * 10
                 if v1 > 1000: v1 = 1000 #degrees * 10
                 message = 'j5 %d \r' % (v1)#% self._GetBaseAndExponents((v1)
                 rospy.logwarn("Sending left_arm_lift_joint command: " + (message))
@@ -419,7 +419,7 @@ class R_shoulder(object):
                 self.right_lift = v
                 #v1 =int(1023 -((v + 1.05) * 195.3786081396))#convert encoder value
                 v1 = int((abs(v-1.57)/0.0042913)+511)
-                if v1 < 100: v1 = 100 #degrees * 10
+                if v1 < 520: v1 = 520 #degrees * 10
                 if v1 > 1000: v1 = 1000 #degrees * 10
                 rospy.logwarn("Handling lift command: " + str(v1) )
 

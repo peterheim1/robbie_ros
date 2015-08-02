@@ -18,7 +18,7 @@
     
 
 
-    <!-- start the dynamixel servos --> 
+    <!-- start the dynamixel servos -->
      <include file="$(find robbie_bringup)/launch/dynamixels.launch"/>
 
     

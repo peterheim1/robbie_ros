@@ -1,0 +1,11 @@
+<launch>
+        
+      
+<!---->
+    <node name="arbotix" pkg="arbotix_python" type="arbotix_driver">
+       <rosparam file="$(find robbie_bringup)/params/arbotix.yaml" command="load" />
+    </node>
+
+   
+   
+</launch>

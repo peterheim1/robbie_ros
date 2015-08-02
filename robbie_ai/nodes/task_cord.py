@@ -18,6 +18,7 @@ from robbie_ai.task_setup import *
 import time
 from datetime import datetime, timedelta
 from time import localtime, strftime
+import subprocess
 
 class ActionTasks:
     def __init__(self, script_path):
@@ -25,6 +26,9 @@ class ActionTasks:
         rospy.on_shutdown(self.cleanup)
         # Initialize a number of parameters and variables for nav locations
         setup_task_environment(self)
+        self.head_move = Head_Move()
+        Move_arm('right_start')
+        Move_arm('left_start')
         
         
 
@@ -60,7 +64,7 @@ class ActionTasks:
         
         # Make sure any lingering sound_play processes are stopped.
         self.soundhandle.stopAll()
-
+        self.head_move.head_move(0.0, 0.0)
         self.soundhandle.say(self.noon1 + self.robot +"   is on line" + " the time is   " + self.local, self.voice)
         rospy.sleep(2)
 
@@ -81,24 +85,25 @@ class ActionTasks:
             self.cmd_vel_pub.publish(Twist())
         if ar[0] == "go":
             loc = ar[6]+ar[9]
-            self.soundhandle.say(loc, self.voice) 
+            self.soundhandle.say("Going to the    " + loc, self.voice) 
             self.move_to(loc)
         if ar[0] == "pick":  
             self.soundhandle.say(str(PickUp(task)), self.voice)
         if ar[0] == "run"and ar[5] == "demo": 
             self.soundhandle.say("ok running    show time", self.voice)
-            ShowTime()
+            #ShowTime()
+            Move_arm('stop')
         if ar[0] == "get" and ar[9] == "beer":  
             self.soundhandle.say("ok get a beer for you", self.voice)
         if ar[0] == "turn" and ar[5] == "left":
             self.soundhandle.say("ok turning left", self.voice) 
-            driver.turn(angle = -0.5 * math.pi, angularSpeed = 0.5);#90 degrees left turn   
+            driver.turn(angle = 0.5 * math.pi, angularSpeed = 0.5);#90 degrees left turn   
         if ar[0] == "turn" and ar[5] == "right":
-            driver.turn(angle = 0.5 * math.pi, angularSpeed = 0.5);#90 degrees right turn  
+            driver.turn(angle = -0.5 * math.pi, angularSpeed = 0.5);#90 degrees right turn  
             self.soundhandle.say("ok turning right", self.voice)
         if ar[0] == "move" and ar[5] == "forward": 
-            driver.driveX(distance = 1.0, speed = 0.15) 
             self.soundhandle.say("ok, moving forward.", self.voice)
+            driver.driveX(distance = 1.0, speed = 0.15)    
         if ar[0] == "look":  
             self.soundhandle.say("ok, looking     "+ str(ar[5]), self.voice)
             Move_Head(task)
@@ -114,6 +119,9 @@ class ActionTasks:
             self.move_base.cancel_all_goals()
             self.cmd_vel_pub.publish(Twist())
             self.pub.publish("dock")
+        if ar[5] == "shutdown":
+            self.soundhandle.say("Good bye. Starting shut down sequence", self.voice)
+            subprocess.call("./shut_down.sh")
         if ar[11] != "":
             #self.soundhandle.say(str(Hello()), self.voice)
             self.soundhandle.say("hello", self.voice)

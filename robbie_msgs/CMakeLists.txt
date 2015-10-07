@@ -10,5 +10,10 @@ add_service_files(FILES
    AutoDock.srv
  )
 
+add_message_files(FILES
+                  RobbieCmd.msg
+                  
+                 )
+
 generate_messages(DEPENDENCIES std_msgs)
 catkin_package(CATKIN_DEPENDS roscpp rospy std_msgs message_runtime)

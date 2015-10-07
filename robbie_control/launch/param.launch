@@ -1,0 +1,9 @@
+<launch>
+        
+      
+ <rosparam file="$(find robbie_control)/config/joints.yaml" command="load" />
+   
+
+   
+   
+</launch>

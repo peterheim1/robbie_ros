@@ -67,10 +67,10 @@ class TrajectoryDemo():
 
         self.move_head(1.3, 0.5)
         rospy.sleep(2)
-        self.move_head(1.3, 0.0)
-        rospy.sleep(2)
-        self.move_head(-1.3, -0.5)
-        rospy.sleep(2)
+        #self.move_head(1.3, 0.0)
+        #rospy.sleep(2)
+        #self.move_head(-1.3, -0.5)
+        #rospy.sleep(2)
         self.move_head(0, 0)
 
 

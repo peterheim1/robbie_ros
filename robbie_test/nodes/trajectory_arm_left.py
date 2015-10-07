@@ -49,7 +49,7 @@ class TrajectoryDemo():
         
         #if reset:
             # Set the arm back to the resting position
-        arm_goal  = [0.0, 0, 1.5, 0.6, -0.1, -0, -0]
+        arm_goal  = [0.0, 0, 1.5, 0.3, -0.1, -0, -0]
             
         #else:
             # Set a goal configuration for the arm

@@ -49,11 +49,11 @@ class TrajectoryDemo():
         
         #if reset:
             # Set the arm back to the resting position
-        arm_goal  = [0.0, 0, 1.5, 0, -0.1, -0, -0]
+        #arm_goal  = [0.0, 0, 1.5, 0, -0.1, -0, -0]
             
         #else:
             # Set a goal configuration for the arm
-        #arm_goal  = [0.0, -1.1701, 1.5347, 1.1978, -1.218, -0.1466, -0.6527]
+        arm_goal  = [0.0, -1.1701, 1.5347, 1.1978, -1.218, -0.1466, -0.6527]
             
     
         # Connect to the right arm trajectory action server

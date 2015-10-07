@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+ 
+<aiml version="1.0.1" xmlns="http://alicebot.org/2001/AIML-1.0.1"
+      xmlns:html="http://www.w3.org/1999/xhtml"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://alicebot.org/2001/AIML-1.0.1 http://aitools.org/aiml/schema/AIML.xsd">
+ 
+
+<category>
+<pattern>TURN RIGHT</pattern>
+<template>
+<system>python /home/tim/catkin_ws/src/robbie_ros/robbie_speech/nodes/move.py turn right</system>
+</template>
+</category>
+
+<category>
+<pattern>TURN LEFT</pattern>
+<template>
+<system>python /home/tim/catkin_ws/src/robbie_ros/robbie_speech/nodes/move.py turn left</system>
+</template>
+</category>
+
+<category>
+<pattern>MOVE FORWARD</pattern>
+<template>
+<system>python /home/tim/catkin_ws/src/robbie_ros/robbie_speech/nodes/move.py move forward</system>
+</template>
+</category>
+
+<category>
+<pattern>MOVE BACKWARDS</pattern>
+<template>
+<system>python /home/tim/catkin_ws/src/robbie_ros/robbie_speech/nodes/move.py move backwards</system>
+</template>
+</category>
+
+<category>
+<pattern>MOVE RIGHT</pattern>
+<template>
+<system>python /home/tim/catkin_ws/src/robbie_ros/robbie_speech/nodes/move.py move right</system>
+</template>
+</category>
+
+<category>
+<pattern>MOVE LEFT</pattern>
+<template>
+<system>python /home/tim/catkin_ws/src/robbie_ros/robbie_speech/nodes/move.py move left</system>
+</template>
+</category>
+
+<category>
+<pattern>LOOK LEFT</pattern>
+<template>
+<system>python /home/tim/catkin_ws/src/robbie_ros/robbie_speech/nodes/move.py look left</system>
+</template>
+</category>
+
+<category>
+<pattern>LOOK RIGHT</pattern>
+<template>
+<system>python /home/tim/catkin_ws/src/robbie_ros/robbie_speech/nodes/move.py look right</system>
+</template>
+</category>
+
+<category>
+<pattern>LOOK FRONT</pattern>
+<template>
+<system>python /home/tim/catkin_ws/src/robbie_ros/robbie_speech/nodes/move.py look front</system>
+</template>
+</category>
+
+<category>
+<pattern>WEATHER</pattern>
+<template>
+<system>python /home/tim/catkin_ws/src/robbie_ros/robbie_speech/nodes/move.py weather 0</system>
+</template>
+</category>
+
+<category>
+<pattern>WEATHER</pattern>
+<template>
+<system>python /home/tim/catkin_ws/src/robbie_ros/robbie_speech/nodes/move.py weather 0</system>
+</template>
+</category>
+
+
+</aiml>
+

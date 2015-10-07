@@ -3,9 +3,7 @@
 
 
 
-     <!-- Move_base action server 
-    <node name="robbie_move_base_action" pkg="robbie" type="robbie_base_action.py" output="screen"/>
--->
+    
      <!-- Head action server  -->
     <node name="robbie_head_action" pkg="robbie_bringup" type="follow_head.py" output="screen"/>
 

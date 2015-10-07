@@ -8,21 +8,23 @@ import roslib
 import rospy, actionlib
      
 from control_msgs.msg import FollowJointTrajectoryAction
-from dynamixel_msgs.msg import JointState as JointStateDynamixel
+#from dynamixel_msgs.msg import JointState as JointControllerState
+from control_msgs.msg import JointControllerState
 from std_msgs.msg import Float64
      
      
-class JointSubscriber():
+class JointSubscriber():    
        
     def __init__(self,joint):
+        self.ns ='robbie'
            
            
-        rospy.Subscriber(joint + '/state', JointStateDynamixel, self.joint_state_cb)
+        rospy.Subscriber('robbie/' + joint + '/state', JointControllerState, self.joint_state_cb)
            
         rospy.loginfo('Subscribing for %s joint state.',joint)
            
         self.joint_name = joint
-        self.state = JointStateDynamixel()
+        self.state = JointControllerState()
         self.received = False
            
            
@@ -36,7 +38,7 @@ class JointSubscriber():
            
     def get_position(self):
            
-        return self.state.current_pos
+        return self.state.process_value
            
            
 class JointCommander():
@@ -44,7 +46,7 @@ class JointCommander():
     def __init__(self,joint):
            
         self.joint_name = joint
-        self.pub = rospy.Publisher(joint + '/command',Float64, queue_size=5)
+        self.pub = rospy.Publisher('robbie/' + joint + '/command',Float64, queue_size=5)
            
     def command(self,pos):
            

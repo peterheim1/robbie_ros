@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+ 
+<aiml version="1.0.1" xmlns="http://alicebot.org/2001/AIML-1.0.1"
+      xmlns:html="http://www.w3.org/1999/xhtml"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://alicebot.org/2001/AIML-1.0.1 http://aitools.org/aiml/schema/AIML.xsd">
+ 
+
+ 
+
+<category>
+        <pattern>WHAT IS YOUR NAME</pattern>
+        <template>My name is <bot name="name"></bot></template>       
+</category>
+
+<category>
+        <pattern>WHAT IS THE WEATHER LIKE</pattern>
+	<template><srai>WEATHER</srai></template>
+</category>
+
+<category>
+        <pattern>WHAT IS IT LIKE OUTSIDE</pattern>
+	<template><srai>WEATHER</srai></template>
+</category>
+
+<category>
+        <pattern>WHATS IT LIKE OUTSIDE</pattern>
+	<template><srai>WEATHER</srai></template>
+</category>
+
+<category>
+        <pattern>WHAT IS THE WEATHER</pattern>
+	<template><srai>WEATHER</srai></template>
+</category>
+
+<category>
+        <pattern>TURN TO THE RIGHT</pattern>
+	<template><srai>TURN RIGHT</srai></template>
+</category>
+
+<category>
+        <pattern>TURN TO THE LEFT</pattern>
+	<template><srai>TURN LEFT</srai></template>
+</category>
+
+<category>
+        <pattern>LOOK TO THE FRONT</pattern>
+	<template><srai>look front</srai></template>
+</category>
+
+<category>
+        <pattern>GO TO THE KITCHEN</pattern>
+	<template><srai>KITCHEN</srai></template>
+</category>
+
+<category>
+        <pattern>GO TO THE BATHROOM</pattern>
+	<template><srai>BATHROOM</srai></template>
+</category>
+
+<category>
+        <pattern>GO STRAIGHT</pattern>
+	<template><srai>MOVE FOWARD</srai></template>
+</category>
+
+
+
+
+
+
+
+
+ 
+</aiml>

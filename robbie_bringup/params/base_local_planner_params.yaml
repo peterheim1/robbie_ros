@@ -9,18 +9,18 @@ TrajectoryPlannerROS:
    max_vel_y: 0.0  # zero for a differential drive robot
    min_vel_y: 0.0
    max_rotational_vel: 1.0
-   min_in_place_vel_theta: 0.2 #was 0.5
+   min_in_place_vel_theta: 0.5 #was 0.5
    escape_vel: -0.1
    acc_lim_x: 1.5
    acc_lim_y: 0.0  # zero for a differential drive robot
    acc_lim_theta: 1.2
 
    holonomic_robot: false
-   yaw_goal_tolerance: 0.1 # about 6 degrees
-   xy_goal_tolerance: 0.1  #  was .2
+   yaw_goal_tolerance: 0.2 # about 6 degrees
+   xy_goal_tolerance: 0.2 #  was .2
    latch_xy_goal_tolerance: false
-   pdist_scale: 2.0
-   gdist_scale: 0.8
+   pdist_scale: 0.85
+   gdist_scale: 3.15
    meter_scoring: true
    forward_point_distance: 0 #last change
    publish_traj_pc: true
@@ -29,11 +29,11 @@ TrajectoryPlannerROS:
    heading_scoring_timestep: 0.8
    occdist_scale: 0.05
    oscillation_reset_dist: 0.05
-   publish_cost_grid_pc: false
+   publish_cost_grid_pc: true
    prune_plan: true
 
-   sim_time: 4.0
-   sim_granularity: 0.025
+   sim_time: 1.9
+   sim_granularity: 0.3
    angular_sim_granularity: 0.1
    vx_samples: 8
    vy_samples: 0  # zero for a differential drive robot

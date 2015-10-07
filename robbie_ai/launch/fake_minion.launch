@@ -1,0 +1,90 @@
+<launch>
+
+  <param name="/use_sim_time" value="false" />
+  
+  
+  <!-- Set the name of the map yaml file: can be overridden on the command line. -->
+  <arg name="map" default="3aug_14.yaml" />
+
+  
+    
+  <node name="arbotix" pkg="arbotix_python" type="arbotix_driver" clear_params="true" output="screen">
+     <rosparam file="$(find robbie_sim)/config/fake_robbie.yaml" command="load" />
+     <param name="sim" value="true"/>
+  </node>
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+      <param name="publish_frequency" type="double" value="20.0" />
+  </node>
+  
+  
+  <!-- Run the map server with a blank map -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find robbie_bringup)/maps/$(arg map)" />
+  
+  <!-- The move_base node -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
+     <rosparam file="$(find robbie_bringup)/params/costmap_common_params.yaml" command="load" ns="global_costmap" />
+     <rosparam file="$(find robbie_bringup)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
+     <rosparam file="$(find robbie_bringup)/params/local_costmap_params.yaml" command="load" />
+     <rosparam file="$(find robbie_bringup)/params/global_costmap_params.yaml" command="load" />
+     <rosparam file="$(find robbie_bringup)/params/base_local_planner_params.yaml" command="load" />
+     
+  </node>
+  
+  
+  <!-- Run fake localization compatible with AMCL output -->
+  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen" />
+      
+  <!-- Run a static transform between /odom and /map -->
+  <node pkg="tf" type="static_transform_publisher" name="odom_map_broadcaster" args="0 0 0 0 0 0 /map /odom 100" />
+
+
+<!-- moveit demo -->
+
+
+<!-- By default, we are not in debug mode -->
+  <arg name="debug" default="false" />
+
+  <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+  <include file="$(find robbie_moveit)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="true"/>
+  </include>
+
+  
+
+
+  <!-- We do not have a robot connected, so publish fake joint states -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="/use_gui" value="true"/> 
+    <rosparam param="/source_list">[/move_group/fake_controller_joint_states]</rosparam>
+  </node>
+  
+  
+
+  <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default) -->
+  <include file="$(find robbie_moveit)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>  
+    <arg name="fake_execution" value="true"/>
+    <arg name="info" value="true"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  <include file="$(find rbx2_utils)/launch/battery_simulator.launch">
+     <arg name="battery_runtime" value="300" />
+  </include>
+
+   <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py" output="screen"/>
+
+  <!-- Launch a node to push terminal input instead of speech recognition -->
+    <node pkg="robbie_utils" type="terminal_input.py" name="terminal_input" output="screen" >
+    </node>
+
+  <!--robbie chat-->
+  <node name="robbie_ai" pkg="robbie_ai" type="robbie_ai.py" />
+
+<!-- Launch master control program -->
+    <node pkg="robbie_ai" type="mcp.py" name="master_control" output="screen" >
+    </node>
+
+  
+</launch>

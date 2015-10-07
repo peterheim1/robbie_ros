@@ -1,0 +1,17 @@
+(dp0
+S'age'
+p1
+I5
+sS'birthday'
+p2
+S'01/08/2010'
+p3
+sS'master'
+p4
+S'peter'
+p5
+sS'name'
+p6
+S'Robbie'
+p7
+s.

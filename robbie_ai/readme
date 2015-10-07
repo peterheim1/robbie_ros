@@ -1,8 +1,8 @@
-meet n greet
-uses face recognition when it recognises a face the first time it will greet you
-the second time it will just say hi
+Robbie_ai
+Is the master control for robbie
+voice to action
 
-
-todo 
-say hi only for the second time ignore others
-need a way to detect when a face leaves and arrives
+robbie_ai is the aiml processor
+mcp.py is the behaviour tree to cordinate tasks and monitor systems
+move.py will publish commands to mcp from commands.aiml
+listen.py retrive a topic and say the resualt (change to a service )

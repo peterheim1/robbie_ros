@@ -32,4 +32,7 @@
 <!--robbie chat-->
   <node name="robbie_chat" pkg="robbie_speech" type="chat_start.bash" />
 
+<!--robbie face recognition
+  <node name="meet_greet" pkg="robbie_ai" type="meet_greet.py" />
+-->
 </launch>

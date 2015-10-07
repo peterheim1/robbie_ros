@@ -4,7 +4,7 @@
   <version>0.0.0</version>
   <description>The robbie_control package</description>
 
-  <maintainer email="peter.heim1066@gmail.com">Dave Coleman</maintainer>
+  <maintainer email="peter.heim1066@gmail.com">Peter Heim</maintainer>
 
   <license>BSD</license>
 
@@ -12,13 +12,15 @@
   <url type="bugtracker">https://github.com/osrf/gazebo_ros_demos/issues</url>
   <url type="repository">https://github.com/osrf/gazebo_ros_demos</url>
 
-  <author email="peter.heim1066@gmail.com">Dave Coleman</author>
+  <author email="peter.heim1066@gmail.com">Peter Heim</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
   <run_depend>controller_manager</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>rqt_gui</run_depend>
+  <run_depend>rrbot_control</run_depend>
 
-  <export>
-  </export>
+  
 
 </package>

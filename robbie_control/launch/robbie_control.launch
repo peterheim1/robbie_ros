@@ -2,27 +2,28 @@
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find robbie_control)/config/robbie_control.yaml" command="load"/>
+  <rosparam file="$(find robbie_control)/config/joints.yaml" command="load" />
 
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
 	output="screen" ns="/robbie" args="joint_state_controller
-					  pan_joint_position_controller
-					  right_arm_tilt_joint_position_controller
-                                          right_arm_lift_joint_position_controller
-                                          right_arm_rotate_joint_position_controller
-                                          right_arm_elbow_joint_position_controller
-                                          right_arm_wrist_yaw_joint_position_controller
-                                          right_arm_wrist_tilt_joint_position_controller
-                                          right_arm_gripper_joint_position_controller
-                                          left_arm_tilt_joint_position_controller
-                                          left_arm_lift_joint_position_controller
-                                          left_arm_rotate_joint_position_controller
-                                          left_arm_elbow_joint_position_controller
-                                          left_arm_wrist_yaw_joint_position_controller
-                                          left_arm_wrist_tilt_joint_position_controller
-                                          left_arm_gripper_joint_position_controller
-                                          head_tilt_mod_joint_position_controller
-                                          head_pan_joint_position_controller
+					  pan_joint
+					  right_arm_tilt_joint
+                                          right_arm_lift_joint
+                                          right_arm_rotate_joint
+                                          right_arm_elbow_joint
+                                          right_arm_wrist_yaw_joint
+                                          right_arm_wrist_tilt_joint
+                                          right_arm_gripper_joint
+                                          left_arm_tilt_joint
+                                          left_arm_lift_joint
+                                          left_arm_rotate_joint
+                                          left_arm_elbow_joint
+                                          left_arm_wrist_yaw_joint
+                                          left_arm_wrist_tilt_joint
+                                          left_arm_gripper_joint
+                                          head_tilt_mod_joint
+                                          head_pan_joint
 "/>
 
   <!-- convert joint states to TF transforms for rviz, etc -->

@@ -31,9 +31,7 @@ This is the launch file for robbies arm for testing
    </node>
 
   
- <!-- start action servers  
-     <include file="$(find robbie)/launch/action.launch"/>
--->
+ 
    
  
 

@@ -8,7 +8,7 @@ from std_msgs.msg import String
 
 class TerminalInput():
     def __init__(self):
-        self.pub = rospy.Publisher('type_text', String, queue_size=1)
+        self.pub = rospy.Publisher('speech_text', String, queue_size=1)
         rospy.init_node('terminal_input_node', anonymous=True)
         print "ENTERING TERMINAL INPUT"
         while not rospy.is_shutdown():

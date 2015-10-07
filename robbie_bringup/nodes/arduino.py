@@ -45,7 +45,6 @@ from nav_msgs.msg import Odometry
 from std_msgs.msg import String
 from std_msgs.msg import Float32, Int16
 from robbie_msgs.srv import *
-#from robbie.msg import *
 from SerialDataGateway import SerialDataGateway
 
 class Arduino(object):

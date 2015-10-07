@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 
-import roslib; roslib.load_manifest('howie_ros')
 import rospy
 from festival.srv import *
 from std_msgs.msg import String

@@ -394,7 +394,7 @@ class Kernel:
                 sys.stderr.write(err)
                 #add log file
                 Learning(err)
-                with open(dir + '/../data/unk_text.txt', "w") as myfile:
+                with open(dir + '/../data/unk_text.txt', "a") as myfile:
                     myfile.write(err + "\n")
         else:
             # Process the element into a response string.

@@ -37,8 +37,8 @@ GRIPPER_EFFORT = [1.0]
 REFERENCE_FRAME = 'map'
 
 #Map location of targets
-X_FRIDGE = 1.65
-Y_FRIDGE = -1.6
+X_FRIDGE = 5.027
+Y_FRIDGE = -5829
 X_PERSON = 1.9
 Y_PERSON = 1.8
 
@@ -214,7 +214,7 @@ class MoveItDemo:
         place_pose.pose.position.z = table_ground + table_size[2] + target_size[2] / 2.0
         place_pose.pose.orientation.w = 1.0
 
-        #move to target
+        #move to target#########################################################################################move to target
         self.move_to(self.fridge)
 
         # Initialize the grasp pose to the target pose

@@ -9,7 +9,7 @@ use as a move turn
 '''
 import sys
 import rospy
-from robbie_speech.interaction import *
+from robbie_behave.interaction import *
 from std_msgs.msg import String, Float64
 from robbie_msgs.msg import RobbieCmd
 import time
@@ -21,10 +21,11 @@ def talker():
     room ={'bathroom': [1.5,1.5,90], 'kitchen': [5.027,-5.892,0],'auto_dock':[0,0,0], 'mats_room':[0.543,-4.742,0], 'tims_room':[2.159,-12.441,-90], 'entry':[3.622,-1.923,90], 'dining_room':[2.975,-7.595,37]}
     turn = {'left':[0,0,90],'right':[0,0,-90]}
     move = {'right':[0.5,-0.5,90],'left':[0.5,0.5,-90],'forward':[1,0,0],'backward':[-1,0,0]}
+    look = {'right':[-1.1,0.0,0],'left':[1.1,0.0,0],'front':[0,0,0],'up':[0,-0.8,0],'down':[0,0.8,0]}
     
     
     mov_pub = rospy.Publisher('move_to', RobbieCmd, queue_size=5)
-    look_at_pub = rospy.Publisher('look_at', String, queue_size=10)
+    look_at_pub = rospy.Publisher('look_at', RobbieCmd, queue_size=10)
     nav_pub = rospy.Publisher('nav_to', String, queue_size=10)
 
     rospy.init_node('director', anonymous=True)
@@ -61,8 +62,17 @@ def talker():
         mov_pub.publish(a)
 
     if sys.argv[1] == 'look':
-        print "looking  " + str(sys.argv[2])
-        #mov_pub.publish(val1 + ":" + val2 )
+        #print "looking  " + str(sys.argv[2])
+        t = look[val2]
+        print " I am looking to the    " + str(val2)
+        #print t
+        a = RobbieCmd()
+        a.command = "map"
+        a.x = t[0]
+        a.y = t[1]
+        a.z = t[2]
+        look_at_pub.publish(a)
+
 
 
        

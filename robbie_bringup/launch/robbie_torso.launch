@@ -1,0 +1,105 @@
+<launch>
+        
+      
+
+    <!-- start the kinect and laser 
+     <include file="$(find robbie_bringup)/launch/freenect.launch"/>
+-->
+    <!-- launch head cam camers
+     <include file="$(find robbie_bringup)/launch/uvc_cam.launch"/>
+-->
+    <!-- start the kinect and laser  
+     <include file="$(find robbie_bringup)/launch/freenect2.launch"/>
+-->
+
+
+    <!-- start the arduino base controller and urdf
+     <include file="$(find robbie_bringup)/launch/robbie_base.launch"/>
+    -->
+
+
+    <!-- start the dynamixel servos -->
+     <include file="$(find robbie_bringup)/launch/dynamixels.launch"/>
+
+    
+    <!-- start action servers   -->
+     <include file="$(find robbie_bringup)/launch/action.launch"/>
+
+    <!-- start imu
+     <include file="$(find omni_bot)/launch/imu.launch" />
+-->
+
+   <!-- Start rosbridge and voice
+
+     <include file="$(find robbie_bringup)/launch/1_stage.launch"/>
+-->
+  <!-- Start arm control-->
+
+     <include file="$(find robbie_bringup)/launch/arm.launch"/>
+ 
+ <!-- Start move base
+     <include file="$(find robbie_bringup)/launch/move_base.launch"/>
+-->
+
+<!-- start robbie's voice --> 
+  <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py" output="screen"/>
+
+<!--robbie chat-->
+  <node name="robbie_ai" pkg="robbie_ai" type="robbie_ai.py" />
+
+
+
+
+  <!-- Start moveit -->
+     <include file="$(find robbie_bringup)/launch/robbie_moveit.launch"/>
+
+ <!-- Run a static transform between /odom and /map -->
+  <node pkg="tf" type="static_transform_publisher" name="odom_map_broadcaster" args="0 0 0 0 0 0 /map /odom 100" />
+
+<include file="$(find rbx2_utils)/launch/battery_simulator.launch">
+     <arg name="battery_runtime" value="3000" />
+  </include>
+
+
+<node name="arbotix" pkg="arbotix_python" type="arbotix_driver" clear_params="true" output="screen">
+     <rosparam file="$(find robbie_sim)/config/fake_robbie.yaml" command="load" />
+     <param name="sim" value="true"/>
+  </node>
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+      <param name="publish_frequency" type="double" value="20.0" />
+  </node>
+  
+   <!-- Set the name of the map yaml file: can be overridden on the command line. -->
+  <arg name="map" default="3aug_14.yaml" />
+  <!-- Run the map server with a blank map -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find robbie_bringup)/maps/$(arg map)" />
+  
+  <!-- The move_base node -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" clear_params="true" output="screen">
+     <rosparam file="$(find robbie_bringup)/params/costmap_common_params.yaml" command="load" ns="global_costmap" />
+     <rosparam file="$(find robbie_bringup)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
+     <rosparam file="$(find robbie_bringup)/params/local_costmap_params.yaml" command="load" />
+     <rosparam file="$(find robbie_bringup)/params/global_costmap_params.yaml" command="load" />
+     <rosparam file="$(find robbie_bringup)/params/base_local_planner_params.yaml" command="load" />
+     
+  </node>
+  
+  
+  <!-- Run fake localization compatible with AMCL output -->
+  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen" />
+
+    
+   <!-- Monitoring and Diagnostics 
+ 
+   <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
+   <rosparam command="load" file="$(find robbie_bringup)/params/diagnostics.yaml" />
+   </node>
+
+  -->
+
+
+     
+       
+   
+</launch>

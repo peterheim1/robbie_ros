@@ -1,0 +1,1 @@
+SUBSYSTEMS=="input", KERNEL=="js[0-9]*", ATTRS{name}=="Sony Playstation SixAxis/DS3", SYMLINK+="input/ps3joy"

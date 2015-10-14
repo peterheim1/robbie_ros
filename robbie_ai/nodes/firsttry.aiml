@@ -63,6 +63,20 @@
 	<template><srai>MOVE FOWARD</srai></template>
 </category>
 
+<category>
+<pattern>LOOK DOWN</pattern>
+<template><srai>LOOK DOWN</srai> </template>
+</category>
+
+<category>
+<pattern>LOCKDOWN</pattern>
+<template><srai>LOOK DOWN</srai> </template>
+</category>
+
+<category>
+<pattern>LOOK UP</pattern>
+<template><srai>LOOK UP</srai> </template>
+</category>
 
 
 

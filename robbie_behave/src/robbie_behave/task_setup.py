@@ -43,7 +43,7 @@ def setup_task_environment(self):
     self.n_patrols = rospy.get_param("~n_patrols", 2) # meters
     
     # How long do we have to get to each waypoint?
-    self.move_base_timeout = rospy.get_param("~move_base_timeout", 40) #seconds
+    self.move_base_timeout = rospy.get_param("~move_base_timeout", 50) #seconds
     
     # Initialize the patrol counter
     self.patrol_count = 0

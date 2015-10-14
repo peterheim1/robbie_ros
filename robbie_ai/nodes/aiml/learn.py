@@ -20,7 +20,8 @@ class Learning:
 
 	xml.append('<category>')
 	xml.append('<pattern>%s</pattern>' % text.upper())
-	xml.append('<template>  </template>')
+	xml.append('<template></template>')
+        xml.append('<template><srai></srai></template>')
 	#xml.append(data[0])
 	#xml.append('</template>')
 	xml.append('</category>')

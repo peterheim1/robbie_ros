@@ -1,0 +1,4 @@
+SUBSYSTEM=="tty", ENV{ID_SERIAL_SHORT}=="55332333130351F031D1",
+MODE="0666", OWNER="robbie", GROUP="robbie",
+SYMLINK+="arduino"
+

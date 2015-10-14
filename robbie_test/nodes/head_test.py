@@ -10,7 +10,7 @@ import tf
 
 class ActionTasks:
     def __init__(self):
-        rospy.init_node('head_test')
+        rospy.init_node('head_test_target')
         rospy.on_shutdown(self.cleanup)
         # Define the target as a PointStamped message
 
@@ -27,7 +27,7 @@ class ActionTasks:
         target = PointStamped()
         target.header.frame_id = 'base_footprint'
         target.point.x = 1
-        target.point.y = 0.3
+        target.point.y = 0.9
         target.point.z = 1.0   
         target.header.stamp = rospy.Time.now()
 

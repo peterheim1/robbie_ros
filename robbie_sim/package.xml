@@ -38,7 +38,6 @@
   <run_depend>robbie_ai</run_depend>
   <run_depend>robbie_bringup</run_depend>
   <run_depend>robbie_moveit</run_depend>
-  <run_depend>robbie_speech</run_depend>
   <run_depend>robbie_utils</run_depend>
   <run_depend>robot_state_publisher</run_depend>
   <run_depend>roscpp</run_depend>

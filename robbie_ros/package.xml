@@ -23,7 +23,6 @@
   <run_depend>robbie_msgs</run_depend>
   <run_depend>robbie_sim</run_depend>
   <run_depend>robbie_nav</run_depend>
-  <run_depend>robbie_speech</run_depend>
   <run_depend>robbie_test</run_depend>
   <run_depend>robbie_utils</run_depend>
   

@@ -82,9 +82,9 @@
   <!--robbie chat-->
   <node name="robbie_ai" pkg="robbie_ai" type="robbie_ai.py" />
 
-<!-- Launch master control program -->
-    <node pkg="robbie_ai" type="mcp.py" name="master_control" output="screen" >
+<!-- Launch master control program 
+    <node pkg="robbie_behave" type="mcp.py" name="master_control" output="screen" >
     </node>
-
+-->
   
 </launch>

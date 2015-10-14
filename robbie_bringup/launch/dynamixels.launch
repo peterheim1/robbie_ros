@@ -37,6 +37,8 @@
         left_arm_gripper_joint
         "
         output="screen" />
+
+<remap from="/head_tilt_joint/set_speed" to="/head_tilt_mod_joint/set_speed" />
 <!-- node to republish neck tilt with gearing-->
         
     <node name="neck" pkg="robbie_bringup" type="neck_tilt.py"/>

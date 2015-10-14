@@ -63,6 +63,20 @@
 </category>
 
 <category>
+<pattern>LOOK UP</pattern>
+<template>
+<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py look up</system>
+</template>
+</category>
+
+<category>
+<pattern>LOOK DOWN</pattern>
+<template>
+<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py look down</system>
+</template>
+</category>
+
+<category>
 <pattern>LOOK FRONT</pattern>
 <template>
 <system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py look front</system>

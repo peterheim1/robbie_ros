@@ -2,13 +2,13 @@
         
       
 
-    <!-- start the kinect and laser -->
+    <!-- start the kinect and laser 
      <include file="$(find robbie_bringup)/launch/freenect.launch"/>
-
+-->
     <!-- launch head cam camers
      <include file="$(find robbie_bringup)/launch/uvc_cam.launch"/>
 -->
-    <!-- start the kinect and laser  -->
+    <!-- start the kinect and laser --> 
      <include file="$(find robbie_bringup)/launch/freenect2.launch"/>
 
 
@@ -45,48 +45,20 @@
   <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py" output="screen"/>
 
 
-<!-- Launch a node that republishes the output of NLTK as a string (representation of a parse tree) -->
-  <!--<node pkg="nltk_parser" type="nltk_parser.py" name="nltk_parser_service" output="screen" >-->
-   <node pkg="robbie_ai" type="language.py" name="simple_chart_parser" output="screen" >
-        <param name="grammar_path" value="$(find robbie_ai)" />
-        <param name="grammar_name" value="language.cfg" />
-    </node>
-
-
-<!-- Node that republishes the output of language.py to be useful for meet_greet_demo -->
-    <node pkg="robbie_ai" type="nltk_interpret.py" name="nltk_interpret" output="screen" />
-
-<!-- Node that republishes the output to nltk or chat node -->
-    <node pkg="robbie_ai" type="talk_w.py" name="speach_director" output="screen" >
-    <param name="wavepath" value="$(find robbie_ai)/sounds"/>
-  </node>
-
-<!-- Node that monitors robbies battery and auto recharge -->
-    <node pkg="robbie_ai" type="health_monitor.py" name="health_monitor" output="screen" />
-
-<!-- robot task coordinator -->
-    <node pkg="robbie_ai" type="task_cord.py" name="task_coordinator" output="screen" />
-
-<!-- launch Face recognition server
-  <include file="$(find robbie_bringup)/launch/face_server.launch"/>
-
--->
 
   <!-- Start moveit -->
      <include file="$(find robbie_bringup)/launch/robbie_moveit.launch"/>
 
-  <!-- start the AI system   
-  <include file="$(find robbie_bringup)/launch/a_test.launch"/>
--->
-<!-- launch Face tracker
-  <include file="$(find robbie_bringup)/launch/face_tracker2.launch"/>
--->
-   <!-- launch head tracking
-   <include file="$(find robbie_bringup)/launch/tf_head_tracker.launch"/>
--->
-<!--robbie chat-->
-  <node name="robbie_chat" pkg="robbie_speech" type="chat_start.bash" />
+ <!--robbie chat-->
+  <node name="robbie_ai" pkg="robbie_ai" type="robbie_ai.py" />
 
+<!-- Launch master control program -->
+    <node pkg="robbie_behave" type="mcp1.py" name="master_control" output="screen" >
+    </node>
+
+
+   <!-- Run a static transform between /odom and /map -->
+  <node pkg="tf" type="static_transform_publisher" name="odom_map_broadcaster" args="0 0 0 0 0 0 /map /odom 100" />
 
 
 

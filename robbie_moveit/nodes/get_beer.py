@@ -43,10 +43,10 @@ class MoveItDemo:
         scene = PlanningSceneInterface()
         
         # Create a scene publisher to push changes to the scene
-        self.scene_pub = rospy.Publisher('planning_scene', PlanningScene)
+        self.scene_pub = rospy.Publisher('planning_scene', PlanningScene, queue_size = 5)
         
         # Create a publisher for displaying gripper poses
-        self.gripper_pose_pub = rospy.Publisher('gripper_pose', PoseStamped)
+        self.gripper_pose_pub = rospy.Publisher('gripper_pose', PoseStamped, queue_size = 5)
         
         # Create a dictionary to hold object colors
         self.colors = dict()
@@ -116,7 +116,7 @@ class MoveItDemo:
         table_ground = 0.65
         
         # Set the dimensions of the scene objects [l, w, h]
-        table_size = [0.2, 0.7, 0.01]
+        table_size = [0.2, 0.7, 0.1]
         box1_size = [0.1, 0.05, 0.05]
         box2_size = [0.05, 0.05, 0.15]
         
@@ -176,7 +176,7 @@ class MoveItDemo:
         # Specify a pose to place the target after being picked up
         place_pose = PoseStamped()
         place_pose.header.frame_id = REFERENCE_FRAME
-        place_pose.pose.position.x = 0.50
+        place_pose.pose.position.x = 0.60
         place_pose.pose.position.y = -0.25
         place_pose.pose.position.z = table_ground + table_size[2] + target_size[2] / 2.0
         place_pose.pose.orientation.w = 1.0

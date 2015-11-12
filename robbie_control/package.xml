@@ -19,7 +19,7 @@
   <run_depend>controller_manager</run_depend>
   <run_depend>robot_state_publisher</run_depend>
   <run_depend>rqt_gui</run_depend>
-  <run_depend>rrbot_control</run_depend>
+
 
   
 

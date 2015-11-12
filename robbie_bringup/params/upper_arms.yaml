@@ -1,4 +1,4 @@
-port: /dev/ttyACM1
+port: /dev/upper_arm
 baudRate: 115200
 
 

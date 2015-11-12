@@ -103,10 +103,10 @@ class MoveItDemo:
         rospy.sleep(2)
         
         # Set the height of the table off the ground
-        table_ground = 0.75
+        table_ground = 0.67
         
         # Set the length, width and height of the table and boxes
-        table_size = [0.2, 0.6, 0.01]
+        table_size = [0.7, 1.0, 0.03]
         box1_size = [0.1, 0.05, 0.05]
         box2_size = [0.05, 0.05, 0.15]
         

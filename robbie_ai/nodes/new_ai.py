@@ -6,9 +6,9 @@ import aiml
 k = aiml.Kernel()
  
 # load the aiml file
-k.learn("standard/std-*.aiml")
+#k.learn("standard/std-*.aiml")
 k.learn("firsttry.aiml")
-k.learn("commands.aiml")
+#k.learn("commands.aiml")
 #k.learn("standard/std-*.aiml")
  
 # set a constant

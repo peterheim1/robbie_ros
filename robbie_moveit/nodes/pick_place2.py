@@ -39,7 +39,7 @@ class TestPick():
         robot = RobotCommander()
        
         right_arm = MoveGroupCommander(GROUP_NAME_ARM)
-        right_arm.set_planner_id("KPIECEkConfigDefault");
+        #right_arm.set_planner_id("KPIECEkConfigDefault");
         right_gripper = MoveGroupCommander(GROUP_NAME_GRIPPER)
        
         eef = right_arm.get_end_effector_link()
@@ -53,11 +53,11 @@ class TestPick():
         scene.remove_world_object("table")
         scene.remove_world_object("part")
    
-        #right_arm.set_named_target("r_start")
-        #right_arm.go()
+        right_arm.set_named_target("right_start")
+        right_arm.go()
       
-        #right_gripper.set_named_target("right_gripper_open")
-        #right_gripper.go()
+        right_gripper.set_named_target("right_gripper_open")
+        right_gripper.go()
       
         rospy.sleep(1)
    
@@ -66,10 +66,10 @@ class TestPick():
         p.header.frame_id = robot.get_planning_frame()
    
         # add a table
-        #p.pose.position.x = 0.42
-        #p.pose.position.y = -0.2
-        #p.pose.position.z = 0.3
-        #scene.add_box("table", p, (0.5, 1.5, 0.6))
+        p.pose.position.x = 0.42
+        p.pose.position.y = -0.2
+        p.pose.position.z = 0.3
+        scene.add_box("table", p, (0.5, 1.5, 0.6))
 
    
         # add an object to be grasped

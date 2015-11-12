@@ -125,7 +125,7 @@ class R_shoulder(object):
                 if (partsCount  < 7):
                         pass
                 try:
-                        P1 = radians(float(lineParts[1]))
+                        P1 = 0 - (radians(float(lineParts[1])))
                         P2 = self.left_rotate #0-((float(lineParts[2])* 0.00174532925)-1.57)
                         P3 = float(lineParts[3])
                         P4 = 0
@@ -361,7 +361,7 @@ class R_shoulder(object):
                 """
                 v = Command.data      # angel request in radians
                 self.left_rotate = v
-                v1 =int(degrees(v))
+                v1 =0 -(int(degrees(v)))
                 message = 'j7 %d \r' % (v1)#% self._GetBaseAndExponents((v1)
                 rospy.logwarn("Sending left_arm_rotate_joint command : " + (message))
                 self._WriteSerial(message) 

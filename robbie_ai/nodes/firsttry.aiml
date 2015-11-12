@@ -14,6 +14,26 @@
 </category>
 
 <category>
+        <pattern>HALLOWEEN</pattern>
+        <template>Happy halloween</template>       
+</category>
+
+<category>
+        <pattern>TRICK</pattern>
+        <template>GIVE ME ALL YOUR SWEETS</template>       
+</category>
+
+<category>
+        <pattern>TREK</pattern>
+        <template>GIVE ME ALL YOUR SWEETS</template>       
+</category>
+
+<category>
+        <pattern>TREAT</pattern>
+        <template>boooooooooooooooooooooo</template>       
+</category>
+
+<category>
         <pattern>WHAT IS THE WEATHER LIKE</pattern>
 	<template><srai>WEATHER</srai></template>
 </category>
@@ -69,6 +89,13 @@
 </category>
 
 <category>
+<pattern>TEST *</pattern>
+<template><star/>
+<javascript>euro , star</javascript>
+</template>
+</category>
+
+<category>
 <pattern>LOCKDOWN</pattern>
 <template><srai>LOOK DOWN</srai> </template>
 </category>
@@ -77,6 +104,25 @@
 <pattern>LOOK UP</pattern>
 <template><srai>LOOK UP</srai> </template>
 </category>
+
+<category>
+<pattern>TEST ME</pattern>
+<template>
+<javascript>
+test , this is me
+</javascript>
+</template>
+</category>
+
+<category>
+<pattern>ROBBIE WHERE IS THE *</pattern>
+<template><star/>
+<javascript>know , star</javascript>
+</template>
+</category>
+
+
+
 
 
 

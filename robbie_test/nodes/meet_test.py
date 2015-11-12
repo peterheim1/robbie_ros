@@ -1,14 +1,7 @@
 #!/usr/bin/env python
 """
     the aim of this node is to start looking for face 
-    if a know face is found for the first time that day then say hello
-    else just node head
-
-    status/todo
-    change face tracker to publish face found then pause itself
-    recognise face or add face 
-    then restart
-    do we need the script path??
+    
 """
 
 import rospy
@@ -16,12 +9,13 @@ import time
 import re
 import sys
 import rospy
-import actionlib
+#import actionlib
 from datetime import datetime, timedelta
 from time import localtime, strftime
 from std_msgs.msg import String
+from cob_perception_msgs.msg import DetectionArray, Detection
 from sound_play.libsoundplay import SoundClient
-from face_recognition.msg import *
+#from face_recognition.msg import *
 
 #from phoenix_robot.interact import *
 
@@ -35,11 +29,8 @@ class Meet_N_Greet:
         self.voice = rospy.get_param("~voice", "voice_en1_mbrola")
         self.robot = rospy.get_param("~robot", "robbie")
         self.greeted =[]
-
-        #set action server
-        self.client = actionlib.SimpleActionClient('face_recognition', face_recognition.msg.FaceRecognitionAction)
-        # listening for goals.
-        self.client.wait_for_server()
+        #self.person =''
+        
 
         #define afternoon and morning
         self.noon = strftime("%p:", localtime())
@@ -63,21 +54,13 @@ class Meet_N_Greet:
         
         # Announce that we are ready for input
         rospy.sleep(1)
-        self.soundhandle.say(self.noon1 + "meet and greet   is on line" + " the time is   " + self.local, self.voice)
+        #self.soundhandle.say(self.noon1 + "meet and greet   is on line" + " the time is   " + self.local, self.voice)
 
-        #start looking for a face with face recognition action server
+        #start looking for a face with face recognition action server  (cob_people_detection_msgs/DetectionArray)
 
         #result will be published on this topic
-        rospy.Subscriber("/face_recognition/result", FaceRecognitionActionFeedback, self.face_found)
-        #rospy.Subscriber("/face_recognition/feedback", FaceRecognitionActionFeedback, self.Unknown)
-        self.look_for_face()
-
-    def look_for_face(self):
-        '''
-        send command look for face once
-        '''
-        goal = face_recognition.msg.FaceRecognitionGoal(order_id=0, order_argument="none")
-        self.client.send_goal(goal)
+        rospy.Subscriber("/cob_people_detection/face_recognizer/face_recognitions", DetectionArray, self.face_found)
+        
         
 
     def face_found(self,msg):
@@ -85,21 +68,28 @@ class Meet_N_Greet:
         clean up feedback to extract the name
         check if greeted before answer accordingly
         '''
-
-        person = str(msg.result.names[0])
-        rospy.logwarn(person)
-        
-        greet = person in self.greeted
-        if greet <= 5:
-            self.soundhandle.say("hello   "+ person +"    "+ self.noon1 +"          ",self.voice)
-            #add name to greeted list
-            self.greeted.append(person)
+        person = 'UnknownHead'
+        for detection in msg.detections:
+            person = detection.label
+            #print person
+        if person != 'UnknownHead':
+            print person
             rospy.sleep(1)
-        else:
-            self.soundhandle.say("hi     ",self.voice)
+            greet = self.greeted.count(person)
+            print greet
+            if greet < 1:
+                self.soundhandle.say("hello   "+ person +"    "+ self.noon1 +"          ",self.voice)
+                #add name to greeted list
+                self.greeted.append(person)
+                #rospy.sleep(10)
+            #else:
+                #self.soundhandle.say("hi     ",self.voice)
         #start looking again
-        rospy.sleep(10)
-        self.look_for_face()
+        #rospy.sleep(10)
+        
+
+
+        
 
     def Unknown(self,msg):
         self.soundhandle.say("hello     what is your name   " ,self.voice)

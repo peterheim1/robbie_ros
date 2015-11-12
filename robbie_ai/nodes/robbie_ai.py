@@ -57,7 +57,7 @@ class Robbie_Chat():
         
         # Wait a moment to let the client connect to the
         # sound_play server
-        rospy.sleep(1)
+        rospy.sleep(2)
         
         # Make sure any lingering sound_play processes are stopped.
         self.soundhandle.stopAll()
@@ -80,7 +80,7 @@ class Robbie_Chat():
 
 
 
-        #self.kern.learn(dir + "/../standard/std-*.aiml")
+        self.kern.learn(dir + "/../standard/std-*.aiml")
         self.kern.learn(dir+"/firsttry.aiml")
         self.kern.learn(dir + "/commands.aiml")
 

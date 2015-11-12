@@ -18,7 +18,7 @@ if __name__=='__main__':
     robot = RobotCommander()
     right_arm = MoveGroupCommander("right_arm")
     right_gripper = MoveGroupCommander("right_gripper")
-    right_arm.set_planner_id("KPIECEkConfigDefault");
+    #right_arm.set_planner_id("KPIECEkConfigDefault");
     rospy.sleep(1)
 
     # clean the scene

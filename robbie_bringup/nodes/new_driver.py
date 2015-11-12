@@ -125,7 +125,7 @@ class Arduino(object):
                         pass
                 try:
                         #offset = Float(-1.57)
-                        P1 = radians(float(lineParts[1]))
+                        P1 = radians(float(lineParts[1])*0.1)
                         P2 = self.right_lift #0-((float(lineParts[2])* 0.00174532925)-1.57)
                         P3 = 0#float(lineParts[3])
                         P4 = 0
@@ -164,7 +164,7 @@ class Arduino(object):
                         pass
                 try: 
                         #off = 1570
-                        P1 = radians(float(lineParts[1]))
+                        P1 = radians(float(lineParts[1])*0.1)
                         P2 = self.right_lift #0-((float(lineParts[2])* 0.00174532925)-1.57)
                         P3 = 0 #float(lineParts[3])
                         P4 = 0
@@ -202,7 +202,7 @@ class Arduino(object):
                 try:
                         
                         
-                        P1 = 0.0#radians(float(lineParts[1])*0.2)
+                        P1 = 0 - (radians(float(lineParts[1])*0.1))
                         P2 = self.left_elbow
                         P3 = 0#float(lineParts[3])# current
                         P4 = 0#float(lineParts[4])# speed
@@ -267,23 +267,23 @@ class Arduino(object):
                 rospy.Subscriber('right_arm_lift_joint/command',Float64, self.right_lift_Command)
                 rospy.Subscriber('left_arm_elbow_joint/command',Float64, self.left_elbow_Command)
                 self._SerialPublisher = rospy.Publisher('arm_upper', String)
-                self.P1_MotorPublisher = rospy.Publisher("/left_arm_tilt/motor_state", MotorState)
-                self.P2_MotorPublisher = rospy.Publisher("/right_arm_tilt/motor_state", MotorState)
-                self.P3_MotorPublisher = rospy.Publisher("/left_arm_lift/motor_state", MotorState)
-                self.P4_MotorPublisher = rospy.Publisher("/right_arm_lift/motor_state", MotorState)
-                self.P5_MotorPublisher = rospy.Publisher("/left_arm_elbow/motor_state", MotorState)
+                self.P1_MotorPublisher = rospy.Publisher("/left_arm_tilt/motor_state", MotorState, queue_size=5)
+                self.P2_MotorPublisher = rospy.Publisher("/right_arm_tilt/motor_state", MotorState, queue_size=5)
+                self.P3_MotorPublisher = rospy.Publisher("/left_arm_lift/motor_state", MotorState, queue_size=5)
+                self.P4_MotorPublisher = rospy.Publisher("/right_arm_lift/motor_state", MotorState, queue_size=5)
+                self.P5_MotorPublisher = rospy.Publisher("/left_arm_elbow/motor_state", MotorState, queue_size=5)
 
-                self._P1_JointPublisher = rospy.Publisher("/left_arm_tilt_joint/state", JointState)
-                self._P2_JointPublisher = rospy.Publisher("/right_arm_tilt_joint/state", JointState)
-                self._P3_JointPublisher = rospy.Publisher("/left_arm_lift_joint/state", JointState)
-                self._P4_JointPublisher = rospy.Publisher("/right_arm_lift_joint/state", JointState)
-                self._P5_JointPublisher = rospy.Publisher("/left_arm_elbow_joint/state", JointState)
+                self._P1_JointPublisher = rospy.Publisher("/left_arm_tilt_joint/state", JointState, queue_size=5)
+                self._P2_JointPublisher = rospy.Publisher("/right_arm_tilt_joint/state", JointState, queue_size=5)
+                self._P3_JointPublisher = rospy.Publisher("/left_arm_lift_joint/state", JointState, queue_size=5)
+                self._P4_JointPublisher = rospy.Publisher("/right_arm_lift_joint/state", JointState, queue_size=5)
+                self._P5_JointPublisher = rospy.Publisher("/left_arm_elbow_joint/state", JointState, queue_size=5)
 
-                self._right_lift_Publisher = rospy.Publisher("right_lift", Float32)
-                self._right_tilt_Publisher = rospy.Publisher("right_tilt", Float32)
-                self._left_lift_Publisher = rospy.Publisher("left_lift", Float32)
-                self._left_tilt_Publisher = rospy.Publisher("left_tilt", Float32)
-                self._left_elbow_Publisher = rospy.Publisher("left_elbow", Float32)
+                self._right_lift_Publisher = rospy.Publisher("right_lift", Float32, queue_size=5)
+                self._right_tilt_Publisher = rospy.Publisher("right_tilt", Float32, queue_size=5)
+                self._left_lift_Publisher = rospy.Publisher("left_lift", Float32, queue_size=5)
+                self._left_tilt_Publisher = rospy.Publisher("left_tilt", Float32, queue_size=5)
+                self._left_elbow_Publisher = rospy.Publisher("left_elbow", Float32, queue_size=5)
 		
 
 		self._SerialDataGateway = SerialDataGateway(port, baudRate,  self._HandleReceivedLine)
@@ -348,7 +348,7 @@ class Arduino(object):
 
                 """
                 v = Command.data      # angel request in radians
-                self.left_tilt = v
+                self.left_elbow = v
                 v1 =abs(int(degrees(v)))
                 rospy.logwarn("Handling left elbow command: " + str(v1))
                 x = 'e %d \r' % (v1)

@@ -22,12 +22,16 @@
       <geometry>
         <box size="0.41 0.35 0.065"/>
       </geometry>
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+      </inertial>
     </collision>
   </link>
   <gazebo reference="base_link">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="base_footprint">
     <visual>
@@ -56,13 +60,13 @@
     </collision>
     <inertial>
       <mass value="0.1"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="left_wheel">
     <material>Gazebo/Grey</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="right_wheel">
     <visual>
@@ -82,13 +86,13 @@
     </collision>
     <inertial>
       <mass value="0.1"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="right_wheel">
     <material>Gazebo/Grey</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="castor_wheel_l">
     <visual>
@@ -108,13 +112,13 @@
     </collision>
     <inertial>
       <mass value="0.1"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="castor_wheel_l">
     <material>Gazebo/Grey</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="castor_wheel_r">
     <visual>
@@ -134,13 +138,13 @@
     </collision>
     <inertial>
       <mass value="0.1"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="castor_wheel_r">
     <material>Gazebo/Grey</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <!--<xacro:my_cylinder name="deck_link" l="0.520" r="0.175" xyz="0 0 -0.26" rpy="0 0 0" mass="0.2" material="Gazebo/grey">
 			<xacro:black />
@@ -174,13 +178,13 @@
     </collision>
     <inertial>
       <mass value="0.2"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="pan_link">
     <material>Gazebo/grey</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <!-- ##############################   upper torso   ##################333333-->
   <link name="lower_torso">
@@ -303,13 +307,13 @@
     </collision>
     <inertial>
       <mass value="0.055"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="wrist_yaw_servo">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="wrist_yaw_servo_bracket_f3">
     <visual>
@@ -332,13 +336,13 @@
     </collision>
     <inertial>
       <mass value="0.01"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="wrist_yaw_servo_bracket_f3">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="right_wrist_yaw_bracket_f2">
     <visual>
@@ -358,13 +362,13 @@
     </collision>
     <inertial>
       <mass value="0.02"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="right_wrist_yaw_bracket_f2">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <!-- wrist_tilt joint-->
   <link name="wrist_tilt_servo">
@@ -386,13 +390,13 @@
     </collision>
     <inertial>
       <mass value="0.055"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="wrist_tilt_servo">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="wrist_tilt_bracket_f2">
     <visual>
@@ -412,13 +416,13 @@
     </collision>
     <inertial>
       <mass value="0.02"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="wrist_tilt_bracket_f2">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <!--here-->
   <link name="gripper_bracket_f3">
@@ -442,13 +446,13 @@
     </collision>
     <inertial>
       <mass value="0.01"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="gripper_bracket_f3">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <!-- Gripper_joint-->
   <link name="gripper_servo">
@@ -470,13 +474,13 @@
     </collision>
     <inertial>
       <mass value="0.055"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="gripper_servo">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="gripper_bracket_f2">
     <visual>
@@ -496,13 +500,13 @@
     </collision>
     <inertial>
       <mass value="0.02"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="gripper_bracket_f2">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="right_finger_link">
     <visual>
@@ -519,12 +523,16 @@
       <geometry>
         <box size="-0.08 0.005 0.035"/>
       </geometry>
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+      </inertial>
     </collision>
   </link>
   <gazebo reference="right_finger_link">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="left_finger_link">
     <visual>
@@ -541,12 +549,16 @@
       <geometry>
         <box size="0.08 0.005 0.035"/>
       </geometry>
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+      </inertial>
     </collision>
   </link>
   <gazebo reference="left_finger_link">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <!-- ##############################   left arm ##################333333-->
   <link name="left_shoulder_tilt">
@@ -637,13 +649,13 @@
     </collision>
     <inertial>
       <mass value="0.01"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="left_wrist_pan_servo_bracket_f3">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <!-- <xacro:F3_bracket name="left_wrist_pan_servo_bracket2_f3" xyz="0 0 0" rpy="0 -1.57 0" />-->
   <!-- left_wrist_yaw joint-->
@@ -666,13 +678,13 @@
     </collision>
     <inertial>
       <mass value="0.055"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="left_wrist_yaw_servo">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="left_wrist_yaw_bracket_f2">
     <visual>
@@ -692,13 +704,13 @@
     </collision>
     <inertial>
       <mass value="0.02"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="left_wrist_yaw_bracket_f2">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <!-- left_wrist_tilt joint-->
   <link name="left_wrist_tilt_servo">
@@ -720,13 +732,13 @@
     </collision>
     <inertial>
       <mass value="0.055"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="left_wrist_tilt_servo">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="left_wrist_tilt_bracket_f2">
     <visual>
@@ -746,13 +758,13 @@
     </collision>
     <inertial>
       <mass value="0.02"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="left_wrist_tilt_bracket_f2">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="left_gripper_bracket_f3">
     <visual>
@@ -775,13 +787,13 @@
     </collision>
     <inertial>
       <mass value="0.01"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="left_gripper_bracket_f3">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <!-- left_Gripper_joint-->
   <link name="left_gripper_servo">
@@ -803,13 +815,13 @@
     </collision>
     <inertial>
       <mass value="0.055"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="left_gripper_servo">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="left_gripper_bracket_f2">
     <visual>
@@ -829,13 +841,13 @@
     </collision>
     <inertial>
       <mass value="0.02"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="left_gripper_bracket_f2">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="left_right_finger_link">
     <visual>
@@ -852,12 +864,16 @@
       <geometry>
         <box size="-0.08 0.005 0.035"/>
       </geometry>
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+      </inertial>
     </collision>
   </link>
   <gazebo reference="left_right_finger_link">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="left_left_finger_link">
     <visual>
@@ -874,12 +890,16 @@
       <geometry>
         <box size="0.08 0.005 0.035"/>
       </geometry>
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+      </inertial>
     </collision>
   </link>
   <gazebo reference="left_left_finger_link">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <!-- head details-->
   <link name="head_tilt_bracket">
@@ -900,13 +920,13 @@
     </collision>
     <inertial>
       <mass value="0.02"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="head_tilt_bracket">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="head_tilt_link">
     <visual>
@@ -927,13 +947,13 @@
     </collision>
     <inertial>
       <mass value="0.055"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="head_tilt_link">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="head_pan_bracket">
     <visual>
@@ -956,13 +976,13 @@
     </collision>
     <inertial>
       <mass value="0.01"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="head_pan_bracket">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="head_pan_link">
     <visual>
@@ -983,13 +1003,13 @@
     </collision>
     <inertial>
       <mass value="0.055"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="head_pan_link">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="neck_link">
     <visual>
@@ -1012,13 +1032,13 @@
     </collision>
     <inertial>
       <mass value="0.01"/>
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
   <gazebo reference="neck_link">
-    <material>Gazebo/WhiteEmissive</material>
+    <material>Gazebo/White</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="head_base_link">
     <visual>
@@ -1035,12 +1055,16 @@
       <geometry>
         <box size="0.06 0.08 0.005"/>
       </geometry>
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+      </inertial>
     </collision>
   </link>
   <gazebo reference="head_base_link">
     <material>Gazebo/FlatBlack</material>
     <selfCollide>false</selfCollide>
-    <turnGravityOff>true</turnGravityOff>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <link name="head_link">
     <visual>
@@ -1082,7 +1106,7 @@
       </geometry>
     </collision>
   </link>
-  <link name="head_cam_link">
+  <link name="camera_link">
     <inertial>
       <mass value="1.0"/>
       <origin xyz="0 0 0"/>
@@ -1527,53 +1551,53 @@
       <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
-  <joint name="head_cam_joint" type="fixed">
+  <joint name="camera_joint" type="fixed">
     <parent link="head_link"/>
-    <child link="head_cam_link"/>
+    <child link="camera_link"/>
     <origin rpy="0 0.1 0" xyz="0.15 0.11 0.13"/>
   </joint>
-  <joint name="head_cam_depth_joint" type="fixed">
+  <joint name="camera_depth_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 0.0125 0.015"/>
-    <parent link="head_cam_link"/>
-    <child link="head_cam_depth_frame"/>
+    <parent link="camera_link"/>
+    <child link="camera_depth_frame"/>
   </joint>
-  <link name="head_cam_depth_frame">
+  <link name="camera_depth_frame">
     <inertial>
       <mass value="0.000001"/>
       <origin xyz="0 0 0"/>
       <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
-  <joint name="head_cam_depth_optical_joint" type="fixed">
+  <joint name="camera_depth_optical_joint" type="fixed">
     <origin rpy="-1.57075 0 -1.57075" xyz="0 0 0"/>
-    <parent link="head_cam_depth_frame"/>
-    <child link="head_cam_depth_optical_frame"/>
+    <parent link="camera_depth_frame"/>
+    <child link="camera_depth_optical_frame"/>
   </joint>
-  <link name="head_cam_depth_optical_frame">
+  <link name="camera_depth_optical_frame">
     <inertial>
       <mass value="0.000001"/>
       <origin xyz="0 0 0"/>
       <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
-  <joint name="head_cam_rgb_joint" type="fixed">
+  <joint name="camera_rgb_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 -0.0125 0.015"/>
-    <parent link="head_cam_link"/>
-    <child link="head_cam_rgb_frame"/>
+    <parent link="camera_link"/>
+    <child link="camera_rgb_frame"/>
   </joint>
-  <link name="head_cam_rgb_frame">
+  <link name="camera_rgb_frame">
     <inertial>
       <mass value="0.000001"/>
       <origin xyz="0 0 0"/>
       <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
-  <joint name="head_cam_rgb_optical_joint" type="fixed">
+  <joint name="camera_rgb_optical_joint" type="fixed">
     <origin rpy="-1.57075 0 -1.57075" xyz="0 0 0"/>
-    <parent link="head_cam_rgb_frame"/>
-    <child link="head_cam_rgb_optical_frame"/>
+    <parent link="camera_rgb_frame"/>
+    <child link="camera_rgb_optical_frame"/>
   </joint>
-  <link name="head_cam_rgb_optical_frame">
+  <link name="camera_rgb_optical_frame">
     <inertial>
       <mass value="0.000001"/>
       <origin xyz="0 0 0"/>

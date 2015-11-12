@@ -6,7 +6,8 @@ import Utils
 from PatternMgr import PatternMgr
 from WordSub import WordSub
 from learn import Learning
-
+from know import *
+from t_know import Knowledge
 from ConfigParser import ConfigParser
 import copy
 import glob
@@ -37,7 +38,7 @@ class Kernel:
         self._brain = PatternMgr()
         self._respondLock = threading.RLock()
         self._textEncoding = "utf-8"
-
+        self.knowledge = Knowledge()
         # set up the sessions        
         self._sessions = {}
         self._addSession(self._globalSessionID)
@@ -664,8 +665,15 @@ class Kernel:
         and right now PyAIML doesn't; <javascript> elements are behave
         exactly like <think> elements.
 
-        """        
-        return self._processThink(elem, sessionID)
+        """ 
+        #print str(elem[3])
+        a = str(elem[1])
+        e = []
+        for e in elem[2:]:
+            e = self._processElement(e, sessionID).lstrip(' ')
+        #goes to the sort function in t_know
+        #self.knowledge.Grade(e, a)
+        return self.knowledge.Grade(e, a)#self.knowledge.Sort(e)
     
     # <learn>
     def _processLearn(self, elem, sessionID):
@@ -1029,6 +1037,22 @@ class Kernel:
         for e in elem[2:]:
             self._processElement(e, sessionID)
         return ""
+
+    # <call to a python modual not used see javascript >
+    def _processPython(self, x, y):
+        """Process a <javascript> AIML element.
+
+        <javascript> elements process their contents recursively, and then
+        discard the results and return the responce string.  T
+
+        """
+        print x
+        print y
+        print "IN PYTHON"
+        for e in elem[2:]:
+            self._processElement(e, sessionID)
+        #response = 'just a test of the javascript class'
+        return "HI THERE"
 
     # <topicstar>
     def _processTopicstar(self, elem, sessionID):

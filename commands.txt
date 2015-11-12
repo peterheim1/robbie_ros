@@ -1,5 +1,8 @@
-
+in catkin_ws
+rosdep install --from-path src/ -y -i
 
 rostopic pub -1 /right_arm_lift_joint/command std_msgs/Float64 -- 0.8
 
 rostopic echo /left_arm_lift_joint/state
+
+rostopic pub /battery_voltage std_msgs/Float32 -- 13.8

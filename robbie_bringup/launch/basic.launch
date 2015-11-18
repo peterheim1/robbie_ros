@@ -1,0 +1,69 @@
+<launch>
+
+  <!--
+used to launch robbies basic systems  higher level functions are run on other computers
+
+sound
+kinect
+base 
+arms
+action servers
+
+
+-->
+        
+      
+  <!-- start robbie's voice --> 
+  <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py" output="screen"/>
+
+    <!-- start the kinect and laser -->
+     <include file="$(find robbie_bringup)/launch/freenect2.launch"/>
+
+    <!-- launch head cam camers
+     <include file="$(find robbie_bringup)/launch/uvc_cam.launch"/>
+-->
+    <!-- start the kinect and laser 
+     <include file="$(find robbie_bringup)/launch/openni_2.launch"/>
+-->
+
+
+    <!-- start the arduino base controller and urdf-->
+     <include file="$(find robbie_bringup)/launch/robbie_base.launch"/>
+    
+
+
+    <!-- start the dynamixel servos -->
+     <include file="$(find robbie_bringup)/launch/dynamixels.launch"/>
+
+    
+    <!-- start action servers   -->
+     <include file="$(find robbie_bringup)/launch/action.launch"/>
+
+    
+  <!-- Start arm control-->
+
+     <include file="$(find robbie_bringup)/launch/arm.launch"/>
+ 
+ <!-- Start move base-->
+     <include file="$(find robbie_bringup)/launch/move_base.launch"/>
+
+
+   <!-- Run a static transform between /odom and /map -->
+  <node pkg="tf" type="static_transform_publisher" name="odom_map_broadcaster" args="0 0 0 0 0 0 /map /odom 100" />
+
+
+
+    
+   <!-- Monitoring and Diagnostics 
+ 
+   <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
+   <rosparam command="load" file="$(find robbie_bringup)/params/diagnostics.yaml" />
+   </node>
+
+  -->
+
+
+     
+       
+   
+</launch>

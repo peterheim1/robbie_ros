@@ -1,0 +1,41 @@
+<launch>
+        <!-- Robbie stage 2 launch   -->
+
+  <!-- start action servers   -->
+     <include file="$(find robbie_bringup)/launch/action.launch"/>
+      
+  
+  <!-- Start moveit -->
+     <include file="$(find robbie_bringup)/launch/robbie_moveit.launch"/>
+
+ <!--robbie chat-->
+  <node name="robbie_ai" pkg="robbie_ai" type="robbie_ai.py" />
+
+<!-- Launch master control program -->
+    <node pkg="robbie_behave" type="mcp1.py" name="master_control" output="screen" >
+    </node>
+
+  <!-- Launch Knowrob interface 
+
+  <param name="initial_package" type="string" value="knowrob_map_data" />
+  <param name="initial_goal" type="string" value="owl_parse('package://knowrob_map_data/owl/ccrl2_semantic_map.owl')" />
+  <node name="json_prolog" pkg="json_prolog" type="json_prolog_node" cwd="node" output="screen" />
+
+-->
+   
+
+
+    
+   <!-- Monitoring and Diagnostics 
+ 
+   <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
+   <rosparam command="load" file="$(find robbie_bringup)/params/diagnostics.yaml" />
+   </node>
+
+  -->
+
+
+     
+       
+   
+</launch>

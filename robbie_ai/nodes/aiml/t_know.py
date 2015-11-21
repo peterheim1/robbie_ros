@@ -4,7 +4,7 @@
 commands need the short and the long name
 '''
 
-import json_prolog
+#import json_prolog
 
 
 class Knowledge:
@@ -59,9 +59,9 @@ class Knowledge:
         a1= y[0].strip(' ')# strip white spaces from name
         a2 = y[1].lstrip(' ')#strip white spaces from left side ofname
         t = self.commands[a1]
-        prolog = json_prolog.Prolog()
-        query = prolog.query("member(A, [1, 2, 3, 4]), B = ['x', A]")
-        for solution in query.solutions():
-            print 'Found solution. A = %s, B = %s' % (solution['A'], solution['B'])
-        query.finish()
+        #prolog = json_prolog.Prolog()
+        #query = prolog.query("member(A, [1, 2, 3, 4]), B = ['x', A]")
+        #for solution in query.solutions():
+            #print 'Found solution. A = %s, B = %s' % (solution['A'], solution['B'])
+        #query.finish()
 

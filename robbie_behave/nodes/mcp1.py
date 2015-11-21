@@ -51,7 +51,7 @@ class PhoenixControl():
         # Make sure any lingering sound_play processes are stopped.
         self.soundhandle.stopAll()
         self.head_move.head_move(0.0,0.0)
-        
+        rospy.sleep(1)
        
         # The root node when all top levels tasks have SUCCESS: program exits
         BEHAVE = Sequence("behave")

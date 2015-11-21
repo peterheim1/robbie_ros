@@ -4,15 +4,16 @@
   <!-- start robbie's voice --> 
   <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py" output="screen"/>
 
+  <!-- start the kinect and laser -->
+     <include file="$(find robbie_bringup)/launch/freenect.launch"/>
+
+
+  
+
     <!-- start the kinect and laser -->
      <include file="$(find robbie_bringup)/launch/freenect2.launch"/>
 
-    <!-- launch head cam camers
-     <include file="$(find robbie_bringup)/launch/uvc_cam.launch"/>
--->
-    <!-- start the kinect and laser 
-     <include file="$(find robbie_bringup)/launch/openni_2.launch"/>
--->
+  
 
 
     <!-- start the arduino base controller and urdf-->
@@ -64,9 +65,9 @@
   <node name="json_prolog" pkg="json_prolog" type="json_prolog_node" cwd="node" output="screen" />
 
 -->
-   <!-- Run a static transform between /odom and /map -->
+   <!-- Run a static transform between /odom and /map 
   <node pkg="tf" type="static_transform_publisher" name="odom_map_broadcaster" args="0 0 0 0 0 0 /map /odom 100" />
-
+-->
 
 
     

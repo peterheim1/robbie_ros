@@ -14,26 +14,6 @@
 </category>
 
 <category>
-        <pattern>HALLOWEEN</pattern>
-        <template>Happy halloween</template>       
-</category>
-
-<category>
-        <pattern>TRICK</pattern>
-        <template>GIVE ME ALL YOUR SWEETS</template>       
-</category>
-
-<category>
-        <pattern>TREK</pattern>
-        <template>GIVE ME ALL YOUR SWEETS</template>       
-</category>
-
-<category>
-        <pattern>TREAT</pattern>
-        <template>boooooooooooooooooooooo</template>       
-</category>
-
-<category>
         <pattern>WHAT IS THE WEATHER LIKE</pattern>
 	<template><srai>WEATHER</srai></template>
 </category>
@@ -79,6 +59,17 @@
 </category>
 
 <category>
+        <pattern>GO TO THE CHARGER</pattern>
+	<template><srai>AUTODOCK</srai></template>
+</category>
+
+<category>
+        <pattern>GO HOME</pattern>
+	<template><srai>AUTODOCK</srai></template>
+</category>
+
+
+<category>
         <pattern>GO STRAIGHT</pattern>
 	<template><srai>MOVE FOWARD</srai></template>
 </category>
@@ -86,6 +77,18 @@
 <category>
 <pattern>LOOK DOWN</pattern>
 <template><srai>LOOK DOWN</srai> </template>
+</category>
+
+
+
+<category>
+<pattern>LOCKDOWN</pattern>
+<template><srai>LOOK DOWN</srai> </template>
+</category>
+
+<category>
+<pattern>LOOK UP</pattern>
+<template><srai>LOOK UP</srai> </template>
 </category>
 
 <category>
@@ -96,13 +99,12 @@
 </category>
 
 <category>
-<pattern>LOCKDOWN</pattern>
-<template><srai>LOOK DOWN</srai> </template>
-</category>
-
-<category>
-<pattern>LOOK UP</pattern>
-<template><srai>LOOK UP</srai> </template>
+<pattern>ROBBIE TOUCH THIS</pattern>
+<template>
+<javascript>
+touch , this
+</javascript>
+</template>
 </category>
 
 <category>

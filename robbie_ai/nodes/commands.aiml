@@ -9,107 +9,161 @@
 <category>
 <pattern>TURN RIGHT</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py turn right</system>
+<javascript>
+turn , right
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>TURN LEFT</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py turn left</system>
+<javascript>
+turn , left
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>MOVE FORWARD</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py move forward</system>
+<javascript>
+move , forward
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>MOVE BACKWARDS</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py move backwards</system>
+<javascript>
+move , backwards
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>MOVE RIGHT</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py move right</system>
+<javascript>
+move , right
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>MOVE LEFT</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py move left</system>
+<javascript>
+move , left
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>LOOK LEFT</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py look left</system>
+<javascript>
+look , left
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>LOOK RIGHT</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py look right</system>
+<javascript>
+look , right
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>LOOK UP</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py look up</system>
+<javascript>
+look , up
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>LOOK DOWN</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py look down</system>
+<javascript>
+look , down
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>LOOK FRONT</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py look front</system>
+<javascript>
+look , front
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>WEATHER</pattern>
-<template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py weather 0</system>
-</template>
+<javascript>
+weather , 0
+</javascript>
 </category>
 
 <category>
 <pattern>KITCHEN</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py goto kitchen</system>
+<javascript>
+goto , kitchen
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>BATHROOM</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py goto bathroom</system>
+<javascript>
+goto , bathroom
+</javascript>
 </template>
 </category>
 
 <category>
 <pattern>TIM ROOM</pattern>
 <template>
-<system>python ~/catkin_ws/src/robbie_ros/robbie_ai/nodes/move.py goto tims_room</system>
+<javascript>
+goto , tims_room
+</javascript>
 </template>
 </category>
+
+<category>
+<pattern>MAT ROOM</pattern>
+<template>
+<javascript>
+goto , mats_room
+</javascript>
+</template>
+</category>
+
+<category>
+<pattern>AUTODOCK</pattern>
+<template>
+<javascript>
+goto , auto_dock
+</javascript>
+</template>
+</category>
+
+<category>
+<pattern>ROBBIE TERMINATE</pattern>
+<template>
+<system>python /home/robbie/catkin_ws/src/robbie_ros/./Shut_down.sh</system>
+</template>
+</category>
+
 
 
 

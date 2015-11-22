@@ -33,7 +33,7 @@ import rospy
 import wx
 
 import tf
-from geometry_msgs.msg import PointStamped
+from geometry_msgs.msg import PointStamped, Point, PoseStamped, Pose
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64
 
@@ -56,10 +56,10 @@ class PointHeadGUI(wx.Frame):
         self.frames = self.tf.getFrameStrings()
         
         # Initialize the target point
-        self.target_point = PointStamped()
+        self.target = PoseStamped()
 
         # Create the target point publisher
-        self.targetPub = rospy.Publisher('/target_point', PointStamped)
+        self.targetPub = rospy.Publisher('target_pose', PoseStamped, queue_size=5)
 
         sizer = wx.GridBagSizer(15,10)
 
@@ -81,14 +81,14 @@ class PointHeadGUI(wx.Frame):
         selectPointBox = wx.StaticBoxSizer(selectPoint, orient=wx.VERTICAL) 
         headSizer = wx.GridBagSizer(3, 10)
         headSizer.Add(wx.StaticText(self, -1, "x:"),(0,0), wx.GBSpan(1,1),wx.ALIGN_CENTER_VERTICAL)
-        self.target_point_x = wx.TextCtrl(self,-1,value=u"0.0")
-        headSizer.Add(self.target_point_x, (0,1))
+        self.target_pose_x = wx.TextCtrl(self,-1,value=u"0.0")
+        headSizer.Add(self.target_pose_x, (0,1))
         headSizer.Add(wx.StaticText(self, -1, "y:"),(1,0), wx.GBSpan(1,1),wx.ALIGN_CENTER_VERTICAL)
-        self.target_point_y = wx.TextCtrl(self,-1,value=u"0.0")
-        headSizer.Add(self.target_point_y, (1,1))
+        self.target_pose_y = wx.TextCtrl(self,-1,value=u"0.0")
+        headSizer.Add(self.target_pose_y, (1,1))
         headSizer.Add(wx.StaticText(self, -1, "z:"),(2,0), wx.GBSpan(1,1),wx.ALIGN_CENTER_VERTICAL)
-        self.target_point_z = wx.TextCtrl(self,-1,value=u"0.0")
-        headSizer.Add(self.target_point_z, (2,1))
+        self.target_pose_z = wx.TextCtrl(self,-1,value=u"0.0")
+        headSizer.Add(self.target_pose_z, (2,1))
         selectPointBox.Add(headSizer) 
         sizer.Add(selectPointBox, (3,0), wx.GBSpan(3,10), wx.EXPAND|wx.BOTTOM|wx.RIGHT|wx.LEFT,5)
 
@@ -126,28 +126,32 @@ class PointHeadGUI(wx.Frame):
         return str(self.frameComboBox.GetValue())
 
     def on_combobox(self, event):
-        self.target_point.header.frame_id = self.get_selected_frame().rstrip()
+        self.target.header.frame_id = self.get_selected_frame().rstrip()
 
     def on_point_button(self, event):
         try:
-            self.target_point.header.frame_id = self.get_selected_frame()
-            self.target_point.point.x = float(self.target_point_x.GetValue().rstrip())
-            self.target_point.point.y = float(self.target_point_y.GetValue().rstrip())
-            self.target_point.point.z = float(self.target_point_z.GetValue().rstrip())
-            rospy.loginfo("Publishing target point:\n" + str(self.target_point))
-            self.targetPub.publish(self.target_point)
+            self.target.header.frame_id ='base_footprint'# self.get_selected_frame()
+            self.target.pose.position.x = float(self.target_pose_x.GetValue().rstrip())
+            self.target.pose.position.y = float(self.target_pose_y.GetValue().rstrip())
+            self.target.pose.position.z = float(self.target_pose_z.GetValue().rstrip())
+            self.target.pose.orientation.x = 0
+            self.target.pose.orientation.y = 0
+            self.target.pose.orientation.z = 0
+            self.target.pose.orientation.w = 1
+            rospy.loginfo("Publishing target point:\n" + str(self.target))
+            self.targetPub.publish(self.target)
         except:
             rospy.loginfo("Invalid floating point coordinates.  Please try again.")
             
     def on_reset_button(self, event):
         # Set the head level and straight ahead but setting a far away target point relative to the base_link frame.
         try:
-            self.target_point.point.x = 1000.
-            self.target_point.point.y = 0.0
-            self.target_point.point.z = 0.0
-            self.target_point.header.frame_id = '/base_footprint'
-            rospy.loginfo("Publishing target point:\n" + str(self.target_point))
-            self.targetPub.publish(self.target_point)
+            self.target.point.x = 1000.
+            self.target.point.y = 0.0
+            self.target.point.z = 0.0
+            self.target.header.frame_id = '/base_footprint'
+            rospy.loginfo("Publishing target point:\n" + str(self.target))
+            self.targetPub.publish(self.target)
         except:
             rospy.loginfo("Invalid floating point coordinates.  Please try again.")
 

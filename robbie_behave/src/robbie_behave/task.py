@@ -55,7 +55,7 @@ class Emotion1(Task):
             print "I'm feeling  bored "
             #print 'i have to do somthing '
             self.soundhandle.say(markov.generate_markov_text(), self.voice)
-            rm.E_Update(0.5,0.5)#us random selected task
+            rm.E_Update(1,1.5)#us random selected task
         if self.emotion_state == 'neutral':
             print "I'm feeling netural   "
             
@@ -82,7 +82,7 @@ class Emotion1(Task):
             print rm.MeEmotion_read()
             self.soundhandle.say(markov.generate_markov_text(), self.voice)
             #print markov.generate_markov_text()
-            rm.E_Update(0.9,0.85)#us random selected task
+            rm.E_Update(2,2)#us random selected task
             
             return TaskStatus.FAILURE
         else:

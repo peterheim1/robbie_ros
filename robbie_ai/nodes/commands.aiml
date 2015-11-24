@@ -159,10 +159,18 @@ goto , auto_dock
 
 <category>
 <pattern>ROBBIE TERMINATE</pattern>
-<template>
-<system>python /home/robbie/catkin_ws/src/robbie_ros/./Shut_down.sh</system>
+<template>Good Bye  
+<system>/home/robbie/catkin_ws/src/robbie_ros/./Shut_down.sh</system>
 </template>
 </category>
+
+<category>
+<pattern>ROBBIE SHUTDOWN</pattern>
+<template>Good Bye  
+<system>/home/robbie/catkin_ws/src/robbie_ros/./Shut_down.sh</system>
+</template>
+</category>
+
 
 
 

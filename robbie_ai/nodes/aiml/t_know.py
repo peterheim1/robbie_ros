@@ -21,7 +21,7 @@ class Knowledge:
     def __init__(self):
 
         #command mapping
-        self.commands ={'test':'self.Test','euro':'self.Euro','move':'self.Move''look':'Look','goto':'self.Goto'}
+        self.commands ={'test':'self.Test','euro':'self.Euro','move':'self.Move','look':'self.Look','goto':'self.Goto','turn':'self.Turn','weather':'self.Weather'}
 
         #command interpertation
         self.room ={'bathroom': [1.5,1.5,90], 'kitchen': [5.027,-5.892,0],'auto_dock':[0,0,0], 'mats_room':[0.543,-4.742,0], 'tims_room':[2.159,-12.441,-90], 'entry':[3.622,-1.923,90], 'dining_room':[2.975,-7.595,37]}
@@ -70,6 +70,7 @@ class Knowledge:
         b =  "hi from euro  " +str(x)+ ' extra  '+str(y)
         #print y
         return y
+
     # interface to knowrob query to be tested
     def Know(self, x):
         y = x.split(",")
@@ -84,7 +85,8 @@ class Knowledge:
         #query.finish()
 
     def Move(self,x,y):
-        t = self.move[x]
+        c = str(x).rstrip(' ')
+        t = self.move[str(c)]
         b = "I am moving "+ str(x)
         a = RobbieCmd()
         a.command = "base_footprint"
@@ -94,8 +96,9 @@ class Knowledge:
         self.mov_pub.publish(a)               
         return b
 
-    def Turn(self,x):
-        t = self.turn[x]
+    def Turn(self,x,y):
+        c = str(x).rstrip(' ')
+        t = self.turn[str(c)]
         b = "I am Turning "+ str(x)
         a = RobbieCmd()
         a.command = "base_footprint"
@@ -105,26 +108,28 @@ class Knowledge:
         self.mov_pub.publish(a)
         return b
 
-    def Look(self,x):
-        t = self.look[x]
+    def Look(self,x,y):
+        c = str(x).rstrip(' ')
+        t = self.look[c]
         b = "I am Looking "+ str(x)
         a = RobbieCmd()
         a.command = "base_footprint"
         a.x = t[0]
         a.y = t[1]
         a.z = t[2]
-        self.mov_pub.publish(a)   
+        self.look_at_pub.publish(a)   
         return b
 
-    def Goto(self,x):
-        t = self.room[x]
+    def Goto(self,x,y):
+        c = str(x).rstrip(' ')
+        t = self.goto[c]
         b = "I am going to the "+ str(x)
         a = RobbieCmd()
         a.command = "base_footprint"
         a.x = t[0]
         a.y = t[1]
         a.z = t[2]
-        self.mov_pub.publish(a)
+        self.nav_pub.publish(a)
         return b
 
     def Weather(self,x,y):
